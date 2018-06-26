@@ -272,3 +272,14 @@ zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 alias brew="env PATH=${PATH/\/Users\/fukagawa\/\.pyenv\/shims:/} brew"
+
+
+function gcc2(){
+    FILENAME=$(basename $1);
+    CFILE=$(basename $1 .c);
+    #gcc -o $CFILE.out -lm -ansi -pedantic -Wall $FILENAME;
+    gcc -o $CFILE -lm -Wall $FILENAME;
+}
+
+alias gcc2=gcc2
+
