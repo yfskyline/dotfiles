@@ -283,3 +283,6 @@ function gcc2(){
 
 alias gcc2=gcc2
 
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
