@@ -136,7 +136,7 @@ bindkey '^R' history-incremental-pattern-search-backward
 
 alias la='ls -a'
 alias ll='ls -l'
-
+alias relogin='exec $SHELL -l'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
