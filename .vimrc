@@ -65,7 +65,7 @@ NeoBundleCheck
 "----------------------------------------------------------
 " カラースキーム
 "----------------------------------------------------------
-if neobundle#is_installed('molokai')
+if neobundle#is_installed('material')
     colorscheme molokai " カラースキームにmolokaiを設定する
 endif
 
