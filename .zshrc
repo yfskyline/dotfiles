@@ -185,7 +185,6 @@ esac
 #よくわからんけどrbenvのやつ
 eval "$(rbenv init -)"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
 
 
 #保管候補をハイライトする
