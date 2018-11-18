@@ -142,6 +142,9 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias mkdir='mkdir -p'
+alias py='python '
+
+
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
