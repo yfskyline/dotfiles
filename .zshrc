@@ -144,7 +144,9 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias py='python '
 
+alias pbcopy='xsel --clipboard --input'
 
+alias pbpaste='xsel --clipboard --output'
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
