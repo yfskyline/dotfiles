@@ -143,6 +143,7 @@ alias mv='mv -i'
 
 alias mkdir='mkdir -p'
 alias py='python '
+alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
 
 alias pbcopy='xsel --clipboard --input'
 
