@@ -149,6 +149,9 @@ alias pbcopy='xsel --clipboard --input'
 
 alias pbpaste='xsel --clipboard --output'
 
+alias py="python3 "
+
+
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
 
