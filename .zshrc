@@ -20,6 +20,8 @@ eval "$(pyenv init -)"
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
+export LANG=ja_JP.UTF-8
+export LC_ALL=$LANG
 export EDITOR=vim
 
 # 色を使用出来るようにする
