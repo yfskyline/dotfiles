@@ -193,6 +193,8 @@ esac
 # for composer
 #PATH=$PATH:$HOME/.composer/vendor/bin
 
+export PATH=$PATH:$HOME/.composer/vendor/bin
+
 #よくわからんけどrbenvのやつ
 eval "$(rbenv init -)"
 export PATH="/usr/local/sbin:$PATH"
@@ -296,3 +298,4 @@ alias gcc2=gcc2
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+export PATH="/usr/local/opt/libpcap/bin:$PATH"
