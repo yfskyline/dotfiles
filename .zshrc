@@ -19,7 +19,7 @@ eval "$(pyenv init -)"
 
 ########################################
 # 環境変数
-export LANG=C
+export LANG=ja_JP.UTF-8
 export LC_ALL=$LANG
 export EDITOR=vim
 
@@ -148,7 +148,7 @@ alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=
 
 #alias pbcopy='xsel --clipboard --input'
 
-alias pbpaste='xsel --clipboard --output'
+#alias pbpaste='xsel --clipboard --output'
 
 alias py="python3 "
 
@@ -162,16 +162,16 @@ alias -g G='| grep'
 
 # C で標準出力をクリップボードにコピーする
 # mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
-if which pbcopy >/dev/null 2>&1 ; then
+#if which pbcopy >/dev/null 2>&1 ; then
     # Mac
-    alias -g C='| pbcopy'
-elif which xsel >/dev/null 2>&1 ; then
+#    alias -g C='| pbcopy'
+#elif which xsel >/dev/null 2>&1 ; then
     # Linux
-    alias -g C='| xsel --input --clipboard'
-elif which putclip >/dev/null 2>&1 ; then
-    # Cygwin
-    alias -g C='| putclip'
-fi
+#    alias -g C='| xsel --input --clipboard'
+#elif which putclip >/dev/null 2>&1 ; then
+#    # Cygwin
+#    alias -g C='| putclip'
+#fi
 
 
 
