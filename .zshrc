@@ -23,6 +23,7 @@ eval "$(pyenv init -)"
 export LANG=C
 export LC_ALL=$LANG
 export EDITOR=vim
+export PYTHONIOENCODING=utf-8
 
 # 色を使用出来るようにする
 autoload -Uz colors
