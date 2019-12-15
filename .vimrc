@@ -45,3 +45,21 @@ function! s:split_line()
   let text_before = (col('.') > 1) ? line_text[: col('.')-2] : ''
   return [text_before, text_after]
 endfunction
+
+
+" NeoBundleでいろいろ管理する
+if has('vim_starting')
+   " 初回起動時のみruntimepathにneobundleのパスを指定する
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" NeoBundleを初期化
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" インストールするプラグインをここに記述
+NeoBundle 'violetyk/iikanji-markdown.vim'
+
+call neobundle#end()
+
+" ファイルタイプ別のプラグイン/インデントを有効にする
+filetype plugin indent on
