@@ -1,15 +1,17 @@
 set runtimepath+=~/src/vim-polyglot
-
-syntax enable
-
-filetype plugin indent on
-
 set encoding=utf-8
 set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 set fileformats=unix,dos,mac
 
+" adjust indent to 4
+set tabstop=4 " file内のタブ文字の表示幅
+set shiftwidth=4 " 自動インデントに使われる文字数
 
-" insert mode
+set number " 行番号の表示
+set whichwrap=b,s,[,],<,> " カーソルの回り込み可能にする(行末で→を押すと次の行へ
+set backspace=indent,eol,start " バックスペースを空白、行末、行頭でも使えるようにする
+
+" insert mode (vim裏切り設定)
 imap <C-p> <Up>
 imap <C-n> <Down>
 imap <C-b> <Left>
@@ -47,7 +49,7 @@ function! s:split_line()
 endfunction
 
 
-" NeoBundleでいろいろ管理する
+" Start NeoBundle Settings.
 if has('vim_starting')
    " 初回起動時のみruntimepathにneobundleのパスを指定する
    set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -57,9 +59,19 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " インストールするプラグインをここに記述
-NeoBundle 'violetyk/iikanji-markdown.vim'
+" NeoBundle 'violetyk/iikanji-markdown.vim'
+NeoBundle 'gabrielelana/vim-markdown' " markdown対応してindent/unindentをenable
+NeoBundle 'Townk/vim-autoclose' " (を自動的に閉じる
+NeoBundle 'mattn/emmet-vim' " enable Emmet
 
 call neobundle#end()
 
+let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"
+
+NeoBundleCheck " 未インストールプラグインがあったらインストールするか尋ねる
+" End NeoBundle Settings.
+
 " ファイルタイプ別のプラグイン/インデントを有効にする
 filetype plugin indent on
+
+syntax enable
