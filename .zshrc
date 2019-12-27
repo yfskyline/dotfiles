@@ -19,7 +19,8 @@ eval "$(pyenv init -)"
 
 ########################################
 # 環境変数
-export LANG=ja_JP.UTF-8
+export LANG=en_US.UTF-8
+#export LANG=ja_JP.UTF-8
 #export LANG=C
 #export LANG=C.UTF-8
 export LC_ALL=$LANG
