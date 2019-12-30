@@ -137,21 +137,32 @@ setopt extended_glob
 bindkey '^R' history-incremental-pattern-search-backward
 
 ########################################
-# エイリアス
 
+
+
+# Aliases
+########################################
 alias la='ls -a'
 alias ll='ls -l'
 alias relogin='exec $SHELL -l'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-
 alias mkdir='mkdir -p'
 alias py='python '
 alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
+alias g='git'
+alias gb='git branch'
+alias gs='git status'
+alias gc='git checkout'
+alias gcm='git commit -m'
+alias gd='git diff'
+
+alias v='vim'
+alias vi='vim'
+
 
 #alias pbcopy='xsel --clipboard --input'
-
 #alias pbpaste='xsel --clipboard --output'
 
 alias py="python3 "
