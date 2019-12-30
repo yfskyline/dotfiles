@@ -151,12 +151,16 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias py='python '
 alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
+
+# Git
 alias g='git'
 alias gb='git branch'
 alias gs='git status'
 alias gc='git checkout'
 alias gcm='git commit -m'
 alias gd='git diff'
+alias gp='git push'
+alias ga='git add'
 
 alias v='vim'
 alias vi='vim'
