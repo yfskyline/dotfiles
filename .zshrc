@@ -161,6 +161,7 @@ alias gcm='git commit -m'
 alias gd='git diff'
 alias gp='git push'
 alias ga='git add'
+alias gl='git log'
 
 alias v='vim'
 alias vi='vim'
