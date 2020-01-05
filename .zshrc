@@ -149,7 +149,8 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
-alias py='python '
+alias py='python3 '
+alias python='python3'
 alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
 
 # Git
@@ -170,7 +171,6 @@ alias vi='vim'
 #alias pbcopy='xsel --clipboard --input'
 #alias pbpaste='xsel --clipboard --output'
 
-alias py="python3 "
 
 
 # sudo の後のコマンドでエイリアスを有効にする
