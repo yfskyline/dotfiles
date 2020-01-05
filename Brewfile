@@ -63,8 +63,15 @@ brew "wakeonlan"
 brew "wget"
 brew "youtube-dl"
 brew "zstd"
+cask "boostnote"
+cask "macs-fan-control"
 cask "mactex"
 cask "mamp"
+cask "microsoft-excel"
+cask "microsoft-powerpoint"
+cask "microsoft-word"
+cask "the-unarchiver"
+cask "vlc"
 mas "1Password 7", id: 1333542190
 mas "Apple Configurator 2", id: 1037126344
 mas "Be Focused Pro", id: 961632517
