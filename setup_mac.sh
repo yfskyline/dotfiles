@@ -98,17 +98,19 @@ mas install 1025073421 #  Musicnotes (1.4)
 
 # homebrew-cask
 # ------------------------------------
+brew bundle
+
 brew cask install virtualbox
 brew cask install mactex
 #brew cask install mamp
 
 brew cask install google-chrome
 
-brew cask install macs-fan-control
-
 brew cask install google-drive-file-stream
 
 brew cask install visual-studio-code
+
+brew cask install karabiner-elements
 
 # brew cask install ccleaner
 
