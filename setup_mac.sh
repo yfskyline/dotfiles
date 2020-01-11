@@ -1,7 +1,7 @@
 # 
 # Mac Setup script
 # 
-
+sw_vers
 
 # システム環境設定(defaults command)
 # -----------------------------------
