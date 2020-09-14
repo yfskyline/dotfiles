@@ -152,6 +152,7 @@ alias mkdir='mkdir -p'
 alias py='python3 '
 alias python='python3'
 alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
+alias pip='pip3'
 
 # Git
 alias g='git'
