@@ -9,9 +9,9 @@ RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 # 補完機能を有効にする
 autoload -Uz compinit
 compinit
-export PYENV_ROOT="${HOME}/.pyenv"
+#export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
 # 少し凝った zshrc
 # License : MIT
@@ -302,7 +302,7 @@ zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 #cd は親ディレクトリからカレントディレクトリを選択しないので表示させないようにする (例: cd ../<TAB>):
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
-alias brew="env PATH=${PATH/\/Users\/fukagawa\/\.pyenv\/shims:/} brew"
+# alias brew="env PATH=${PATH/\/Users\/fukagawa\/\.pyenv\/shims:/} brew"
 
 
 function gcc2(){
