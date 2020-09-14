@@ -215,8 +215,8 @@ esac
 export PATH=$PATH:$HOME/.composer/vendor/bin
 
 #よくわからんけどrbenvのやつ
-eval "$(rbenv init -)"
-export PATH="/usr/local/sbin:$PATH"
+#eval "$(rbenv init -)"
+#export PATH="/usr/local/sbin:$PATH"
 
 
 #保管候補をハイライトする
