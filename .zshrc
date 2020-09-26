@@ -9,9 +9,9 @@ RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 # 補完機能を有効にする
 autoload -Uz compinit
 compinit
-export PYENV_ROOT="${HOME}/.pyenv"
+#export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
 # 少し凝った zshrc
 # License : MIT
@@ -152,6 +152,7 @@ alias mkdir='mkdir -p'
 alias py='python3 '
 alias python='python3'
 alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
+alias pip='pip3'
 
 # Git
 alias g='git'
@@ -215,8 +216,8 @@ esac
 export PATH=$PATH:$HOME/.composer/vendor/bin
 
 #よくわからんけどrbenvのやつ
-eval "$(rbenv init -)"
-export PATH="/usr/local/sbin:$PATH"
+#eval "$(rbenv init -)"
+#export PATH="/usr/local/sbin:$PATH"
 
 
 #保管候補をハイライトする
@@ -302,7 +303,7 @@ zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 #cd は親ディレクトリからカレントディレクトリを選択しないので表示させないようにする (例: cd ../<TAB>):
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
-alias brew="env PATH=${PATH/\/Users\/fukagawa\/\.pyenv\/shims:/} brew"
+# alias brew="env PATH=${PATH/\/Users\/fukagawa\/\.pyenv\/shims:/} brew"
 
 
 function gcc2(){
