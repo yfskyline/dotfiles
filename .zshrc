@@ -24,7 +24,7 @@ export LANG=en_US.UTF-8
 #export LANG=C
 #export LANG=C.UTF-8
 export LC_ALL=$LANG
-export EDITOR=vim
+export EDITOR=vim #デフォルトエディタをvimに設定
 export PYTHONIOENCODING=utf-8
 
 # 色を使用出来るようにする
