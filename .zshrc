@@ -319,3 +319,4 @@ alias gcc2=gcc2
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export PATH="/usr/local/opt/libpcap/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
