@@ -4,4 +4,7 @@
 cd  
 git clone https://github.com/yfskyline/dotfiles.git  
 cd ./dotfiles/  
-sh ./dotfilesLink.sh  
+sh ./dotfilesLink.sh
+
+## Mac Setup
+
