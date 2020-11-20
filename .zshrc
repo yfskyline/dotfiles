@@ -164,15 +164,10 @@ alias gd='git diff'
 alias gp='git push'
 alias ga='git add'
 alias gl='git log'
-
 alias v='vim'
 alias vi='vim'
-
-
 #alias pbcopy='xsel --clipboard --input'
 #alias pbpaste='xsel --clipboard --output'
-
-
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
@@ -225,7 +220,6 @@ autoload -U compinit
 compinit
 zstyle ':completion:*:default' menu select=2
 
-
 # 補完関数の表示を強化する
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
@@ -237,7 +231,6 @@ zstyle ':completion:*:descriptions' format '%F{yellow}Completing %B%d%b%f'$DEFAU
 
 # マッチ種別を別々に表示
 zstyle ':completion:*' group-name ''
-
 
 # セパレータを設定する
 zstyle ':completion:*' list-separator '-->'
@@ -262,10 +255,8 @@ setopt auto_menu             # 補完キー連打で順に補完候補を自動�
 setopt auto_param_keys       # カッコの対応などを自動的に補完
 setopt interactive_comments  # コマンドラインでも # 以降をコメントと見なす
 setopt magic_equal_subst     # コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる
-
 setopt complete_in_word      # 語の途中でもカーソル位置で補完
 setopt always_last_prompt    # カーソル位置は保持したままファイル名一覧を順次その場で表示
-
 setopt print_eight_bit  #日本語ファイル名等8ビットを通す
 setopt extended_glob  # 拡張グロブで補完(~とか^とか。例えばless *.txt~memo.txt ならmemo.txt 以外の *.txt にマッチ)
 setopt globdots # 明確なドットの指定なしで.から始まるファイルをマッチ
@@ -312,7 +303,6 @@ function gcc2(){
     #gcc -o $CFILE.out -lm -ansi -pedantic -Wall $FILENAME;
     gcc -o $CFILE -lm -Wall $FILENAME;
 }
-
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
