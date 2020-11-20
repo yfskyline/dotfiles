@@ -313,7 +313,6 @@ function gcc2(){
     gcc -o $CFILE -lm -Wall $FILENAME;
 }
 
-alias gcc2=gcc2
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
