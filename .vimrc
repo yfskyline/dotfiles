@@ -12,6 +12,9 @@ set relativenumber "行数を相対表示"
 set whichwrap=b,s,[,],<,> " カーソルの回り込み可能にする(行末で→を押すと次の行へ
 set backspace=indent,eol,start " バックスペースを空白、行末、行頭でも使えるようにする
 
+" search
+set ic " 検索時に大文字/小文字を区別しない
+
 " insert mode (vim裏切り設定)
 imap <C-p> <Up>
 imap <C-n> <Down>
