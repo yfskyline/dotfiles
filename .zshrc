@@ -13,6 +13,8 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 # zplug 256-color
 zplug "chrissicool/zsh-256color"
+# zplug history-substring search
+zplug "zsh-users/zsh-history-substring-search"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -33,9 +35,12 @@ PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
-# 補完機能を有効にする
+# zshの補完機能を有効にする
 autoload -Uz compinit
 compinit
+#保管候補をハイライトする
+zstyle ':completion:*:default' menu select=2
+
 #export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
 # eval "$(pyenv init -)"
@@ -84,9 +89,6 @@ zstyle ':zle:*' word-style unspecified
 
 ########################################
 # 補完
-# 補完機能を有効にする
-autoload -Uz compinit
-compinit
 
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -242,10 +244,6 @@ export PATH=$PATH:$HOME/.composer/vendor/bin
 #export PATH="/usr/local/sbin:$PATH"
 
 
-#保管候補をハイライトする
-autoload -U compinit
-compinit
-zstyle ':completion:*:default' menu select=2
 
 # 補完関数の表示を強化する
 zstyle ':completion:*' verbose yes
