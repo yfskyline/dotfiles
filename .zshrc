@@ -36,8 +36,7 @@ SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
 # zshの補完機能を有効にする
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 #保管候補をハイライトする
 zstyle ':completion:*:default' menu select=2
 
