@@ -9,6 +9,8 @@ zplug "mafredri/zsh-async"
 zplug "zsh-users/zsh-syntax-highlighting"
 # command-suggestion referring history
 zplug "zsh-users/zsh-autosuggestions"
+# zplug completions
+zplug "zsh-users/zsh-completions"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
