@@ -1,7 +1,7 @@
 # install zplug if it has not been installed
-test -d ~/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+test -d $HOME/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 # zplug
-source ~/.zplug/init.zsh
+source $HOME/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 # 非同期処理
 zplug "mafredri/zsh-async"
@@ -62,7 +62,7 @@ colors
 bindkey -e
 
 # ヒストリの設定
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
