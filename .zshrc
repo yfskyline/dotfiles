@@ -7,7 +7,8 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "mafredri/zsh-async"
 # Syntax Highlight(https://github.com/zsh-users/zsh-syntax-highlighting)
 zplug "zsh-users/zsh-syntax-highlighting"
-
+# command-suggestion referring history
+zplug "zsh-users/zsh-autosuggestions"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
