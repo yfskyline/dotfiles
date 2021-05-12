@@ -3,8 +3,8 @@ test -d ~/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercont
 # zplug
 source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-
+# 非同期処理
+zplug "mafredri/zsh-async"
 
 # 色を使用出来るようにする
 autoload colors
