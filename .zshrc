@@ -5,6 +5,8 @@ source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 # 非同期処理
 zplug "mafredri/zsh-async"
+# Syntax Highlight(https://github.com/zsh-users/zsh-syntax-highlighting)
+zplug "zsh-users/zsh-syntax-highlighting"
 
 # 色を使用出来るようにする
 autoload colors
