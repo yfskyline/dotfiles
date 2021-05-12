@@ -1,3 +1,11 @@
+# zplugのインストール
+test -d ~/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+# zplug
+source ~/.zplug/init.zsh
+
+
+
+
 # 色を使用出来るようにする
 autoload colors
 colors
