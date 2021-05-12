@@ -8,6 +8,18 @@ zplug "mafredri/zsh-async"
 # Syntax Highlight(https://github.com/zsh-users/zsh-syntax-highlighting)
 zplug "zsh-users/zsh-syntax-highlighting"
 
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
+fi
+# source zplug plugins and add commands to $PATH
+zplug load
+
+
 # 色を使用出来るようにする
 autoload colors
 colors
