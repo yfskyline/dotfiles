@@ -11,6 +11,8 @@ zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 # zplug completions
 zplug "zsh-users/zsh-completions"
+# zplug 256-color
+zplug "chrissicool/zsh-256color"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
