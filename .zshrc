@@ -334,3 +334,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export PATH="/usr/local/opt/libpcap/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+
+# fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
+stty stop undef
