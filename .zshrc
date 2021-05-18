@@ -34,6 +34,8 @@ export PATH="$PATH:/usr/local/opt/gnu-getopt/bin"
 #export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
 # eval "$(pyenv init -)"
+# for user scripts
+export PATH="$PATH:$HOME/bin"
 
 # 色を使用出来るようにする
 autoload colors
