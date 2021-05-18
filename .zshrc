@@ -23,9 +23,17 @@ if ! zplug check --verbose; then
     echo; zplug install
   fi
 fi
+
+### PATH ###
 # source zplug plugins and add commands to $PATH
 zplug load
 
+export PATH="$PATH:/usr/local/opt/libpcap/bin"
+export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:/usr/local/opt/gnu-getopt/bin"
+#export PYENV_ROOT="${HOME}/.pyenv"
+export PATH="${PYENV_ROOT}/bin:$PATH"
+# eval "$(pyenv init -)"
 
 # 色を使用出来るようにする
 autoload colors
@@ -39,10 +47,6 @@ RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 autoload -Uz compinit && compinit
 #保管候補をハイライトする
 zstyle ':completion:*:default' menu select=2
-
-#export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin:$PATH"
-# eval "$(pyenv init -)"
 
 # 少し凝った zshrc
 # License : MIT
@@ -322,9 +326,6 @@ function gcc2(){
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-export PATH="$PATH:/usr/local/opt/libpcap/bin"
-export PATH="$PATH:/usr/local/sbin"
-export PATH="$PATH:/usr/local/opt/gnu-getopt/bin"
 
 # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
 stty stop undef
