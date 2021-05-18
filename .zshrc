@@ -234,10 +234,6 @@ case ${OSTYPE} in
 esac
 
 
-#よくわからんけどrbenvのやつ
-#eval "$(rbenv init -)"
-#export PATH="/usr/local/sbin:$PATH"
-
 
 
 # 補完関数の表示を強化する
