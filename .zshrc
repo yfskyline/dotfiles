@@ -37,6 +37,8 @@ export PATH="${PYENV_ROOT}/bin:$PATH"
 # for user scripts
 export PATH="$PATH:$HOME/bin"
 test -d $HOME/bin || mkdir $HOME/bin
+# nodebrew's node
+export PATH="$PATH:$HOME/.nodebrew/current/bin"
 
 # 色を使用出来るようにする
 autoload colors
