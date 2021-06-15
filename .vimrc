@@ -4,19 +4,19 @@ set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 set fileformats=unix,dos,mac
 
 " adjust indent to 4
-set tabstop=4 " fileÆâ¤Î¥¿¥ÖÊ¸»ú¤ÎÉ½¼¨Éı
-set shiftwidth=4 " ¼«Æ°¥¤¥ó¥Ç¥ó¥È¤Ë»È¤ï¤ì¤ëÊ¸»ú¿ô
+set tabstop=4 " fileå†…ã®ã‚¿ãƒ–æ–‡å­—ã®è¡¨ç¤ºå¹…
+set shiftwidth=4 " è‡ªå‹•ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã«ä½¿ã‚ã‚Œã‚‹æ–‡å­—æ•°
 
-set number " ¹ÔÈÖ¹æ¤ÎÉ½¼¨,¸½ºß¹Ô¿ô¤òÀäÂĞÉ½¼¨ "
-set relativenumber "¹Ô¿ô¤òÁêÂĞÉ½¼¨"
-set whichwrap=b,s,[,],<,> " ¥«¡¼¥½¥ë¤Î²ó¤ê¹ş¤ß²ÄÇ½¤Ë¤¹¤ë(¹ÔËö¤Ç¢ª¤ò²¡¤¹¤È¼¡¤Î¹Ô¤Ø
-set backspace=indent,eol,start " ¥Ğ¥Ã¥¯¥¹¥Ú¡¼¥¹¤ò¶õÇò¡¢¹ÔËö¡¢¹ÔÆ¬¤Ç¤â»È¤¨¤ë¤è¤¦¤Ë¤¹¤ë
-set mouse=a "¥Ş¥¦¥¹¥Û¥¤¡¼¥ë¤òÍøÍÑ¤¹¤ë"
+set number " è¡Œç•ªå·ã®è¡¨ç¤º,ç¾åœ¨è¡Œæ•°ã‚’çµ¶å¯¾è¡¨ç¤º "
+set relativenumber "è¡Œæ•°ã‚’ç›¸å¯¾è¡¨ç¤º"
+set whichwrap=b,s,[,],<,> " ã‚«ãƒ¼ã‚½ãƒ«ã®å›ã‚Šè¾¼ã¿å¯èƒ½ã«ã™ã‚‹(è¡Œæœ«ã§â†’ã‚’æŠ¼ã™ã¨æ¬¡ã®è¡Œã¸
+set backspace=indent,eol,start " ãƒãƒƒã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚’ç©ºç™½ã€è¡Œæœ«ã€è¡Œé ­ã§ã‚‚ä½¿ãˆã‚‹ã‚ˆã†ã«ã™ã‚‹
+set mouse=a "ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã‚’åˆ©ç”¨ã™ã‚‹"
 
 " search
-set ic " ¸¡º÷»ş¤ËÂçÊ¸»ú/¾®Ê¸»ú¤ò¶èÊÌ¤·¤Ê¤¤
+set ic " æ¤œç´¢æ™‚ã«å¤§æ–‡å­—/å°æ–‡å­—ã‚’åŒºåˆ¥ã—ãªã„
 
-" insert mode (vimÎ¢ÀÚ¤êÀßÄê)
+" insert mode (vimè£åˆ‡ã‚Šè¨­å®š)
 imap <C-p> <Up>
 imap <C-n> <Down>
 imap <C-b> <Left>
@@ -31,7 +31,7 @@ function! s:home()
   let start_column = col('.')
   normal! ^
   if col('.') == start_column
-  Â¦ normal! 0
+  å´ normal! 0
   endif
   return ''
 endfunction
@@ -39,9 +39,9 @@ endfunction
 function! s:kill()
   let [text_before, text_after] = s:split_line()
   if len(text_after) == 0
-  Â¦ normal! J
+  å´ normal! J
   else
-  Â¦ call setline(line('.'), text_before)
+  å´ call setline(line('.'), text_before)
   endif
   return ''
 endfunction
@@ -56,27 +56,27 @@ endfunction
 
 " Start NeoBundle Settings.
 if has('vim_starting')
-   " ½é²óµ¯Æ°»ş¤Î¤ßruntimepath¤Ëneobundle¤Î¥Ñ¥¹¤ò»ØÄê¤¹¤ë
+   " åˆå›èµ·å‹•æ™‚ã®ã¿runtimepathã«neobundleã®ãƒ‘ã‚¹ã‚’æŒ‡å®šã™ã‚‹
    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-" NeoBundle¤ò½é´ü²½
+" NeoBundleã‚’åˆæœŸåŒ–
 call neobundle#begin(expand('~/.vim/bundle/'))
 
-" ¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¥×¥é¥°¥¤¥ó¤ò¤³¤³¤Ëµ­½Ò
+" ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’ã“ã“ã«è¨˜è¿°
 " NeoBundle 'violetyk/iikanji-markdown.vim'
-NeoBundle 'gabrielelana/vim-markdown' " markdownÂĞ±ş¤·¤Æindent/unindent¤òenable
-NeoBundle 'Townk/vim-autoclose' " (¤ò¼«Æ°Åª¤ËÊÄ¤¸¤ë
+NeoBundle 'gabrielelana/vim-markdown' " markdownå¯¾å¿œã—ã¦indent/unindentã‚’enable
+NeoBundle 'Townk/vim-autoclose' " (ã‚’è‡ªå‹•çš„ã«é–‰ã˜ã‚‹
 NeoBundle 'mattn/emmet-vim' " enable Emmet
 
 call neobundle#end()
 
 let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"
 
-NeoBundleCheck " Ì¤¥¤¥ó¥¹¥È¡¼¥ë¥×¥é¥°¥¤¥ó¤¬¤¢¤Ã¤¿¤é¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¤«¿Ò¤Í¤ë
+NeoBundleCheck " æœªã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãŒã‚ã£ãŸã‚‰ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ã‹å°‹ã­ã‚‹
 " End NeoBundle Settings.
 
-" ¥Õ¥¡¥¤¥ë¥¿¥¤¥×ÊÌ¤Î¥×¥é¥°¥¤¥ó/¥¤¥ó¥Ç¥ó¥È¤òÍ­¸ú¤Ë¤¹¤ë
+" ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—åˆ¥ã®ãƒ—ãƒ©ã‚°ã‚¤ãƒ³/ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚’æœ‰åŠ¹ã«ã™ã‚‹
 filetype plugin indent on
 
 syntax enable
