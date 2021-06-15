@@ -79,4 +79,20 @@ NeoBundleCheck " 未インストールプラグインがあったらインスト
 " ファイルタイプ別のプラグイン/インデントを有効にする
 filetype plugin indent on
 
+
+" Highlight Full-width Space
+function! FullSpace()
+    highlight FullSpace cterm=underline ctermfg=magenta guibg=darkgray
+endfunction
+
+if has('syntax')
+    augroup FullSpace
+        autocmd!
+        autocmd ColorScheme * call FullSpace()
+        autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('FullSpace', '　')
+    augroup END
+    call FullSpace()
+endif
+""""""""""""""""""""""""""""""
+
 syntax enable
