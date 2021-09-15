@@ -3,32 +3,32 @@
 # 
 sw_vers
 
-# $B%7%9%F%`4D6-@_Dj(B(defaults command)
+# システム環境設定(defaults command)
 # -----------------------------------
 
-# Dock: $B<+F0E*$K1#$9(B
+# Dock: 自動的に隠す
 defaults write com.apple.dock autohide -bool true
 
-# $B%^%&%9%+!<%=%kB.EY@_Dj(B
+# マウスカーソル速度設定
 defaults write "Apple Global Domain" com.apple.mouse.scaling 3.0
 
 # MissionControl
-# $B:G6a$N;HMQN($K1~$8$FJB$YBX$($k(B
+# 最近の使用率に応じて並べ替える
 defaults write com.apple.dock mru-spaces -bool true
 
-# $B%"%W%j%1!<%7%g%s$4$H$K%&%#%s%I%&$r$^$H$a$k(B
+# アプリケーションごとにウィンドウをまとめる
 defaults write com.apple.dock expose-group-apps -bool true
 
 # HotCorner
-defaults write com.apple.dock wvous-tl-corner -int 13 # $B2hLL$r%m%C%/(B
-# defaults write com.apple.dock wvous-tl-corner -int 5 # $B%+!<%=%k1&>e(B(tr)$B$G%9%/%j!<%s%;%$%P!<$r3+;O(B
-# defaults write com.apple.dock wvous-tl-corner -int 8 # $B%G%#%9%W%l%$$r%9%j!<%W(B
+defaults write com.apple.dock wvous-tl-corner -int 13 # 画面をロック
+# defaults write com.apple.dock wvous-tl-corner -int 5 # カーソル右上(tr)でスクリーンセイバーを開始
+# defaults write com.apple.dock wvous-tl-corner -int 8 # ディスプレイをスリープ
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
-# Finder:$B1#$7%U%!%$%k(B/$B%U%)%k%@$rI=<((B
+# Finder:隠しファイル/フォルダを表示
 defaults write com.apple.finder AppleShowAllFiles true
 
-# Finder:$B3HD%;R$rI=<((B
+# Finder:拡張子を表示
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Dock icon size
@@ -40,7 +40,7 @@ defaults write com.apple.dock autohide -bool true
 # Wipe all app icons from the Dock exclude Finder and Trash
 defaults write com.apple.dock persistent-apps -array
 
-# $B@_Dj$rH?1G(B
+# 設定を反映
 killall Dock
 
 
@@ -63,7 +63,7 @@ git config --global alias.co "checkout"
 git config --global core.editor "vim"
 
 # ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# install Homebrew ($B%Q%9%o!<%IF~NOMW5a$5$l$?$i%m%0%$%s%Q%9%o!<%I(B)
+# install Homebrew (パスワード入力要求されたらログインパスワード)
 if [ ! -x "`which brew`" ]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew update
@@ -78,7 +78,7 @@ fi
 if [ ! -x "`which mas`" ]; then
   brew install mas
 fi
-# $BM=$a(BApple ID$B$G%m%0%$%s$7$F$*$/I,MW$,$"$k(B
+# 予めApple IDでログインしておく必要がある
 mas install 803453959 # Slack
 mas install 539883307 # LINE
 mas install 1333542190 # 1Password 7 (7.4.1)
