@@ -208,6 +208,7 @@ alias ga='git add'
 alias gl='git log'
 alias v='vim'
 alias vi='vim'
+alias less='less -iNM'
 #alias pbcopy='xsel --clipboard --input'
 #alias pbpaste='xsel --clipboard --output'
 

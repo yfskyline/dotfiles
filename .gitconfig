@@ -1,0 +1,7 @@
+[core]
+	excludesfile = ~/.gitignore_global
+[user]
+	name = Yuta Fukagawa
+	email = 25516089+yfskyline@users.noreply.github.com
+[credential]
+	helper = osxkeychain

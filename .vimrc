@@ -26,7 +26,8 @@ imap <C-a> <C-o>:call <SID>home()<CR>
 imap <C-e> <End>
 imap <C-d> <Del>
 imap <C-h> <BS>
-imap <C-k> <C-r>=<SID>kill()<CR>
+" imap <C-k> <C-r>=<SID>kill()<CR>
+inoremap <C-k> <C-o>:call setline(line('.'), col('.') == 1 ? '' : getline('.')[:col('.') - 2])<CR>
 
 function! s:home()
   let start_column = col('.')
