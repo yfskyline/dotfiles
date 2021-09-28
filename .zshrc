@@ -183,7 +183,7 @@ bindkey '^R' history-incremental-pattern-search-backward
 
 # Aliases
 ########################################
-alias ls='ls -lah'
+alias lah='ls -lah'
 alias ll='ls -l'
 alias relogin='exec $SHELL -l'
 alias rm='rm -i'
