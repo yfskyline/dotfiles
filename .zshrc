@@ -1,3 +1,15 @@
+# set $OS
+if [ "$(uname)" = 'Darwin' ]; then
+  OS='Mac'
+elif [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
+  OS='Linux'
+elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW32_NT' ]; then                                               
+  OS='Cygwin'
+else
+  echo "Your platform ($(uname -a)) is not supported."
+  exit 1
+fi
+
 # install zplug if it has not been installed
 test -d $HOME/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 # zplug
@@ -27,7 +39,6 @@ fi
 
 # install NeoBundle for vim if it has not been installed
 test -e $HOME/.vim/bundle/neobundle.vim || sh ./NeoBundle_install.sh
-
 
 ### PATH ###
 # source zplug plugins and add commands to $PATH
@@ -248,9 +259,6 @@ case ${OSTYPE} in
         alias ls='ls -F --color=auto'
         ;;
 esac
-
-
-
 
 # 補完関数の表示を強化する
 zstyle ':completion:*' verbose yes
