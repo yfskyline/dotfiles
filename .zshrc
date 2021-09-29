@@ -1,6 +1,7 @@
 # install zplug if it has not been installed
 test -d $HOME/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 # zplug
+test $(stat $HOME/.zplug -c '%u') -eq $(id -u) || sudo chown -R $(whoami) $HOME/.zplug
 source $HOME/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 # 非同期処理
