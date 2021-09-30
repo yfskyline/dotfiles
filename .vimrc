@@ -12,12 +12,13 @@ set shiftwidth=4 " 自動インデントに使われる文字数
 set number
 set relativenumber
 set whichwrap=b,s,[,],<,> " カーソルの回り込み可能にする(行末で→を押すと次の行へ
-set backspace=indent,eol,start " バックスペースを空白、行末、行頭でも使えるようにする
-set mouse=a "マウスホイールを利用する"
+set backspace=indent,eol,start
+set mouse=a
 set cursorline
 set ruler
 set laststatus=2
 set showmatch
+set history=10000
 
 " search
 set ic " 検索時に大文字/小文字を区別しない
