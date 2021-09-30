@@ -19,6 +19,7 @@ set ruler
 set laststatus=2
 set showmatch
 set history=10000
+set hlsearch
 
 " search
 set ic " 検索時に大文字/小文字を区別しない
