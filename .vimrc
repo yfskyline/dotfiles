@@ -15,6 +15,7 @@ set whichwrap=b,s,[,],<,> " カーソルの回り込み可能にする(行末で
 set backspace=indent,eol,start
 set mouse=a
 set cursorline
+set cursorcolumn
 set ruler
 set laststatus=2
 set showmatch
