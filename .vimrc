@@ -20,11 +20,9 @@ set laststatus=2
 set showmatch
 set history=10000
 set hlsearch
+set ignorecase
 
-" search
-set ic " 検索時に大文字/小文字を区別しない
-
-" insert mode (vim裏切り設定)
+" insert mode(Emacs-Keybind)
 imap <C-p> <Up>
 imap <C-n> <Down>
 imap <C-b> <Left>
