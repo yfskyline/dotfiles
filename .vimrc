@@ -1,3 +1,4 @@
+set nocompatible
 set runtimepath+=~/src/vim-polyglot
 set encoding=utf-8
 set fileencoding=utf-8
@@ -79,7 +80,6 @@ let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown
 NeoBundleCheck " 未インストールプラグインがあったらインストールするか尋ねる
 " End NeoBundle Settings.
 
-" ファイルタイプ別のプラグイン/インデントを有効にする
 filetype plugin indent on
 
 
