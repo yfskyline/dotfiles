@@ -16,6 +16,7 @@ set backspace=indent,eol,start " バックスペースを空白、行末、行�
 set mouse=a "マウスホイールを利用する"
 set cursorline
 set ruler
+set laststatus=2
 
 " search
 set ic " 検索時に大文字/小文字を区別しない
