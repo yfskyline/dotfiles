@@ -16,7 +16,8 @@ test -d $HOME/.zplug || curl -sL --proto-redir -all,https https://raw.githubuser
 if [ $OS = 'Linux' ]; then
 	test $(stat $HOME/.zplug -c '%u') -eq $(id -u) || sudo chown -R $(whoami) $HOME/.zplug
 elif [ $OS = 'Mac' ]; then
-	test $(stat -f '%u' $HOME/.zplug) -eq $(id -u) || sudo chown -LR $(whoami) $HOME/.zplug
+	test $(stat -f '%u' $HOME/.zplug) -eq $(id -u) || sudo chown -R $(whoami) $HOME/.zplug
+	test $(stat -f '%u' $HOME/.zplug) -eq $(id -u) || sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
 fi
 source $HOME/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'

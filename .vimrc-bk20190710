@@ -1,7 +1,5 @@
-set encoding=utf-8
 scriptencoding utf-8
-" ↑1行目は読み込み時の文字コードの設定
-" ↑2行目はVim Script内でマルチバイトを使う場合の設定
+" ↑Vim Script内でマルチバイトを使う場合の設定
 " Vim scritptにvimrcも含まれるので、日本語でコメントを書く場合は先頭にこの設定が必要になる
 
 "----------------------------------------------------------
@@ -56,9 +54,6 @@ endif
 
 call neobundle#end()
 
-" ファイルタイプ別のVimプラグイン/インデントを有効にする
-filetype plugin indent on
-
 " 未インストールのVimプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
 NeoBundleCheck
 
@@ -75,7 +70,6 @@ syntax enable " 構文に色を付ける
 "----------------------------------------------------------
 " 文字
 "----------------------------------------------------------
-set fileencoding=utf-8 " 保存時の文字コード
 set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別. 左側が優先される
 set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先される
 set ambiwidth=double " □や○文字が崩れる問題を解決
@@ -119,8 +113,6 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " カーソル
 "----------------------------------------------------------
 set whichwrap=b,s,h,l,<,>,[,],~ " カーソルの左右移動で行末から次の行の行頭への移動が可能になる
-set number " 行番号を表示
-set cursorline " カーソルラインをハイライト
 
 " 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
 nnoremap j gj
@@ -230,6 +222,4 @@ if executable('ag')
   let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
   let g:ctrlp_user_command='ag %s -i --hidden -g ""' " 「ag」の検索設定
 endif
-
-
 
