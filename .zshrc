@@ -17,7 +17,7 @@ if [ $OS = 'Linux' ]; then
 	test $(stat $HOME/.zplug -c '%u') -eq $(id -u) || sudo chown -R $(whoami) $HOME/.zplug
 elif [ $OS = 'Mac' ]; then
 	test $(stat -f '%u' $HOME/.zplug) -eq $(id -u) || sudo chown -R $(whoami) $HOME/.zplug
-	test $(stat -f '%u' /usr/local/share/zsh) -eq $(id -u) || sudo chown -LR $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
+	test $(stat -f '%u' /usr/local/share/zsh) -eq $(id -u) || sudo chown -LR $(whoami) /usr/local/share/
 fi
 source $HOME/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
