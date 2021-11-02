@@ -1,4 +1,4 @@
-sudo apt install zsh
+sudo apt install -y zsh curl ssh git
 cd $HOME/dotfiles
 sh dotfilesLink.sh
 sudo chsh $USER -s $(which zsh)
