@@ -1,4 +1,4 @@
-sudo apt install -y zsh curl ssh git vim
+sudo apt install -y zsh curl ssh git vim tmux
 cd $HOME/dotfiles
 sh dotfilesLink.sh
 sudo chsh $USER -s $(which zsh)
