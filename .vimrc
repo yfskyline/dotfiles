@@ -22,6 +22,7 @@ set showmatch
 set history=10000
 set hlsearch
 set ignorecase
+set shortmess-=S
 
 " insert mode(Emacs-Keybind)
 imap <C-p> <Up>
