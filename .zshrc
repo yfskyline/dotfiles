@@ -227,6 +227,8 @@ alias gl='git log'
 alias v='vim'
 alias vi='vim'
 alias less='less -iNM'
+alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s" --add-metadata'
+#alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s"'
 #alias pbcopy='xsel --clipboard --input'
 #alias pbpaste='xsel --clipboard --output'
 
