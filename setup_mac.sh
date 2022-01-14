@@ -121,4 +121,6 @@ brew cask install boostnote
 
 
 
-
+# Visual Studio Code
+ln -sf ~/dotfiles/vscode/settings.json ~/settings.json
+ln -sf ~/dotfiles/vscode/argv.json ~/.vscode/argv.json
