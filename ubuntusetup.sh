@@ -9,4 +9,4 @@ sudo update-alternatives --set editor /usr/bin/vim.basic
 sudo sh ./ssh-keys.sh
 sudo sh NeoBundle_install.sh
 sudo sh cron.sh
-source $HOME/dotfiles/.zshrc
+. $HOME/dotfiles/.zshrc
