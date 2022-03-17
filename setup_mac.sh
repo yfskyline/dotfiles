@@ -50,8 +50,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 xcode-select --install 
 
-# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# install Homebrew (パスワード入力要求されたらログインパスワード)
+# install Homebrew
 if [ ! -x "`which brew`" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   brew update
