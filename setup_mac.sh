@@ -21,8 +21,6 @@ defaults write com.apple.dock expose-group-apps -bool true
 
 # HotCorner
 defaults write com.apple.dock wvous-tl-corner -int 13 # 画面をロック
-# defaults write com.apple.dock wvous-tl-corner -int 5 # カーソル右上(tr)でスクリーンセイバーを開始
-# defaults write com.apple.dock wvous-tl-corner -int 8 # ディスプレイをスリープ
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
 # Finder:隠しファイル/フォルダを表示
@@ -50,17 +48,7 @@ defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 # ------------------------------------
 
-
 xcode-select --install 
-
-# git
-# ------------------------------------
-git --version
-#brew install git
-git config --global user.name "Yuta Fukagawa"
-git config --global user.email "25516089+yfskyline@users.noreply.github.com"
-git config --global alias.co "checkout"
-git config --global core.editor "vim"
 
 # ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # install Homebrew (パスワード入力要求されたらログインパスワード)
@@ -88,7 +76,7 @@ fi
 # ------------------------------------
 brew bundle
 
-brew cask install visual-studio-code
+#brew cask install visual-studio-code
 brew cask install karabiner-elements
 brew cask install boostnote
 #Interface Theme: Dark
