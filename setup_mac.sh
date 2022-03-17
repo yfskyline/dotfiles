@@ -53,11 +53,11 @@ xcode-select --install
 # ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # install Homebrew (パスワード入力要求されたらログインパスワード)
 if [ ! -x "`which brew`" ]; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   brew update
 fi
-# ------------------------------------
 
+# ------------------------------------
 # mas-cli
 # ------------------------------------
 # install mas-cli
