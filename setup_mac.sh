@@ -79,18 +79,18 @@ if [ ! -x "`which mas`" ]; then
   brew install mas
 fi
 # 予めApple IDでログインしておく必要がある
-mas install 803453959 # Slack
-mas install 539883307 # LINE
-mas install 1333542190 # 1Password 7 (7.4.1)
-mas install 1037126344 # Apple Configurator 2 (2.11.1)
-mas install 497799835 # Xcode (11.3)
-mas install 1482454543 #  Twitter (8.4.2)
-mas install 1295203466 #  Microsoft Remote Desktop (10.3.7)
-mas install 836500024 # WeChat (2.3.29)
-mas install 904280696 # Things (3.11)
-mas install 513610341 # com.peacockmedia.integrity (9.3.6)
-mas install 961632517 # Be Focused Pro (1.7.5)
-mas install 1025073421 #  Musicnotes (1.4)
+#mas install 803453959 # Slack
+#mas install 539883307 # LINE
+#mas install 1333542190 # 1Password 7 (7.4.1)
+#mas install 1037126344 # Apple Configurator 2 (2.11.1)
+#mas install 497799835 # Xcode (11.3)
+#mas install 1482454543 #  Twitter (8.4.2)
+#mas install 1295203466 #  Microsoft Remote Desktop (10.3.7)
+#mas install 836500024 # WeChat (2.3.29)
+#mas install 904280696 # Things (3.11)
+#mas install 513610341 # com.peacockmedia.integrity (9.3.6)
+#mas install 961632517 # Be Focused Pro (1.7.5)
+#mas install 1025073421 #  Musicnotes (1.4)
 
 # ------------------------------------
 
@@ -102,18 +102,8 @@ brew bundle
 
 brew cask install virtualbox
 brew cask install mactex
-#brew cask install mamp
-
-brew cask install google-chrome
-
-brew cask install google-drive-file-stream
-
 brew cask install visual-studio-code
-
 brew cask install karabiner-elements
-
-# brew cask install ccleaner
-
 brew cask install boostnote
 #Interface Theme: Dark
 #Editor Theme: night
