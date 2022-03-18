@@ -56,21 +56,6 @@ if [ ! -x "`which brew`" ]; then
   brew update
 fi
 
-# ------------------------------------
-# mas-cli
-# ------------------------------------
-# install mas-cli
-#if [ ! -x "`which mas`" ]; then
-#  brew install mas
-#fi
-# 予めApple IDでログインしておく必要がある
-#mas install 803453959 # Slack
-#mas install 1333542190 # 1Password 7 (7.4.1)
-
-# ------------------------------------
-
-
-
 # homebrew-cask
 # ------------------------------------
 brew bundle
