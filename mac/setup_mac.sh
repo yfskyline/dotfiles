@@ -11,9 +11,7 @@ if [ ! -x "`which brew`" ]; then
   brew update
 fi
 
-# homebrew-cask
-# ------------------------------------
-brew bundle
+brew bundle --file $HOME/dotfiles/mac/Brewfile
 
 # システム環境設定(defaults command)
 # -----------------------------------
