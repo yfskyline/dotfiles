@@ -68,6 +68,7 @@ cask "tor-browser"
 cask "visual-studio-code"
 cask "webex-meetings"
 cask "wireshark"
+cask "zoom"
 mas "LINE", id: 539883307
 mas "Snippety", id: 1530751461
 mas "WireGuard", id: 1451685025
