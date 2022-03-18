@@ -3,6 +3,18 @@
 # 
 sw_vers
 
+xcode-select --install 
+
+# install Homebrew
+if [ ! -x "`which brew`" ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  brew update
+fi
+
+# homebrew-cask
+# ------------------------------------
+brew bundle
+
 # システム環境設定(defaults command)
 # -----------------------------------
 
@@ -48,17 +60,6 @@ defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 # ------------------------------------
 
-xcode-select --install 
-
-# install Homebrew
-if [ ! -x "`which brew`" ]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew update
-fi
-
-# homebrew-cask
-# ------------------------------------
-brew bundle
 
 #Interface Theme: Dark
 #Editor Theme: night
