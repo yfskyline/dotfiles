@@ -75,9 +75,6 @@ fi
 # ------------------------------------
 brew bundle
 
-#brew cask install visual-studio-code
-brew cask install karabiner-elements
-brew cask install boostnote
 #Interface Theme: Dark
 #Editor Theme: night
 # ------------------------------------
