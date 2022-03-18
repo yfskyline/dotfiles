@@ -49,6 +49,7 @@ defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
 defaults write com.apple.controlcenter "NSStatusItem Visible AccessibilityShortcuts" -bool false
 defaults write com.apple.controlcenter "NSStatusItem Visible Battery" -bool false
 defaults write com.apple.menuextra.battery "ShowPercent" -string YES
+defaults -currentHost write com.apple.controlcenter BatteryShowPercentage -bool true
 
 defaults write com.apple.menuextra.clock "IsAnalog" -bool false
 defaults write com.apple.menuextra.clock "ShowDayOfMonth" -bool true
