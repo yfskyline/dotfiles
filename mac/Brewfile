@@ -70,6 +70,7 @@ cask "webex-meetings"
 cask "wireshark"
 cask "zoom"
 cask "vlc"
+cask "shiftit"
 mas "LINE", id: 539883307
 mas "Snippety", id: 1530751461
 mas "WireGuard", id: 1451685025
