@@ -56,6 +56,18 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 98 "<dic
 
 
 # Input Source
+## Japanese(Roma-ji)
+### Correct Type-Mis
+defaults write com.apple.inputmethod.Kotoeri JIMPrefAutocorrectionKey -bool false
+
+### display recommendation
+defaults write com.apple.inputmethod.Kotoeri JIMPrefPredictiveCandidateKey -bool false
+
+### PunctuationType(. and ,)
+defaults write com.apple.inputmethod.Kotoeri JIMPrefPunctuationTypeKey -int 3
+
+### Yen-Key
+defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForYenKey -int 1
 
 # Voice Input
 ## ShortCut
