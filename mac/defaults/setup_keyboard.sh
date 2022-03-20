@@ -9,6 +9,8 @@ defaults write -g InitialKeyRepeat -int 10
 
 
 # User Dictionary
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g WebAutomaticSpellingCorrectionEnabled -bool false
 
 # Shortcuts
 ## Dock automatically on/off
