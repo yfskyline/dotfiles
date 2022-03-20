@@ -58,3 +58,6 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 98 "<dic
 # Input Source
 
 # Voice Input
+## ShortCut
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 164 "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>65535</integer><integer>0</integer></array><key>type</key><string>standard</string></dict></dict>"
+
