@@ -214,6 +214,11 @@ alias pip='pip3'
 alias activate="source ./bin/activate"
 alias fig='docker-compose'
 
+# for macOS
+alias gdb='defaults read > before.txt'
+alias gda='defaults read > after.txt'
+alias gdc='diff before.txt after.txt'
+
 # Git
 alias g='git'
 alias gb='git branch'
