@@ -11,5 +11,6 @@ sh ./dotfilesLink.sh
 # Sign in to AppleID
 $ open /System/Applications/System Preferences.app
 
+$ cd mac
 $ sh setup_mac.sh
 ```

@@ -6,5 +6,3 @@ ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.digrc ~/.digrc
 ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
-mkdir -p ~/.config
-ln -sf ~/dotfiles/mac/karabiner ~/.config/karabiner

@@ -3,6 +3,12 @@
 # 
 sw_vers
 
+sh $HOME/dotfiles/mac/dotfilesLink.sh
+
+# Karabiner-Elements config
+mkdir -p ~/.config
+ln -sf ~/dotfiles/mac/karabiner ~/.config/karabiner
+
 xcode-select --install 
 
 # install Homebrew
