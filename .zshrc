@@ -213,6 +213,7 @@ alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=
 alias pip='pip3'
 alias activate="source ./bin/activate"
 alias fig='docker-compose'
+alias sl='ls'
 
 # for macOS
 alias gdb='defaults read > before.txt'
