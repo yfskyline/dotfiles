@@ -69,6 +69,7 @@ cask "visual-studio-code"
 cask "webex-meetings"
 cask "wireshark"
 cask "zoom"
+cask "vlc"
 mas "LINE", id: 539883307
 mas "Snippety", id: 1530751461
 mas "WireGuard", id: 1451685025
