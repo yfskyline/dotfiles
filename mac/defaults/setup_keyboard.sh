@@ -7,6 +7,17 @@ defaults write -g KeyRepeat -int 1
 defaults write -g InitialKeyRepeat -int 10
 # defaults write -g InitialKeyRepeat -int 15 # システム上限
 
+# CapsLock を Ctrl に変更する
+# get string like : 1452-630-0 for keyboard_id (ref: http://freewing.starfree.jp/software/macos_keyboard_setting_terminal_commandline)
+keyboard_id="$(ioreg -c AppleEmbeddedKeyboard -r | grep -Eiw "VendorID|ProductID" | awk '{ print $4 }' | paste -s -d'-\n' -)-0"
+defaults -currentHost write -g com.apple.keyboard.modifiermapping.${keyboard_id} -array-add "
+<dict>
+  <key>HIDKeyboardModifierMappingDst</key>\
+  <integer>30064771300</integer>\
+  <key>HIDKeyboardModifierMappingSrc</key>\
+  <integer>30064771129</integer>\
+</dict>
+"
 
 # User Dictionary
 defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
