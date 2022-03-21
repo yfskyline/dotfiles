@@ -44,3 +44,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 # Visual Studio Code
 # ln -sf ~/dotfiles/vscode/settings.json ~/settings.json
 # ln -sf ~/dotfiles/vscode/argv.json ~/.vscode/argv.json
+
+# CoreFoundation Preferences
+killall cfprefsd
+killall SystemUIServer
