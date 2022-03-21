@@ -55,7 +55,7 @@ defaults write com.apple.menuextra.clock "IsAnalog" -bool false
 defaults write com.apple.menuextra.clock "ShowDayOfMonth" -bool true
 defaults write com.apple.menuextra.clock "ShowDayOfWeek" -bool true
 defaults write com.apple.menuextra.clock "ShowSeconds" -bool true
-defaults write com.apple.menuextra.clock "FlashDateSeparators" -bool true
+defaults write com.apple.menuextra.clock "FlashDateSeparators" -bool false
 defaults write com.apple.menuextra.clock "DateFormat" -string "M\u6708d\u65e5(EEE) K:mm:ss"
 
 # Spotlight in menubar
