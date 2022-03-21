@@ -34,7 +34,7 @@ defaults write com.apple.dock show-recents -bool false
 # Desktopにメニュー場を自動的に表示/非常時
 defaults write -g _HIHideMenuBar -bool false
 # フルスクリーンでメニューバーを自動的に表示/非表示
-defaults write -g AppleMenuBarVisibleInFullscreen -bool true
+defaults write -g AppleMenuBarVisibleInFullscreen -bool false
 
 # Control Center
 defaults write com.apple.controlcenter "NSStatusItem Visible WiFi" -bool true
