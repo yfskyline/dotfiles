@@ -1,7 +1,7 @@
 #!/bin/bash
 defaults write -g "com.apple.trackpad.forceClick" -bool true
 
-# タップでクリック
+# Enable 'Tap to Click'
 defaults write com.apple.driver.AppleMultitouch.trackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
