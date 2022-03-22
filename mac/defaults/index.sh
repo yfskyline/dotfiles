@@ -8,3 +8,4 @@ sh $HOME/dotfiles/mac/defaults/setup_ical.sh
 sh $HOME/dotfiles/mac/defaults/setup_mouse.sh
 sh $HOME/dotfiles/mac/defaults/setup_safari.sh
 sh $HOME/dotfiles/mac/defaults/setup_maps.sh
+sh $HOME/dotfiles/mac/defaults/setup_printer.sh
