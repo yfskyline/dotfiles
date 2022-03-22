@@ -11,3 +11,4 @@ sh $HOME/dotfiles/mac/defaults/setup_maps.sh
 sh $HOME/dotfiles/mac/defaults/setup_printer.sh
 sh $HOME/dotfiles/mac/defaults/setup_terminal.sh
 sh $HOME/dotfiles/mac/defaults/setup_currentHost.sh
+sh $HOME/dotfiles/mac/defaults/setup_general.sh
