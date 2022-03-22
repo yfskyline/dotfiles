@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # Spotlight
 
-# Change indexing order and siable some search results
+# display 'developer'
+touch /Applications/Xcode.app
 
+# Change indexing order and siable some search results
 defaults write com.apple.spotlight orderedItems -array \
     '{"enabled" = 1; "name" = "APPLICATIONS";}' \
     '{"enabled" = 1; "name" = "MENU_EXPRESSION";}' \
@@ -23,7 +25,8 @@ defaults write com.apple.spotlight orderedItems -array \
     '{"enabled" = 0; "name" = "MUSIC";}' \
     '{"enabled" = 0; "name" = "MOVIES";}' \
     '{"enabled" = 0; "name" = "FONTS";}' \
-    '{"enabled" = 0; "name" = "MENU_OTHER";}'
+    '{"enabled" = 0; "name" = "MENU_OTHER";}' \
+    '{"enabled" = 0; "name" = "SOURCE";}'
 
 # Load new settings before rebuilding the index
 killall mds > /dev/null 2>&1
@@ -33,3 +36,6 @@ sudo mdutil -i on / > /dev/null
 
 # Rebuild the index from scratch
 sudo mdutil -E / > /dev/null
+
+# remove blank xcode.app
+rm /Applications/Xcode.app
