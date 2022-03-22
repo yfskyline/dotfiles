@@ -3,7 +3,7 @@
 
 # タップしたときに、クリックとする
 defaults write -g com.apple.mouse.tapBehavior -int 1
-# マウスの速度を速める
+# Mouse Speed
 defaults write -g com.apple.mouse.scaling 3
 # 3本指でmission control & expose
 # defaults write com.apple.dock showMissionControlGestureEnabled -bool true
