@@ -24,5 +24,8 @@ defaults write com.apple.finder ShowTabView -bool true
 # Show the ~/Library directory
 chflags nohidden ~/Library
 
+# Show files extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
 
 killall Finder # enable Finder setting changes
