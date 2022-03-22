@@ -2,8 +2,11 @@
 ## Only parameters different from default
 
 # KeyBoard (設定の反映はログアウトが必要)
+## 1 * 15ms = 15ms
 defaults write -g KeyRepeat -int 1
 # defaults write -g KeyRepeat -int 2 # システム上限
+
+## 10 * 15ms = 150ms
 defaults write -g InitialKeyRepeat -int 10
 # defaults write -g InitialKeyRepeat -int 15 # システム上限
 
