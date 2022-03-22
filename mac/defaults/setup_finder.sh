@@ -27,5 +27,7 @@ chflags nohidden ~/Library
 # Show files extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
+# Avoid creating `.DS_Store` files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 killall Finder # enable Finder setting changes
