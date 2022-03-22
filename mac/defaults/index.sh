@@ -7,3 +7,4 @@ sh $HOME/dotfiles/mac/defaults/setup_spotlight.sh
 sh $HOME/dotfiles/mac/defaults/setup_ical.sh
 sh $HOME/dotfiles/mac/defaults/setup_mouse.sh
 sh $HOME/dotfiles/mac/defaults/setup_safari.sh
+sh $HOME/dotfiles/mac/defaults/setup_maps.sh
