@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Dock icon size
 defaults write com.apple.dock tilesize -int 40
 
