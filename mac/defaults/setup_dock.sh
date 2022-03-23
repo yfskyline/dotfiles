@@ -80,7 +80,7 @@ defaults write com.apple.systemuiserver "menuExtras" -array "/System/Library/Cor
 # defaults write com.apple.dock mru-spaces -bool true
 
 # アプリケーションごとにウィンドウをまとめる
-# defaults write com.apple.dock expose-group-apps -bool true
+defaults write com.apple.dock expose-group-apps -bool true
 
 # HotCorner
 ## Possible values:
