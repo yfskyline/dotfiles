@@ -12,4 +12,5 @@ sh $HOME/dotfiles/mac/defaults/setup_printer.sh
 sh $HOME/dotfiles/mac/defaults/setup_terminal.sh
 sh $HOME/dotfiles/mac/defaults/setup_currentHost.sh
 sh $HOME/dotfiles/mac/defaults/setup_general.sh
-sh $HOME/dotfiles/mac/defaults/setup_shiftit.sh
+# sh $HOME/dotfiles/mac/defaults/setup_shiftit.sh
+sh $HOME/dotfiles/mac/defaults/setup_hammerspoon.sh
