@@ -12,7 +12,8 @@ defaults write com.apple.driver.AppleMultitouch.trackpad SecondClickThreshold -i
 # 軌跡
 defaults write -g com.apple.trackpad.scaling -int 3
 
-
+# Scroll Direction: Natural
+defaults write -g com.apple.swipescrolldirection -bool true
 
 
 # Other Gesture
