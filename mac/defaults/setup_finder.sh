@@ -30,4 +30,15 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # Avoid creating `.DS_Store` files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+## 未確認ファイルを開くときの警告無効化
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+## ゴミ箱を空にするときの警告無効化
+defaults write com.apple.finder WarnOnEmptyTrash -bool "false"
+
+# Default List-View
+## icon-view: icnv
+## column-view: clmv
+## Cover-Flow-View: Flwv
+defaults write com.apple.Finder FXPreferredViewStyle Nlsv
+
 killall Finder # enable Finder setting changes
