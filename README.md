@@ -7,6 +7,7 @@ cd ./dotfiles/
 sh ./dotfilesLink.sh
 
 ## macOS Setup
+This assumes macOS monterey(12).
 ```shell
 # Sign in to AppleID
 $ open /System/Applications/System Preferences.app
