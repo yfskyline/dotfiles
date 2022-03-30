@@ -15,3 +15,4 @@ sh $HOME/dotfiles/mac/defaults/setup_general.sh
 # sh $HOME/dotfiles/mac/defaults/setup_shiftit.sh
 sh $HOME/dotfiles/mac/defaults/setup_hammerspoon.sh
 sh $HOME/dotfiles/mac/defaults/setup_music.sh
+sh $HOME/dotfiles/mac/defaults/setup_display.sh
