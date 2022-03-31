@@ -30,6 +30,9 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # Avoid creating `.DS_Store` files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+# Search within seeing directory
+defaults write com.apple.finder FXDefaultSearchScope -string SCcf
+
 ## 未確認ファイルを開くときの警告無効化
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 ## ゴミ箱を空にするときの警告無効化
