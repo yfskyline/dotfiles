@@ -90,3 +90,4 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 164 "<di
 
 # Control Strip
 defaults write com.apple.controlstrip MiniCustomized '(com.apple.system.brightness, com.apple.system.volume, com.apple.system.mute)'
+killall ControlStrip
