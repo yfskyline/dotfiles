@@ -16,7 +16,7 @@ if [ ! -x "`which brew`" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   brew update
 fi
-
+brew update
 brew bundle --file $HOME/dotfiles/mac/Brewfile
 
 #Interface Theme: Dark
@@ -32,3 +32,7 @@ mkdir -p ~/dev
 # CoreFoundation Preferences
 killall cfprefsd
 killall SystemUIServer
+
+open -a "Google Chrome"
+open -a "1Password 7"
+open -a slack
