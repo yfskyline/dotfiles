@@ -7,7 +7,7 @@ sh $HOME/dotfiles/mac/dotfilesLink.sh
 sh $HOME/dotfiles/git_setup.sh
 
 # Karabiner-Elements config
-mkdir -p ~/.config
+mkdir -p ~/.config/karabiner
 ln -sf ~/dotfiles/mac/karabiner/assets ~/.config/karabiner/assets
 ln -sf ~/dotfiles/mac/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
 
