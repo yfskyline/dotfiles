@@ -38,4 +38,4 @@ sudo mdutil -i on / > /dev/null
 sudo mdutil -E / > /dev/null
 
 # remove blank xcode.app
-rm /Applications/Xcode.app
+# rm /Applications/Xcode.app
