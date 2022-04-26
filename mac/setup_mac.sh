@@ -9,7 +9,10 @@ sh $HOME/dotfiles/mac/dotfilesLink.sh
 mkdir -p ~/.config
 ln -sf ~/dotfiles/mac/karabiner ~/.config/karabiner
 
-xcode-select --install 
+# install xcode-select
+if [ ! -x "`xcode-select --print-path`" ]; then
+	xcode-select --install
+fi
 
 # install Homebrew
 if [ ! -x "`which brew`" ]; then
