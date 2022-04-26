@@ -12,6 +12,7 @@ This assumes macOS monterey(12).
 # Sign in to AppleID
 $ open /System/Applications/System Preferences.app
 
+$ git clone https://github.com/yfskyline/dotfiles.git
 $ cd mac
 $ sh setup_mac.sh
 
