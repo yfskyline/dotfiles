@@ -27,6 +27,8 @@ brew bundle --file $HOME/dotfiles/mac/Brewfile
 # ln -sf ~/dotfiles/vscode/settings.json ~/settings.json
 # ln -sf ~/dotfiles/vscode/argv.json ~/.vscode/argv.json
 
+mkdir -p ~/dev
+
 # CoreFoundation Preferences
 killall cfprefsd
 killall SystemUIServer
