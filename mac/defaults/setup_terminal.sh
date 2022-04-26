@@ -12,3 +12,9 @@ if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
     defaults write com.apple.Terminal "Startup Window Settings" -string "$TERM_PROFILE"
 fi
 defaults import com.apple.Terminal "$HOME/Library/Preferences/com.apple.Terminal.plist"
+
+
+# ターミナルの文字エンコーディング指定を UTF-8だけにする
+# defaults write com.apple.terminal StringEncodings -array 4
+
+defaults write com.apple.terminal "Default Window Settings" -string "skyline"
