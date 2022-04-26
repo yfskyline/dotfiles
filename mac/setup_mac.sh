@@ -42,3 +42,4 @@ killall SystemUIServer
 open -a "Google Chrome"
 open -a "1Password 7"
 open -a slack
+open -a line
