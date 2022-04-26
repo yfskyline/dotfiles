@@ -43,5 +43,12 @@ open -a "Google Chrome"
 open -a "1Password 7"
 open -a slack
 open -a line
+open -a snippety
+open -a hammerspoon
+open -a deepl
+open -a discord
+open -a firefox
+open -a zoom.us
+open -a karabiner-elements
 
 softwareupdate --all --install --force
