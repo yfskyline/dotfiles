@@ -218,9 +218,9 @@ alias fig='docker-compose'
 alias sl='ls'
 
 # for macOS
-alias gdb='defaults read > before.txt'
-alias gda='defaults read > after.txt'
-alias gdc='diff before.txt after.txt'
+alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
+alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
+alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
 
 # Git
 alias g='git'
