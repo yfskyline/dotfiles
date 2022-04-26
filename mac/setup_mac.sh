@@ -8,7 +8,9 @@ sh $HOME/dotfiles/git_setup.sh
 
 # Karabiner-Elements config
 mkdir -p ~/.config
-ln -sf ~/dotfiles/mac/karabiner ~/.config/karabiner
+ln -sf ~/dotfiles/mac/karabiner/assets ~/.config/karabiner/assets
+ln -sf ~/dotfiles/mac/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
+
 
 # install xcode-select
 if [ ! -x "`xcode-select --print-path`" ]; then
