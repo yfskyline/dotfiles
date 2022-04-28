@@ -4,6 +4,8 @@
 # display 'developer'
 touch /Applications/Xcode.app
 
+defaults write com.apple.spotlight version -int 7
+
 # Change indexing order and siable some search results
 defaults write com.apple.spotlight orderedItems -array \
     '{"enabled" = 1; "name" = "APPLICATIONS";}' \
