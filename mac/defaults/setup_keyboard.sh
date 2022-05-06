@@ -89,5 +89,5 @@ defaults write com.apple.inputmethod.Kotoeri JIMPrefCharacterForYenKey -int 1
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 164 "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>65535</integer><integer>0</integer></array><key>type</key><string>standard</string></dict></dict>"
 
 # Control Strip
-defaults write com.apple.controlstrip MiniCustomized '(com.apple.system.brightness, com.apple.system.volume, com.apple.system.mute)'
-killall ControlStrip
+# defaults write com.apple.controlstrip MiniCustomized '(com.apple.system.brightness, com.apple.system.volume, com.apple.system.mute)'
+# killall ControlStrip
