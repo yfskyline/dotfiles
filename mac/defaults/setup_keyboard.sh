@@ -42,7 +42,7 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 35 "<dic
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>59</integer><integer>41</integer><integer>393216</integer></array><key>type</key><string>standard</string></dict></dict>"
 
 ## Mission Control: Move right
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>59</integer><integer>41</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
+# defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>59</integer><integer>41</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>59</integer><integer>41</integer><integer>393216</integer></array><key>type</key><string>standard</string></dict></dict>"
 
 ## Use NextWindow
