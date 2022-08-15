@@ -37,6 +37,9 @@ brew bundle --file $HOME/dotfiles/mac/Brewfile
 
 mkdir -p ~/dev
 
+# setup scripts
+sh ./defaults/index.sh
+
 # CoreFoundation Preferences
 killall cfprefsd
 killall SystemUIServer
