@@ -216,6 +216,7 @@ alias pip='pip3'
 alias activate="source ./bin/activate"
 alias fig='docker-compose'
 alias sl='ls'
+alias vmi='vim'
 
 # for macOS
 alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
