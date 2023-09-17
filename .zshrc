@@ -372,10 +372,10 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
 stty stop undef
 
-# 1Password-CLI completion
-eval "$(op completion zsh)"; compdef _op op
 
-# Use 1Password ssh-agent
 if [ "$OS" = 'Darwin' ]; then
+  # 1Password-CLI completion
+  eval "$(op completion zsh)"; compdef _op op
+  # Use 1Password ssh-agent
   export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 fi
