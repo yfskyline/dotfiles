@@ -219,9 +219,12 @@ alias sl='ls'
 alias vmi='vim'
 
 # for macOS
-alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
-alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
-alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
+if [ "$OS" = 'Darwin' ]; then
+  alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
+  alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
+  alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
+  alias wireshark='open -n /Applications/Wireshark.app/ '
+fi
 
 # Git
 alias g='git'
