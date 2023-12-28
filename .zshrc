@@ -217,6 +217,7 @@ alias activate="source ./bin/activate"
 alias fig='docker-compose'
 alias sl='ls'
 alias vmi='vim'
+alias ffprobe='ffprobe -hide_banner'
 
 # for macOS
 if [ "$OS" = 'Darwin' ]; then
