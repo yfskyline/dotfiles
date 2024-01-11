@@ -219,14 +219,6 @@ alias sl='ls'
 alias vmi='vim'
 alias ffprobe='ffprobe -hide_banner'
 
-# for macOS
-if [ "$OS" = 'Darwin' ]; then
-  alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
-  alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
-  alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
-  alias wireshark='open -n /Applications/Wireshark.app/ '
-fi
-
 # Git
 alias g='git'
 alias gb='git branch'
@@ -243,9 +235,6 @@ alias vi='vim'
 alias vmi='vim'
 alias less='less -iNM --no-init'
 alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s" --add-metadata'
-#alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s"'
-#alias pbcopy='xsel --clipboard --input'
-#alias pbpaste='xsel --clipboard --output'
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
@@ -267,6 +256,19 @@ alias -g G='| grep'
 #    alias -g C='| putclip'
 #fi
 
+# for Linux
+if [ "$OS" = 'Linux' ]; then
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+fi
+
+# for macOS
+if [ "$OS" = 'Darwin' ]; then
+  alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
+  alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
+  alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
+  alias wireshark='open -n /Applications/Wireshark.app/ '
+fi
 
 
 ########################################
