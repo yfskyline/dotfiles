@@ -97,7 +97,7 @@ colors
 # emacs 風キーバインドにする
 bindkey -e
 
-# ヒストリの設定
+# history file
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
