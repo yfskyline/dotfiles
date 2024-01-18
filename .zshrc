@@ -232,7 +232,7 @@ function gcc2(){
     gcc -o $CFILE -lm -Wall $FILENAME;
 }
 
-if [ "$OS" = 'Darwin' ]; then
+if [ "$OS" = 'Mac' ]; then
   # 1Password-CLI completion
   eval "$(op completion zsh)"; compdef _op op
   # Use 1Password ssh-agent
