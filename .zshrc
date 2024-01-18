@@ -62,10 +62,7 @@ autoload -Uz compinit && compinit # enable zsh completion
 zstyle ':completion:*:default' menu select=2 # 保管候補をハイライトする
 
 # Environmental Variable
-export LANG=en_US.UTF-8
-#export LANG=ja_JP.UTF-8
-#export LANG=C
-#export LANG=C.UTF-8
+export LANG=en_US.UTF-8        # ja_JP.UTF-8 / C.UTF-8
 export LC_ALL=$LANG
 export EDITOR=vim              # set vim as a default editor
 export PYTHONIOENCODING=utf-8
