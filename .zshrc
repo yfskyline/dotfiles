@@ -41,9 +41,8 @@ fi
 # install NeoBundle for vim if it has not been installed
 test -e $HOME/.vim/bundle/neobundle.vim || sh $HOME/dotfiles/NeoBundle_install.sh
 
-### PATH ###
-# source zplug plugins and add commands to $PATH
-zplug load
+# PATH
+zplug load # source zplug plugins and add commands to $PATH
 
 export PATH="$PATH:/usr/local/opt/libpcap/bin"
 export PATH="$PATH:/usr/local/sbin"
@@ -56,10 +55,9 @@ export PATH="$PATH:$HOME/bin"
 test -d $HOME/bin || mkdir $HOME/bin
 export PATH="$PATH:$HOME/.nodebrew/current/bin" # nodebrew's node
 
-autoload -Uz colors && colors # Use colors
+autoload -Uz colors && colors     # Use colors
 autoload -Uz compinit && compinit # enable zsh completion
 
-zstyle ':completion:*:default' menu select=2 # 補完候補をハイライトする
 
 # Environmental Variable
 export LANG=en_US.UTF-8        # ja_JP.UTF-8 / C.UTF-8
@@ -74,21 +72,9 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-# 単語の区切り文字を指定する
-autoload -Uz select-word-style && select-word-style default
-# ここで指定した文字は単語区切りとみなされる
-# / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
+autoload -Uz select-word-style && select-word-style default # select word's delimiter
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
-
-########################################
-# 補完
-
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完で小文字でも大文字にマッチさせる
-zstyle ':completion:*' ignore-parents parent pwd .. # ../ の後は今いるディレクトリを補完しない
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin # sudo の後ろでコマンド名を補完する
-zstyle ':completion:*:processes' command 'ps x -o pid,s,args' # ps コマンドのプロセス名補完
 
 
 # PROMPT
@@ -119,7 +105,8 @@ add-zsh-hook precmd _update_vcs_info_msg
 bindkey -e                                                # enable emacs key-bind
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey "^I" menu-complete                                # display option menu before completion
-
+bindkey '^[[1;5C' forward-word                            # CTRL+-> for move right word
+bindkey '^[[1;5D' backward-word                           # CTRL+<- for move left word
 
 # Aliases
 alias lah='ls -lah'
@@ -167,7 +154,7 @@ if [ "$OS" = 'Linux' ]; then
   alias pbpaste='xsel --clipboard --output'
   alias ls='ls -F --color=auto'
   alias -g C='| xsel --input --clipboard'
-elif [ "$OS" = 'Darwin' ]; then
+elif [ "$OS" = 'Mac' ]; then
   alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
   alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
   alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
@@ -178,20 +165,27 @@ elif [ "$OS" = 'Darwin' ]; then
 fi
 
 
-# 補完関数の表示を強化する
+# Completion
+zstyle ':completion:*:default' menu select=2                        # display completion menu when there are two or more candidates
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'                 # case insensitive
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin     # complete command name after 'sudo'
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'       # ps コマンドのプロセス名補完
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
 zstyle ':completion:*:messages' format '%F{YELLOW}%d'$DEFAULT
 zstyle ':completion:*:warnings' format '%F{RED}No matches for:''%F{YELLOW} %d'$DEFAULT
-zstyle ':completion:*:descriptions' format '%F{YELLOW}completing %B%d%b'$DEFAULT
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:descriptions' format '%F{yellow}Completing %B%d%b%f'$DEFAULT
-
-zstyle ':completion:*' group-name '' # マッチ種別を別々に表示
-
-# セパレータを設定する
-zstyle ':completion:*' list-separator '-->'
-zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*' group-name ''                                # マッチ種別を別々に表示
+zstyle ':completion:*' list-separator '-->'                         # セパレータを設定する
+zstyle ':completion:*:manuals' separate-sections true               # manの補完をセクション番号別に表示させる
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters # 変数の添字を補完する
+zstyle ':completion:*' use-cache true                               # apt-getとかdpkgコマンドをキャッシュを使って速くする
+cdpath=(~ ~/dotfiles/ ~/dev/) # 'cd' search path
+zstyle ':completion:*:cd:*' tag-order local-directories path-directories # if there is no candidate in the current directory, complete from 'cdpath'
+zstyle ':completion:*:cd:*' ignore-parents parent pwd               # avoid referencing current directory
+zstyle ':completion:*' ignore-parents parent pwd ..
 
 
 # zsh options
@@ -202,6 +196,7 @@ setopt pushd_ignore_dups     # don't push duplicated directory history to the di
 setopt interactive_comments  # treat '#' and after as comments on the CLI as well
 setopt print_eight_bit       # enable display of Japanese file names
 setopt no_flow_control       # disable flow-control with CTRL+S / CTRL+Q
+stty stop undef              # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
 setopt ignore_eof            # disable exit zsh with CTRL+D
 setopt share_history         # share zsh history files between concurrently opened zsh sessions
 setopt hist_ignore_all_dups  # don't save duplicate commands in the history
@@ -230,17 +225,6 @@ local PURPLE=$'%{^[[1;35m%}'$
 local LIGHT_BLUE=$'%{^[[1;36m%}'$
 local WHITE=$'%{^[[1;37m%}'$
 
-
-zstyle ':completion:*:manuals' separate-sections true # manの補完をセクション番号別に表示させる
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters # 変数の添字を補完する
-zstyle ':completion:*' use-cache true # apt-getとかdpkgコマンドをキャッシュを使って速くする
-
-# ディレクトリを切り替える時の色々な補完スタイル
-#あらかじめcdpathを適当に設定しておく
-cdpath=(~ ~/myapp/gae/ ~/myapp/gae/google_appengine/demos/)
-zstyle ':completion:*:cd:*' tag-order local-directories path-directories # カレントディレクトリに候補がない場合のみ cdpath 上のディレクトリを候補に出す
-zstyle ':completion:*:cd:*' ignore-parents parent pwd #cd は親ディレクトリからカレントディレクトリを選択しないので表示させないようにする (例: cd ../<TAB>):
-
 function gcc2(){
     FILENAME=$(basename $1);
     CFILE=$(basename $1 .c);
@@ -248,15 +232,12 @@ function gcc2(){
     gcc -o $CFILE -lm -Wall $FILENAME;
 }
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-stty stop undef  # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
-
 if [ "$OS" = 'Darwin' ]; then
   # 1Password-CLI completion
   eval "$(op completion zsh)"; compdef _op op
   # Use 1Password ssh-agent
   export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
 cat $HOME/dotfiles/poke.txt
