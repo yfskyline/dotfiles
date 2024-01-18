@@ -59,7 +59,7 @@ export PATH="$PATH:$HOME/.nodebrew/current/bin" # nodebrew's node
 autoload -Uz colors && colors # Use colors
 autoload -Uz compinit && compinit # enable zsh completion
 
-zstyle ':completion:*:default' menu select=2 # 保管候補をハイライトする
+zstyle ':completion:*:default' menu select=2 # 補完候補をハイライトする
 
 # Environmental Variable
 export LANG=en_US.UTF-8        # ja_JP.UTF-8 / C.UTF-8
@@ -67,6 +67,7 @@ export LC_ALL=$LANG
 export EDITOR=vim              # set vim as a default editor
 export PYTHONIOENCODING=utf-8
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # use LS_COLORS in completion menu
 
 # history file
 HISTFILE=$HOME/.zsh_history
@@ -115,15 +116,15 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 
 # key-bind
-########################################
-bindkey -e # enable emacs key-bind
-bindkey '^R' history-incremental-pattern-search-backward # ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
+bindkey -e                                                # enable emacs key-bind
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey "^I" menu-complete                                # display option menu before completion
 
 
 # Aliases
-########################################
 alias lah='ls -lah'
 alias ll='ls -l'
+alias sl='ls'
 alias relogin='exec $SHELL -l'
 alias rm='rm -i'
 alias cp='cp -i'
@@ -136,7 +137,6 @@ alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(t
 alias pip='pip3'
 alias activate="source ./bin/activate"
 alias fig='docker-compose'
-alias sl='ls'
 alias vmi='vim'
 alias ffprobe='ffprobe -hide_banner'
 
@@ -162,39 +162,21 @@ alias sudo='sudo ' # enable aliasses after "sudo "
 alias -g L='| less'
 alias -g G='| grep'
 
-#if which pbcopy >/dev/null 2>&1 ; then
-    # Mac
-#    alias -g C='| pbcopy'
-#elif which xsel >/dev/null 2>&1 ; then
-    # Linux
-#    alias -g C='| xsel --input --clipboard'
-#fi
-
-# for Linux
 if [ "$OS" = 'Linux' ]; then
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
-fi
-
-# for macOS
-if [ "$OS" = 'Darwin' ]; then
+  alias ls='ls -F --color=auto'
+  alias -g C='| xsel --input --clipboard'
+elif [ "$OS" = 'Darwin' ]; then
   alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
   alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
   alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
   alias wireshark='open -n /Applications/Wireshark.app/ '
+  alias ls='ls -G -F'
+  export CLICOLOR=1
+  alias -g C='| pbcopy'
 fi
 
-case ${OSTYPE} in
-    darwin*)
-        #Mac用の設定
-        export CLICOLOR=1
-        alias ls='ls -G -F'
-        ;;
-    linux*)
-        #Linux用の設定
-        alias ls='ls -F --color=auto'
-        ;;
-esac
 
 # 補完関数の表示を強化する
 zstyle ':completion:*' verbose yes
@@ -211,7 +193,6 @@ zstyle ':completion:*' group-name '' # マッチ種別を別々に表示
 zstyle ':completion:*' list-separator '-->'
 zstyle ':completion:*:manuals' separate-sections true
 
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # ファイル補完候補に色を付ける
 
 # zsh options
 setopt no_beep               # disable beep sound
@@ -238,7 +219,6 @@ setopt always_last_prompt    # insert void line for big output
 setopt glob_dots             # display files start from '.' when globbing
 setopt extended_glob         # completion with extended glob (e.g. ~, ^)
 
-bindkey "^I" menu-complete   # 展開する前に補完候補を出させる(Ctrl-iで補完するようにする)
 
 # COLOR definitions
 local DEFAULT=$'%{^[[m%}'$
