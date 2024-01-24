@@ -166,25 +166,25 @@ fi
 
 
 # Completion
-zstyle ':completion:*:default' menu select=2                        # display completion menu when there are two or more candidates
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'                 # case insensitive
+zstyle ':completion:*:default' menu select=2                             # display completion menu when there are two or more candidates
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'                      # case insensitive
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin     # complete command name after 'sudo'
-zstyle ':completion:*:processes' command 'ps x -o pid,s,args'       # ps コマンドのプロセス名補完
+                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin          # complete command name after 'sudo'
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'            # ps コマンドのプロセス名補完
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
 zstyle ':completion:*:messages' format '%F{YELLOW}%d'$DEFAULT
 zstyle ':completion:*:warnings' format '%F{RED}No matches for:''%F{YELLOW} %d'$DEFAULT
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:descriptions' format '%F{yellow}Completing %B%d%b%f'$DEFAULT
-zstyle ':completion:*' group-name ''                                # マッチ種別を別々に表示
-zstyle ':completion:*' list-separator '-->'                         # セパレータを設定する
-zstyle ':completion:*:manuals' separate-sections true               # manの補完をセクション番号別に表示させる
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters # 変数の添字を補完する
-zstyle ':completion:*' use-cache true                               # apt-getとかdpkgコマンドをキャッシュを使って速くする
-cdpath=(~ ~/dotfiles/ ~/dev/) # 'cd' search path
+zstyle ':completion:*' group-name ''                                     # マッチ種別を別々に表示
+zstyle ':completion:*' list-separator '-->'                              # セパレータを設定する
+zstyle ':completion:*:manuals' separate-sections true                    # manの補完をセクション番号別に表示させる
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters      # 変数の添字を補完する
+zstyle ':completion:*' use-cache true                                    # apt-getとかdpkgコマンドをキャッシュを使って速くする
+cdpath=(~ ~/dotfiles/ ~/dev/)                                            # 'cd' search path
 zstyle ':completion:*:cd:*' tag-order local-directories path-directories # if there is no candidate in the current directory, complete from 'cdpath'
-zstyle ':completion:*:cd:*' ignore-parents parent pwd               # avoid referencing current directory
+zstyle ':completion:*:cd:*' ignore-parents parent pwd                    # avoid referencing current directory
 zstyle ':completion:*' ignore-parents parent pwd ..
 
 
@@ -237,7 +237,7 @@ if [ "$OS" = 'Mac' ]; then
   eval "$(op completion zsh)"; compdef _op op
   # Use 1Password ssh-agent
   export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+  test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 fi
 
 cat $HOME/dotfiles/poke.txt
