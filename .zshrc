@@ -32,7 +32,7 @@ zplug "zsh-users/zsh-history-substring-search" # zplug history-substring search
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
+  printf "Install zplug plugins? [y/N]: "
   if read -q; then
     echo; zplug install
   fi
@@ -53,7 +53,7 @@ export PATH="${PYENV_ROOT}/bin:$PATH"
 # for user scripts
 export PATH="$PATH:$HOME/bin"
 test -d $HOME/bin || mkdir $HOME/bin
-export PATH="$PATH:$HOME/.nodebrew/current/bin" # nodebrew's node
+#export PATH="$PATH:$HOME/.nodebrew/current/bin" # nodebrew's node
 
 autoload -Uz colors && colors     # Use colors
 autoload -Uz compinit && compinit # enable zsh completion
@@ -119,15 +119,12 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias py='python3 '
 alias python='python3'
-alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
-alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s" --add-metadata'
 alias pip='pip3'
 alias activate="source ./bin/activate"
+alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
+alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s" --add-metadata'
 alias fig='docker-compose'
-alias vmi='vim'
 alias ffprobe='ffprobe -hide_banner'
-
-# Git
 alias g='git'
 alias gb='git branch'
 alias gs='git status'
@@ -142,7 +139,6 @@ alias v='vim'
 alias vi='vim'
 alias vmi='vim'
 alias less='less -iNM --no-init'
-
 alias sudo='sudo ' # enable aliasses after "sudo "
 
 # Global Alias
