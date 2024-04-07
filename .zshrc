@@ -235,5 +235,6 @@ if [ "$OS" = 'Mac' ]; then
   export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
   test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 fi
+eval "$(gh completion -s zsh)"
 
 cat $HOME/dotfiles/poke.txt
