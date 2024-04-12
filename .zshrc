@@ -1,13 +1,13 @@
 # set $OS
 if [ "$(uname)" = 'Darwin' ]; then
-  OS='Mac'
+	OS='Mac'
 elif [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
-  OS='Linux'
-elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW32_NT' ]; then                                               
-  OS='Cygwin'
+	OS='Linux'
+elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW32_NT' ]; then
+	OS='Cygwin'
 else
-  echo "Your platform ($(uname -a)) is not supported."
-  exit 1
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
 fi
 
 # install zplug if it has not been installed
@@ -32,10 +32,10 @@ zplug "zsh-users/zsh-history-substring-search" # zplug history-substring search
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
-  printf "Install zplug plugins? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
+	printf "Install zplug plugins? [y/N]: "
+	if read -q; then
+		echo; zplug install
+	fi
 fi
 
 # install NeoBundle for vim if it has not been installed
@@ -95,8 +95,8 @@ zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
 function _update_vcs_info_msg() {
-    LANG=en_US.UTF-8 vcs_info
-    RPROMPT="${vcs_info_msg_0_}"
+	LANG=en_US.UTF-8 vcs_info
+	RPROMPT="${vcs_info_msg_0_}"
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
@@ -222,10 +222,10 @@ local LIGHT_BLUE=$'%{^[[1;36m%}'$
 local WHITE=$'%{^[[1;37m%}'$
 
 function gcc2(){
-    FILENAME=$(basename $1);
-    CFILE=$(basename $1 .c);
-    #gcc -o $CFILE.out -lm -ansi -pedantic -Wall $FILENAME;
-    gcc -o $CFILE -lm -Wall $FILENAME;
+	FILENAME=$(basename $1);
+	CFILE=$(basename $1 .c);
+	#gcc -o $CFILE.out -lm -ansi -pedantic -Wall $FILENAME;
+	gcc -o $CFILE -lm -Wall $FILENAME;
 }
 
 if [ "$OS" = 'Mac' ]; then
