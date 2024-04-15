@@ -229,12 +229,12 @@ function gcc2(){
 }
 
 if [ "$OS" = 'Mac' ]; then
-  # 1Password-CLI completion
-  eval "$(op completion zsh)"; compdef _op op
-  # Use 1Password ssh-agent
-  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-  test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
+	# 1Password-CLI completion
+	eval "$(op completion zsh)"; compdef _op op
+	# Use 1Password ssh-agent
+	export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+	test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
+	eval "$(gh completion -s zsh)"
 fi
-eval "$(gh completion -s zsh)"
 
 cat $HOME/dotfiles/poke.txt
