@@ -5,6 +5,9 @@ set cursorline
 "set cursorcolumn
 set ruler
 "set runtimepath+=~/src/vim-polyglot
+set wildmenu
+" set wildmode=list:longest
+set showmode
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
@@ -25,10 +28,8 @@ set shortmess-=S
 " set autoread					" 編集中のファイルが変更されたら自動で読み直す
 " set hidden					" バッファが編集中でもその他のファイルを開けるように
 " set showcmd					" 入力中のコマンドをステータスに表示する: 打ったコマンドをステータスラインの下に表示
-" set showmode					" 現在のモードを表示
 " set virtualedit=onemore		" 行末の1文字先までカーソルを移動できるように
 " set visualbell				" ビープ音を可視化
-" set wildmode=list:longest		" コマンドラインの補完
 " 折り返し時に表示行単位での移動できるようにする
 
 " 検索系
