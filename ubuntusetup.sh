@@ -9,6 +9,8 @@ sudo chsh $USER -s $(which zsh)
 sudo update-alternatives --set editor /usr/bin/vim.basic
 sh ./ssh-keys.sh
 sudo sh ./ssh-keys.sh
+sh NeoBundle_install.sh
 sudo sh NeoBundle_install.sh
+sh cron.sh
 sudo sh cron.sh
 . $HOME/dotfiles/.zshrc
