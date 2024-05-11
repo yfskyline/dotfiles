@@ -13,4 +13,5 @@ sh NeoBundle_install.sh
 sudo sh NeoBundle_install.sh
 sh cron.sh
 sudo sh cron.sh
+zsh
 . $HOME/dotfiles/.zshrc
