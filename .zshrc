@@ -81,9 +81,20 @@ zstyle ':zle:*' word-style unspecified
 if [[ -n "$SSH_CONNECTION" ]];then
 	ISSSH="%F{cyan}[SSH]%f"
 fi
-PROMPT="%{$ISSSH$fg[green]%}[%n@%m]%{${reset_color}%} %~
-%(!.#.$) "
+
+set_prompt() {
+	if [ $? = 0 ]; then
+		PROMPT="%{$ISSSH$fg[green]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
 # %# "
+	else
+		PROMPT="%{$ISSSH$fg[red]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
+	fi
+}
+
+precmd() {
+	set_prompt
+}
+
 PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 
