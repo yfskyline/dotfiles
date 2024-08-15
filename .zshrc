@@ -56,7 +56,15 @@ test -d $HOME/bin || mkdir $HOME/bin
 #export PATH="$PATH:$HOME/.nodebrew/current/bin" # nodebrew's node
 
 autoload -Uz colors && colors     # Use colors
-autoload -Uz compinit && compinit # enable zsh completion
+
+local now=$(date +"%s")
+[ -f ~/.zcompdump ] && local updated=$(date -r ~/.zcompdump +"%s")
+local threshold=$((60 * 60 * 24 * 7))
+if [ $((${now} - ${updated})) -gt ${threshold} ]; then
+	autoload -Uz compinit && compinit		# enable zsh completion
+else
+	autoload -Uz compinit && compinit -C	# enable zsh completion
+fi
 
 
 # Environmental Variable
