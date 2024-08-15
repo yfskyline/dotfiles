@@ -248,4 +248,6 @@ if [ "$OS" = 'Mac' ]; then
 	eval "$(gh completion -s zsh)"
 fi
 
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
 cat $HOME/dotfiles/poke.txt
