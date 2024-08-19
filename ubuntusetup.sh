@@ -15,6 +15,16 @@ sudo chsh $USER -s $(which zsh)
 [ -f /etc/update-motd.d/50-motd-news ] && sudo mv /etc/update-motd.d/50-motd-news /etc/update-motd.d/50-motd-news.orig
 [ -f /etc/update-motd.d/91-contract-ua-esm-status ] && sudo mv /etc/update-motd.d/91-contract-ua-esm-status /etc/update-motd.d/91-contract-ua-esm-status.orig
 [ -f /etc/update-motd.d/90-updates-available ] && sudo mv /etc/update-motd.d/90-updates-available /etc/update-motd.d/90-updates-available.orig
+sudo systemctl disable update-notifier-motd.timer
+sudo rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available
+sudo systemctl disable motd-news.timer
+sudo rm -f /var/cache/motd-news
+
+# ubuntu pro
+sudo mkdir /etc/apt/apt.conf.d/old
+sudo mv /etc/apt/apt.conf.d/{,old/}20apt-esm-hook.conf
+sudo touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
+sudo pro config set apt_news=false
 
 # setup vim
 sudo update-alternatives --set editor /usr/bin/vim.basic
