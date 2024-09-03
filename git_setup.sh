@@ -6,6 +6,7 @@ git config --global color.status auto
 git config --global color.branch auto
 git config --global pull.ff only
 git config --global pull.rebase true
+git config --global fetch.prune true
 git config --list
 
 mkdir -p ~/.config/git && cp .gitignore_global ~/.config/git/ignore
