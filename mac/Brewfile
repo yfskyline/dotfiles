@@ -53,6 +53,7 @@ brew "yt-dlp"
 brew "zsh-completions"
 cask "1password"
 cask "1password-cli"
+cask "chatgpt"
 cask "discord"
 cask "fujitsu-scansnap-home"
 cask "google-chrome"
@@ -63,6 +64,8 @@ cask "mactex-no-gui"
 cask "microsoft-auto-update"
 cask "microsoft-office"
 cask "microsoft-remote-desktop"
+cask "notion"
+cask "nvidia-geforce-now"
 cask "slack"
 cask "tor-browser"
 cask "visual-studio-code"
@@ -72,5 +75,6 @@ cask "webex-meetings"
 cask "wireshark"
 cask "zoom"
 mas "LINE", id: 539883307
+mas "Prime Video", id: 545519333
 mas "Snippety", id: 1530751461
 mas "WireGuard", id: 1451685025
