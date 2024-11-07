@@ -47,9 +47,12 @@ zplug load # source zplug plugins and add commands to $PATH
 export PATH="$PATH:/usr/local/opt/libpcap/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/local/opt/gnu-getopt/bin"
-#export PYENV_ROOT="${HOME}/.pyenv"
+
+# pyenv
+export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
-# eval "$(pyenv init -)"
+ eval "$(pyenv init -)"
+
 # for user scripts
 export PATH="$PATH:$HOME/bin"
 test -d $HOME/bin || mkdir $HOME/bin
