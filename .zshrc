@@ -1,3 +1,14 @@
+# define message
+RED="\e[31;1m"
+GREEN="\e[32;1m"
+YELLOW="\e[33;1m"
+BLUE="\e[34;1m"
+CYAN="\e[36;1m"
+RESET="\e[0m"
+SUCCESS="${GREEN}[SUCCESS]${RESET}"
+FAILED="${RED}[FAILED ]${RESET}"
+LOG="${CYAN}[LOG    ]${RESET}"
+
 # set $OS
 if [ "$(uname)" = 'Darwin' ]; then
 	OS='Mac'
@@ -6,7 +17,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
 elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW32_NT' ]; then
 	OS='Cygwin'
 else
-	echo "Your platform ($(uname -a)) is not supported."
+	echo -e "${LOG}Your platform ($(uname -a)) is not supported."
 	exit 1
 fi
 
@@ -164,6 +175,7 @@ alias less='less -iNM --no-init'
 alias sudo='sudo ' # enable aliasses after "sudo "
 alias deploy='sudo containerlab deploy'
 alias destroy='sudo containerlab destroy'
+alias color='for fore in `seq 30 37`; do printf "\e[${fore}m \\\e[${fore}m \e[m\n"; for mode in 1 4 5; do printf "\e[${fore};${mode}m \\\e[${fore};${mode}m \e[m"; for back in `seq 40 47`; do printf "\e[${fore};${back};${mode}m \\\e[${fore};${back};${mode}m \e[m"; done; echo; done; echo; done; printf " \\\e[m\n"'
 
 # Global Alias
 alias -g L='| less'
