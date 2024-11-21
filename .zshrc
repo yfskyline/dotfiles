@@ -51,7 +51,7 @@ export PATH="$PATH:/usr/local/opt/gnu-getopt/bin"
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
- eval "$(pyenv init -)"
+eval "$(pyenv init -)"
 
 # for user scripts
 export PATH="$PATH:$HOME/bin"
@@ -162,6 +162,8 @@ alias vi='vim'
 alias vmi='vim'
 alias less='less -iNM --no-init'
 alias sudo='sudo ' # enable aliasses after "sudo "
+alias deploy='sudo containerlab deploy'
+alias destroy='sudo containerlab destroy'
 
 # Global Alias
 alias -g L='| less'
