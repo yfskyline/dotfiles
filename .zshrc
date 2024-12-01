@@ -171,6 +171,7 @@ alias grep='egrep --color --exclude-dir=.git -I'
 alias v='vim'
 alias vi='vim'
 alias vmi='vim'
+alias mtr='mtr -z'
 alias less='less -iNM --no-init'
 alias sudo='sudo ' # enable aliasses after "sudo "
 alias deploy='sudo containerlab deploy'
