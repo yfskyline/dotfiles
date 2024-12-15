@@ -155,7 +155,7 @@ alias python='python3'
 alias pip='pip3'
 alias activate="source ./bin/activate"
 alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
-alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s" --add-metadata'
+alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s" --add-metadata --cookies-from-browser chrome'
 alias fig='docker-compose'
 alias ffprobe='ffprobe -hide_banner'
 alias g='git'
