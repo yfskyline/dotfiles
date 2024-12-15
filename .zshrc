@@ -105,11 +105,15 @@ if [[ -n "$SSH_CONNECTION" ]];then
 fi
 
 set_prompt() {
+	local venv=""
+	if [[ -n "$VIRTUAL_ENV" ]]; then
+		venv="(%{$fg[cyan]%}$(basename $VIRTUAL_ENV)%{$reset_color%})"
+	fi
+
 	if [ $? = 0 ]; then
-		PROMPT="%{$ISSSH$fg[green]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
-# %# "
+		PROMPT="${venv}%{$ISSSH$fg[green]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
 	else
-		PROMPT="%{$ISSSH$fg[red]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
+		PROMPT="${venv}%{$ISSSH$fg[red]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
 	fi
 }
 
