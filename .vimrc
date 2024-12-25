@@ -2,11 +2,8 @@ set nocompatible
 set number
 set relativenumber
 set cursorline
-"set cursorcolumn
 set ruler
-"set runtimepath+=~/src/vim-polyglot
 set wildmenu
-" set wildmode=list:longest
 set showmode
 set encoding=utf-8
 set fileencoding=utf-8
@@ -23,6 +20,11 @@ set history=10000
 set hlsearch
 set ignorecase
 set shortmess-=S
+set smartcase
+set wrapscan
+
+" set runtimepath+=~/src/vim-polyglot
+" set wildmode=list:longest
 " set nobackup					" do not make backup file
 " set noswapfile				" スワップファイルを作らない
 " set autoread					" 編集中のファイルが変更されたら自動で読み直す
@@ -32,10 +34,6 @@ set shortmess-=S
 " set visualbell				" ビープ音を可視化
 " 折り返し時に表示行単位での移動できるようにする
 
-" 検索系
-" set smartcase					" 検索文字列に大文字が含まれている場合は区別して検索する
-" set incsearch					" 検索文字列入力時に順次対象文字列にヒットさせる
-" set wrapscan					" 検索時に最後まで行ったら最初に戻る
 
 " 文字
 " set ambiwidth=double			" □や○文字が崩れる問題を解決
@@ -46,10 +44,6 @@ set shortmess-=S
 " set softtabstop=4				" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 " set autoindent				" 改行時に前の行のインデントを継続する
 " set smartindent				" 改行時に前の行の構文をチェックし次の行のインデントを増減する
-
-" 文字列検索
-" set incsearch					" インクリメンタルサーチ. １文字入力毎に検索を行う
-" set smartcase					" 検索パターンに大文字を含んでいたら大文字小文字を区別する
 
 " set termguicolors
 " set background=dark
@@ -102,16 +96,17 @@ endif
 
 " initialize NeoBundle
 call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
 " NeoBundle 'violetyk/iikanji-markdown.vim'
 NeoBundle 'gabrielelana/vim-markdown' " markdown対応してindent/unindentをenable
 NeoBundle 'Townk/vim-autoclose'       " (を自動的に閉じる
+NeoBundle 'github/copilot.vim'
 call neobundle#end()
 
 let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"
+filetype plugin indent on
 NeoBundleCheck " check if there are any plugins that are not installed, and ask to install them
 
-
-filetype plugin indent on
 
 " Highlight Full-width Space
 function! FullSpace()
