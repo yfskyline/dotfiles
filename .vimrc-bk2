@@ -24,17 +24,6 @@ endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 
-" インストールするVimプラグインを以下に記述
-" NeoBundle自身を管理
-NeoBundleFetch 'Shougo/neobundle.vim'
-" カラースキームmolokai
-NeoBundle 'tomasr/molokai'
-" ステータスラインの表示内容強化
-NeoBundle 'itchyny/lightline.vim'
-" インデントの可視化
-NeoBundle 'Yggdroot/indentLine'
-" 末尾の全角半角空白文字を赤くハイライト
-NeoBundle 'bronson/vim-trailing-whitespace'
 " 構文エラーチェック
 NeoBundle 'scrooloose/syntastic'
 " 多機能セレクタ
@@ -48,25 +37,8 @@ NeoBundle 'rking/ag.vim'
 " プロジェクトに入ってるESLintを読み込む
 NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim'
 
-" vimのlua機能が使える時だけ以下のVimプラグインをインストールする
-if has('lua')
-    " コードの自動補完
-    NeoBundle 'Shougo/neocomplete.vim'
-    " スニペットの補完機能
-    NeoBundle "Shougo/neosnippet"
-    " スニペット集
-    NeoBundle 'Shougo/neosnippet-snippets'
-endif
-
 call neobundle#end()
 
-
-"----------------------------------------------------------
-" カラースキーム
-"----------------------------------------------------------
-if neobundle#is_installed('molokai')
-    colorscheme molokai " カラースキームにmolokaiを設定する
-endif
 
 set t_Co=256 " iTerm2など既に256色環境なら無くても良い
 
@@ -134,8 +106,6 @@ endif
 if neobundle#is_installed('neocomplete.vim')
     " Vim起動時にneocompleteを有効にする
     let g:neocomplete#enable_at_startup = 1
-    " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
-    let g:neocomplete#enable_smart_case = 1
     " 3文字以上の単語に対して補完を有効にする
     let g:neocomplete#min_keyword_length = 3
     " 区切り文字まで補完する
@@ -190,5 +160,3 @@ if executable('ag')
   let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
   let g:ctrlp_user_command='ag %s -i --hidden -g ""' " 「ag」の検索設定
 endif
-
-colorscheme material-theme
