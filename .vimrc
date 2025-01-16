@@ -38,12 +38,23 @@ set wrapscan
 " 文字
 " set ambiwidth=double			" □や○文字が崩れる問題を解決
 
-" タブ・インデント
+" Tab/Indent
 " set list listchars=tab:\▸\-	" 不可視文字を可視化(タブが「▸-」と表示される)
-" set expandtab					" Tab文字を半角スペースにする: タブ入力を複数の空白入力に置き換える
 " set softtabstop=4				" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 " set autoindent				" 改行時に前の行のインデントを継続する
 " set smartindent				" 改行時に前の行の構文をチェックし次の行のインデントを増減する
+
+autocmd FileType c setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType dockerfile setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType yaml setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType markdown setlocal tabstop=4 shiftwidth=4 expandtab wrap
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
 
 " set termguicolors
 " set background=dark
