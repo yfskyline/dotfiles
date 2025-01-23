@@ -32,10 +32,9 @@ set wrapscan
 " set showcmd					" 入力中のコマンドをステータスに表示する: 打ったコマンドをステータスラインの下に表示
 " set virtualedit=onemore		" 行末の1文字先までカーソルを移動できるように
 " set visualbell				" ビープ音を可視化
-" 折り返し時に表示行単位での移動できるようにする
 
 
-" 文字
+" Character
 " set ambiwidth=double			" □や○文字が崩れる問題を解決
 
 " Tab/Indent
@@ -59,6 +58,18 @@ autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
 " set termguicolors
 " set background=dark
 
+" 折り返し時に表示行単位での移動できるようにする
+" normal mode
+nnoremap j gj
+nnoremap k gk
+
+" visual mode
+xnoremap j gj
+xnoremap k gk
+
+" insert mode
+onoremap j gj
+onoremap k gk
 
 " insert mode(Emacs-Keybind)
 imap <C-p> <Up>
@@ -66,11 +77,17 @@ imap <C-n> <Down>
 imap <C-b> <Left>
 imap <C-f> <Right>
 imap <C-a> <C-o>:call <SID>home()<CR>
-imap <C-e> <End>
 imap <C-d> <Del>
 imap <C-h> <BS>
 " imap <C-k> <C-r>=<SID>kill()<CR>
 inoremap <C-k> <C-o>:call setline(line('.'), col('.') == 1 ? '' : getline('.')[:col('.') - 2])<CR>
+
+" disable Copilot default mapping
+let g:copilot_no_tab_map = v:true
+" Use Ctrl+e for Copilot and Emacs keybind
+imap <silent><script><expr> <C-e> copilot#Accept("\<End>")
+
+nnoremap <leader>w :w<CR>
 
 function! s:home()
 	let start_column = col('.')
@@ -97,7 +114,6 @@ function! s:split_line()
 	let text_before = (col('.') > 1) ? line_text[: col('.')-2] : ''
 	return [text_before, text_after]
 endfunction
-
 
 " NeoBundle
 if has('vim_starting')
