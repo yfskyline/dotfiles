@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # define message
 RED="\e[31;1m"
@@ -29,11 +29,11 @@ if [ $OS = 'Linux' ]; then
 	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 	eval "$(pyenv init --path)"
 elif [ $OS = 'Mac' ]; then
-	brew install pyenv
 	if [ $(uname -m) = 'x86_64' ]; then
 		echo -e "Your platform ($(uname -a)) is not supported."
 		exit 1
 	fi
+	brew install pyenv
 fi
 pyenv -v
 echo -e "${SUCCESS}Successfully pyenv installed."
