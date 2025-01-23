@@ -58,18 +58,24 @@ autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
 " set termguicolors
 " set background=dark
 
-" 折り返し時に表示行単位での移動できるようにする
+" Enable movement by display lines when wrapping
 " normal mode
 nnoremap j gj
 nnoremap k gk
+nnoremap <down> gj
+nnoremap <up> gk
 
 " visual mode
 xnoremap j gj
 xnoremap k gk
+xnoremap <down> gj
+xnoremap <up> gk
 
 " insert mode
 onoremap j gj
 onoremap k gk
+onoremap <down> gj
+onoremap <up> gk
 
 " insert mode(Emacs-Keybind)
 imap <C-p> <Up>
