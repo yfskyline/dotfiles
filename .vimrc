@@ -10,6 +10,7 @@ set showmode
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
+set termencoding=utf-8
 set fileformats=unix,dos,mac
 set tabstop=4                                   " display width of TAB(^I)
 set shiftwidth=4                                " number of spaces for smart indent
