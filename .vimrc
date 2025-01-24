@@ -15,6 +15,7 @@ set fileformats=unix,dos,mac
 set tabstop=4                                   " display width of TAB(^I)
 set shiftwidth=4                                " number of spaces for smart indent
 set whichwrap=b,s,[,],<,>
+" set whichwrap=b,s,h,l,<,>,[,],~ " カーソルの左右移動で行末から次の行の行頭への移動が可能になる
 set backspace=indent,eol,start
 set mouse=a
 set laststatus=2
@@ -119,12 +120,36 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'gabrielelana/vim-markdown' " markdown対応してindent/unindentをenable
 NeoBundle 'Townk/vim-autoclose'       " (を自動的に閉じる
 NeoBundle 'github/copilot.vim'
+" NeoBundle 'scrooloose/syntastic' " 構文エラーチェック
+" NeoBundle 'ctrlpvim/ctrlp.vim' " 多機能セレクタ
+" NeoBundle 'tacahiroy/ctrlp-funky' " CtrlPの拡張プラグイン. 関数検索
+" NeoBundle 'suy/vim-ctrlp-commandline' " CtrlPの拡張プラグイン. コマンド履歴検索
+" NeoBundle 'rking/ag.vim' " CtrlPの検索にagを使う
+" NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim' " プロジェクトに入ってるESLintを読み込む
 call neobundle#end()
 
 let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"
 filetype plugin indent on
 NeoBundleCheck " check if there are any plugins that are not installed, and ask to install them
 
+"----------------------------------------------------------
+" CtrlP
+"----------------------------------------------------------
+let g:ctrlp_match_window = 'order:ttb,min:20,max:20,results:100' " マッチウインドウの設定. 「下部に表示, 大きさ20行で固定, 検索結果100件」
+let g:ctrlp_show_hidden = 1 " .(ドット)から始まるファイルも検索対象にする
+let g:ctrlp_types = ['fil'] "ファイル検索のみ使用
+let g:ctrlp_extensions = ['funky', 'commandline'] " CtrlPの拡張として「funky」と「commandline」を使用
+
+" CtrlPCommandLineの有効化
+command! CtrlPCommandLine call ctrlp#init(ctrlp#commandline#id())
+
+" CtrlPFunkyの絞り込み検索設定
+let g:ctrlp_funky_matchtype = 'path'
+
+if executable('ag')
+  let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
+  let g:ctrlp_user_command='ag %s -i --hidden -g ""' " 「ag」の検索設定
+endif
 
 " Highlight Full-width Space
 function! FullSpace()
