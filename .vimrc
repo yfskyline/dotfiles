@@ -165,4 +165,5 @@ if has('syntax')
 	call FullSpace()
 endif
 
+colorscheme default
 syntax enable
