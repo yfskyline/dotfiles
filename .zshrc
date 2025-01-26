@@ -77,7 +77,6 @@ fi
 # for user scripts
 export PATH="$PATH:$HOME/bin"
 test -d $HOME/bin || mkdir $HOME/bin
-#export PATH="$PATH:$HOME/.nodebrew/current/bin" # nodebrew's node
 
 autoload -Uz colors && colors     # Use colors
 
