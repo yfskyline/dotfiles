@@ -10,3 +10,11 @@ desc = "Inserts matching bracket, paren, brace or quote"
 [[plugins]]
 repo = 'github/copilot.vim'
 desc = "A Vim/Neovim plugin for GitHub Copilot"
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+desc = "lean & mean status/tabline for vim that's light as air"
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+desc = "A collection of themes for vim-airline"

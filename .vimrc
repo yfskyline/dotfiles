@@ -36,6 +36,7 @@ set virtualedit=onemore
 " set autoindent				" 改行時に前の行のインデントを継続する
 " set smartindent				" 改行時に前の行の構文をチェックし次の行のインデントを増減する
 
+filetype plugin indent on
 autocmd FileType c setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
@@ -126,7 +127,6 @@ if has('vim_starting')
 endif
 
 let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"
-filetype plugin indent on
 
 "----------------------------------------------------------
 " CtrlP
@@ -143,8 +143,8 @@ command! CtrlPCommandLine call ctrlp#init(ctrlp#commandline#id())
 let g:ctrlp_funky_matchtype = 'path'
 
 if executable('ag')
-  let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
-  let g:ctrlp_user_command='ag %s -i --hidden -g ""' " agの検索設定
+	let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
+	let g:ctrlp_user_command='ag %s -i --hidden -g ""' " agの検索設定
 endif
 
 if dein#load_state(s:dein_dir)
@@ -165,6 +165,9 @@ if dein#check_install()
 	call dein#install()
 endif
 
+let g:airline_theme = 'powerlineish'
+let g:airline_section_x = airline#section#create_right(['%{&modified?"⚡":"✔"}'])
+
 " Highlight Full-width Space
 function! FullSpace()
 	highlight FullSpace cterm=underline ctermfg=magenta guibg=darkgray
@@ -178,6 +181,6 @@ if has('syntax')
 	augroup END
 	call FullSpace()
 endif
+syntax enable
 
 colorscheme default
-syntax enable
