@@ -14,8 +14,7 @@ set termencoding=utf-8
 set fileformats=unix,dos,mac
 set tabstop=4                                   " display width of TAB(^I)
 set shiftwidth=4                                " number of spaces for smart indent
-set whichwrap=b,s,[,],<,>
-" set whichwrap=b,s,h,l,<,>,[,],~ " カーソルの左右移動で行末から次の行の行頭への移動が可能になる
+set whichwrap=b,s,h,l,<,>,[,],~
 set backspace=indent,eol,start
 set mouse=a
 set laststatus=2
@@ -107,15 +106,28 @@ function! s:home()
 endfunction
 
 
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = expand(s:dein_dir . '/repos/github.com/Shougo/dein.vim')
+
 if has('vim_starting')
-	set nocompatible
+	if &compatible
+		set nocompatible
+	endif
 	" NeoBundle
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
 	" set runtimepath+=~/src/vim-polyglot
+	if isdirectory(s:dein_repo_dir)
+		execute 'set runtimepath+=' . s:dein_repo_dir
+	endif
+	set runtimepath+=expand("~/.cache/dein")
 
 	if !isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
 		echo "install NeoBundle..."
-		:call system("~/dotfiles/vim/install_NeoBundle.sh")
+		call system("~/dotfiles/vim/install_NeoBundle.sh")
+	endif
+	if !isdirectory(expand('~/.cache/dein'))
+		echo "Please install dein.vim by running the following command:"
+		echo "sh -c '$(curl -fsSL https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh)'"
 	endif
 endif
 
@@ -125,12 +137,10 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'gabrielelana/vim-markdown' " markdown対応してindent/unindentをenable
 NeoBundle 'Townk/vim-autoclose'       " (を自動的に閉じる
 NeoBundle 'github/copilot.vim'
-" NeoBundle 'scrooloose/syntastic' " 構文エラーチェック
 " NeoBundle 'ctrlpvim/ctrlp.vim' " 多機能セレクタ
 " NeoBundle 'tacahiroy/ctrlp-funky' " CtrlPの拡張プラグイン. 関数検索
 " NeoBundle 'suy/vim-ctrlp-commandline' " CtrlPの拡張プラグイン. コマンド履歴検索
 " NeoBundle 'rking/ag.vim' " CtrlPの検索にagを使う
-" NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim' " プロジェクトに入ってるESLintを読み込む
 call neobundle#end()
 
 let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"
@@ -153,7 +163,25 @@ let g:ctrlp_funky_matchtype = 'path'
 
 if executable('ag')
   let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
-  let g:ctrlp_user_command='ag %s -i --hidden -g ""' " 「ag」の検索設定
+  let g:ctrlp_user_command='ag %s -i --hidden -g ""' " agの検索設定
+endif
+
+if dein#load_state(s:dein_dir)
+	call dein#begin(s:dein_dir)
+
+	let g:rc_dir = expand('~/dotfiles/vim')
+	let s:toml	 = g:rc_dir . '/dein.toml'
+	let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+	call dein#load_toml(s:toml,			{'lazy': 0})
+	call dein#load_toml(s:lazy_toml,	{'lazy': 1})
+
+	call dein#end()
+	call dein#save_state()
+endif
+
+if dein#check_install()
+	call dein#install()
 endif
 
 " Highlight Full-width Space
