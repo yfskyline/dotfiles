@@ -49,8 +49,8 @@ if ! zplug check --verbose; then
 	fi
 fi
 
-# install NeoBundle for vim if it has not been installed
-test -e $HOME/.vim/bundle/neobundle.vim || sh $HOME/dotfiles/vim/install_NeoBundle.sh
+# install dein.vim if it has not been installed
+test -e $HOME/.cache/dein || sh $HOME/dotfiles/vim/install_dein.sh
 
 # PATH
 zplug load # source zplug plugins and add commands to $PATH
