@@ -1,3 +1,19 @@
-#[[plugins]]
-#repo = 'junegunn/fzf'
-#on_ft = ['fzf']
+# [[plugins]]
+# repo = 'junegunn/fzf'
+# on_ft = ['fzf']
+
+# [[plugins]]
+# repo = 'ctrlpvim/ctrlp.vim'
+# desc = "多機能セレクタ"
+
+# [[plugins]]
+# repo = 'tacahiroy/ctrlp-funky'
+# desc = "CtrlPの拡張プラグイン: 関数検索をサポート"
+
+# [[plugins]]
+# repo = 'suy/vim-ctrlp-commandline'
+# desc = "CtrlPの拡張プラグイン: コマンド履歴検索をサポート"
+
+# [[plugins]]
+# repo = 'rking/ag.vim'
+# desc = "CtrlPの検索機能でag(The Silver Searcher)を使用するプラグイン"

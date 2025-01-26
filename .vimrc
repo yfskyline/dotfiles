@@ -134,13 +134,6 @@ endif
 " initialize NeoBundle
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'gabrielelana/vim-markdown' " markdown対応してindent/unindentをenable
-NeoBundle 'Townk/vim-autoclose'       " (を自動的に閉じる
-NeoBundle 'github/copilot.vim'
-" NeoBundle 'ctrlpvim/ctrlp.vim' " 多機能セレクタ
-" NeoBundle 'tacahiroy/ctrlp-funky' " CtrlPの拡張プラグイン. 関数検索
-" NeoBundle 'suy/vim-ctrlp-commandline' " CtrlPの拡張プラグイン. コマンド履歴検索
-" NeoBundle 'rking/ag.vim' " CtrlPの検索にagを使う
 call neobundle#end()
 
 let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"

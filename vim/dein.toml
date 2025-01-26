@@ -1,2 +1,12 @@
-#[[plugins]]
-#repo = 'tpope/vim-fugitive'
+[[plugins]]
+repo = 'gabrielelana/vim-markdown'
+desc = "Markdown syntax highlighting / support indent/unindent"
+on_ft = ['markdown']
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+desc = "Inserts matching bracket, paren, brace or quote"
+
+[[plugins]]
+repo = 'github/copilot.vim'
+desc = "A Vim/Neovim plugin for GitHub Copilot"
