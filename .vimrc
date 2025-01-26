@@ -113,32 +113,20 @@ if has('vim_starting')
 	if &compatible
 		set nocompatible
 	endif
-	" NeoBundle
-	set runtimepath+=~/.vim/bundle/neobundle.vim/
 	" set runtimepath+=~/src/vim-polyglot
 	if isdirectory(s:dein_repo_dir)
 		execute 'set runtimepath+=' . s:dein_repo_dir
 	endif
 	set runtimepath+=expand("~/.cache/dein")
 
-	if !isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
-		echo "install NeoBundle..."
-		call system("~/dotfiles/vim/install_NeoBundle.sh")
-	endif
 	if !isdirectory(expand('~/.cache/dein'))
 		echo "Please install dein.vim by running the following command:"
 		echo "sh -c '$(curl -fsSL https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh)'"
 	endif
 endif
 
-" initialize NeoBundle
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
-
 let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"
 filetype plugin indent on
-NeoBundleCheck " check if there are any plugins that are not installed, and ask to install them
 
 "----------------------------------------------------------
 " CtrlP
