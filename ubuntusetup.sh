@@ -34,7 +34,7 @@ pro config set apt_news=false
 
 # setup vim
 update-alternatives --set editor /usr/bin/vim.basic
-sh NeoBundle_install.sh
+sh vim/install_NeoBundle.sh
 
 sh ./ssh-keys.sh
 sh cron.sh

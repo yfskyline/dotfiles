@@ -50,7 +50,7 @@ if ! zplug check --verbose; then
 fi
 
 # install NeoBundle for vim if it has not been installed
-test -e $HOME/.vim/bundle/neobundle.vim || sh $HOME/dotfiles/NeoBundle_install.sh
+test -e $HOME/.vim/bundle/neobundle.vim || sh $HOME/dotfiles/vim/install_NeoBundle.sh
 
 # PATH
 zplug load # source zplug plugins and add commands to $PATH
