@@ -112,6 +112,11 @@ if has('vim_starting')
 	" NeoBundle
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
 	" set runtimepath+=~/src/vim-polyglot
+
+	if !isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
+		echo "install NeoBundle..."
+		:call system("~/dotfiles/vim/install_NeoBundle.sh")
+	endif
 endif
 
 " initialize NeoBundle
