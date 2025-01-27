@@ -4,7 +4,7 @@
 sw_vers
 
 sh $HOME/dotfiles/mac/dotfilesLink.sh
-sh $HOME/dotfiles/git_setup.sh
+sh $HOME/dotfiles/setup_git.sh
 
 # Karabiner-Elements config
 mkdir -p ~/.config/karabiner

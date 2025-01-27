@@ -24,6 +24,6 @@ $ open /Applications/Karabiner-Elements.app
 This assumes Ubuntu 24.04 LTS.
 ```shell
 $ git clone git@github.com:yfskyline/dotfiles.git
-$ sudo bash ubuntusetup.sh
+$ sudo bash ubuntu/setup_ubuntu.sh
 
 ```
