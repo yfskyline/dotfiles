@@ -18,3 +18,7 @@ desc = "lean & mean status/tabline for vim that's light as air"
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 desc = "A collection of themes for vim-airline"
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+desc = "An extensible & universal comment vim-plugin that also handles embedded filetypes"
