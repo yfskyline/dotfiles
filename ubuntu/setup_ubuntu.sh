@@ -13,7 +13,7 @@ apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove
 
 # setup zsh
 cd /home/"$SUDO_USER"/dotfiles || exit 1
-sh dotfilesLink.sh
+su - "$SUDO_USER" -c bash dotfilesLink.sh
 chsh "$SUDO_USER" -s "$(which zsh)"
 
 # modify motd
@@ -33,7 +33,7 @@ touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
 pro config set apt_news=false
 
 # setup python
-"$SUDO_USER"/dotfiles/python/setup_python.sh
+sh /home/"$SUDO_USER"/dotfiles/python/setup_python.sh
 
 # setup vim
 update-alternatives --set editor /usr/bin/vim.basic
@@ -41,12 +41,17 @@ sh vim/install_NeoBundle.sh
 pip install vim-vint
 pip install --upgrade setuptools
 
-# install nodejs
-$SUDO_USER/dotfiles/nodejs/install_nvm.sh
-$SUDO_USER/dotfiles/nodejs/install_yarn.sh
+# setup nodejs
+sh /home/"$SUDO_USER"/dotfiles/nodejs/install_nvm.sh
+sh /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh
 
-sh ./ssh-keys.sh
-sh cron.sh
+# setup ssh
+su - "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/ssh-keys.sh
+su - "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/cron.sh
+
+# setup docker
+sh /home/"$SUDO_USER"/dotfiles/docker/install_docker.sh
+
 su - "$SUDO_USER" -c zsh
 # shellcheck source=/home/skyline/dotfiles/.zshrc
 source /home/"$SUDO_USER"/dotfiles/.zshrc
