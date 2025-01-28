@@ -33,7 +33,7 @@ touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
 pro config set apt_news=false
 
 # setup python
-"$SUDO_USER"/dotfiles/setup_python.sh
+"$SUDO_USER"/dotfiles/python/setup_python.sh
 
 # setup vim
 update-alternatives --set editor /usr/bin/vim.basic
