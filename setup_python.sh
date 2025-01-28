@@ -27,15 +27,21 @@ fi
 
 # install pyenv if it has not been installed
 if [ $OS = 'Linux' ]; then
+	echo -e "${LOG}installing pyenv..."
 	sudo apt update
 	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 	eval "$(pyenv init --path)"
 elif [ $OS = 'Mac' ]; then
-	if [ $(uname -m) = 'x86_64' ]; then
-		echo -e "Your platform ($(uname -a)) is not supported."
+	if [ "$(uname -m)" = 'x86_64' ]; then
+		echo -e "${FAILED}Your platform ($(uname -a)) is not supported."
 		exit 1
+	else
+		echo -e "${LOG}installing pyenv..."
+		brew install pyenv
 	fi
-	brew install pyenv
+else
+	echo -e "${FAILED}Your platform ($(uname -a)) is not supported."
+	exit 1
 fi
 pyenv -v
 echo -e "${SUCCESS}Successfully pyenv installed."
