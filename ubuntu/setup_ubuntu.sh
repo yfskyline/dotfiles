@@ -49,7 +49,7 @@ sh /home/"$SUDO_USER"/dotfiles/nodejs/install_nvm.sh
 sh /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh
 
 # setup ssh
-su - "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/ssh-keys.sh
+su - "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh
 
 # setup docker
 sh /home/"$SUDO_USER"/dotfiles/docker/install_docker.sh

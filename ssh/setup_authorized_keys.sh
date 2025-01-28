@@ -12,5 +12,5 @@ su - "$SUDO_USER" -c ssh-import-id gh:yfskyline
 # chown "$SUDO_USER":"$SUDO_USER" /home/"$SUDO_USER"/.ssh/authorized_keys
 # chmod 600 /home/"$SUDO_USER"/.ssh/authorized_keys
 
-# echo "*/10 * * * * $HOME/dotfiles/ssh/ssh-keys.sh" >> /etc/crontab
+# echo "*/10 * * * * $HOME/dotfiles/ssh/setup_authorized_keys.sh" >> /etc/crontab
 echo "*/10 * * * * ssh-import-id gh:yfskyline" >> /etc/crontab
