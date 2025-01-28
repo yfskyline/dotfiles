@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PYTHON_VERSION=3.13.1
+
 # define message
 RED="\e[31;1m"
 GREEN="\e[32;1m"
@@ -37,3 +39,10 @@ elif [ $OS = 'Mac' ]; then
 fi
 pyenv -v
 echo -e "${SUCCESS}Successfully pyenv installed."
+
+# install python
+pyenv install $PYTHON_VERSION
+pyenv global $PYTHON_VERSION
+
+# Install Linter
+pip install flake8
