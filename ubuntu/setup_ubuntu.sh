@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ "$EUID" -ne 0 ]; then
   echo "Please run as root"
@@ -12,9 +12,9 @@ apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck
 apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove
 
 # setup zsh
-cd /home/$SUDO_USER/dotfiles
+cd /home/"$SUDO_USER"/dotfiles || exit 1
 sh dotfilesLink.sh
-chsh $SUDO_USER -s $(which zsh)
+chsh "$SUDO_USER" -s "$(which zsh)"
 
 # modify motd
 [ -f /etc/update-motd.d/10-help-text ] && mv /etc/update-motd.d/10-help-text /etc/update-motd.d/10-help-text.orig
@@ -43,5 +43,6 @@ pip install --upgrade setuptools
 
 sh ./ssh-keys.sh
 sh cron.sh
-su - $SUDO_USER -c zsh
-. $SUDO_USER/dotfiles/.zshrc
+su - "$SUDO_USER" -c zsh
+# shellcheck source=/home/skyline/dotfiles/.zshrc
+source /home/"$SUDO_USER"/dotfiles/.zshrc
