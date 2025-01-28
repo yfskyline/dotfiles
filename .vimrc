@@ -111,9 +111,6 @@ let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = expand(s:dein_dir . '/repos/github.com/Shougo/dein.vim')
 
 if has('vim_starting')
-	if &compatible
-		set nocompatible
-	endif
 	" set runtimepath+=~/src/vim-polyglot
 	if isdirectory(s:dein_repo_dir)
 		execute 'set runtimepath+=' . s:dein_repo_dir
