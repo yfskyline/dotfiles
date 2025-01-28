@@ -41,6 +41,10 @@ sh vim/install_NeoBundle.sh
 pip install vim-vint
 pip install --upgrade setuptools
 
+# install nodejs
+$SUDO_USER/dotfiles/nodejs/install_nvm.sh
+$SUDO_USER/dotfiles/nodejs/install_yarn.sh
+
 sh ./ssh-keys.sh
 sh cron.sh
 su - "$SUDO_USER" -c zsh

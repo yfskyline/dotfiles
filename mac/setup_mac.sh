@@ -20,16 +20,16 @@ fi
 
 # install Homebrew
 if [ ! -x "$(which brew)" ]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo "eval '$(/opt/homebrew/bin/brew shellenv)'" >> ~/.zprofile
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  brew update
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	echo "eval '$(/opt/homebrew/bin/brew shellenv)'" >> ~/.zprofile
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+	brew update
 fi
-brew update
+
 brew bundle --file "$HOME"/dotfiles/mac/Brewfile
 
-#Interface Theme: Dark
-#Editor Theme: night
+# Interface Theme: Dark
+# Editor Theme: night
 # ------------------------------------
 
 # Visual Studio Code
