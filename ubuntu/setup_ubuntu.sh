@@ -32,6 +32,9 @@ mv /etc/apt/apt.conf.d/{,old/}20apt-esm-hook.conf
 touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
 pro config set apt_news=false
 
+# setup python
+"$SUDO_USER"/dotfiles/setup_python.sh
+
 # setup vim
 update-alternatives --set editor /usr/bin/vim.basic
 sh vim/install_NeoBundle.sh
