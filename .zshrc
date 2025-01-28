@@ -290,4 +290,4 @@ fi
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-cat $HOME/dotfiles/poke.txt
+cat $HOME/dotfiles/asciiart_skyline.txt
