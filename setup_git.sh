@@ -1,3 +1,5 @@
+#!/bin/bash
+
 git config --global user.name "Yuta Fukagawa"
 git config --global user.email 25516089+yfskyline@users.noreply.github.com
 git config --global core.editor vim
