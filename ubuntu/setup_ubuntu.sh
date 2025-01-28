@@ -38,6 +38,8 @@ pro config set apt_news=false
 # setup vim
 update-alternatives --set editor /usr/bin/vim.basic
 sh vim/install_NeoBundle.sh
+pip install vim-vint
+pip install --upgrade setuptools
 
 sh ./ssh-keys.sh
 sh cron.sh
