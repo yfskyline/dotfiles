@@ -5,4 +5,4 @@ ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 #ssh-import-id gh:yfskyline
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.digrc ~/.digrc
-ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
+ln -sf ~/dotfiles/git/.gitignore_global ~/.gitignore_global
