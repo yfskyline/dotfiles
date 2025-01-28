@@ -22,3 +22,7 @@ desc = "A collection of themes for vim-airline"
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
 desc = "An extensible & universal comment vim-plugin that also handles embedded filetypes"
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+desc = "A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks"

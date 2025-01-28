@@ -183,4 +183,10 @@ if has('syntax')
 endif
 syntax enable
 
+" GitGutter ColorSetting
+autocmd ColorScheme * highlight SignColumn		ctermbg=NONE
+autocmd ColorScheme * highlight GitGutterAdd	ctermfg=Green ctermbg=NONE
+autocmd ColorScheme * highlight GitGutterChange	ctermfg=Yellow ctermbg=NONE
+autocmd ColorScheme * highlight GitGutterDelete	ctermfg=Red ctermbg=NONE
+
 colorscheme default
