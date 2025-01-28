@@ -164,6 +164,22 @@ endif
 
 let g:airline_theme = 'powerlineish'
 let g:airline_section_x = airline#section#create_right(['%{&modified?"⚡":"✔"}'])
+let g:ale_linters = {
+	\ 'python': ['flake8'],
+	\ 'javascript': ['eslint'],
+	\ 'typescript': ['eslint'],
+	\ 'css': ['stylelint'],
+	\ 'html': ['htmlhint'],
+	\ 'json': ['jsonlint'],
+	\ 'yaml': ['yamllint'],
+	\ 'markdown': ['markdownlint'],
+	\ 'dockerfile': ['hadolint'],
+	\ 'vim': ['vint'],
+	\ 'sh': ['shellcheck'],
+	\ 'bash': ['shellcheck'],
+	\ 'zsh': ['shellcheck'],
+	\}
+let g:ale_sign_column_always = 1
 
 " Highlight Full-width Space
 function! FullSpace()
