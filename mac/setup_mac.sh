@@ -1,10 +1,11 @@
+#!/bin/bash
 # 
 # Mac Setup script
 # 
 sw_vers
 
-sh $HOME/dotfiles/mac/dotfilesLink.sh
-sh $HOME/dotfiles/setup_git.sh
+sh "$HOME"/dotfiles/mac/dotfilesLink.sh
+sh "$HOME"/dotfiles/setup_git.sh
 
 # Karabiner-Elements config
 mkdir -p ~/.config/karabiner
@@ -13,19 +14,19 @@ ln -sf ~/dotfiles/mac/karabiner/karabiner.json ~/.config/karabiner/karabiner.jso
 
 
 # install xcode-select
-if [ ! -x "`xcode-select --print-path`" ]; then
+if [ ! -x "$(xcode-select --print-path)" ]; then
 	xcode-select --install
 fi
 
 # install Homebrew
-if [ ! -x "`which brew`" ]; then
+if [ ! -x "$(which brew)" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+  echo "eval '$(/opt/homebrew/bin/brew shellenv)'" >> ~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
   brew update
 fi
 brew update
-brew bundle --file $HOME/dotfiles/mac/Brewfile
+brew bundle --file "$HOME"/dotfiles/mac/Brewfile
 
 #Interface Theme: Dark
 #Editor Theme: night
@@ -38,7 +39,7 @@ brew bundle --file $HOME/dotfiles/mac/Brewfile
 mkdir -p ~/dev
 
 # setup scripts
-sh $HOME/dotfiles/mac/defaults/index.sh
+sh "$HOME"/dotfiles/mac/defaults/index.sh
 
 # CoreFoundation Preferences
 killall cfprefsd
