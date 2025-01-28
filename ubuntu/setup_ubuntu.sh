@@ -26,6 +26,9 @@ rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available
 systemctl disable motd-news.timer
 rm -f /var/cache/motd-news
 
+# setup cron
+echo "*/10 * * * * cd $HOME/dotfiles/ && git pull" >> /etc/crontab
+
 # ubuntu pro
 mkdir /etc/apt/apt.conf.d/old
 mv /etc/apt/apt.conf.d/{,old/}20apt-esm-hook.conf
@@ -47,7 +50,6 @@ sh /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh
 
 # setup ssh
 su - "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/ssh-keys.sh
-su - "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/cron.sh
 
 # setup docker
 sh /home/"$SUDO_USER"/dotfiles/docker/install_docker.sh
