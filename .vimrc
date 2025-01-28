@@ -1,5 +1,3 @@
-scriptencoding utf-8
-
 " General Settings
 set number
 set relativenumber
@@ -36,18 +34,23 @@ set virtualedit=onemore
 " set autoindent				" 改行時に前の行のインデントを継続する
 " set smartindent				" 改行時に前の行の構文をチェックし次の行のインデントを増減する
 
+scriptencoding utf-8
+
 filetype plugin indent on
-autocmd FileType c setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType dockerfile setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType yaml setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd FileType markdown setlocal tabstop=4 shiftwidth=4 expandtab wrap
-autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
+augroup FileTypeSettings
+	autocmd!
+	autocmd FileType c setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+	autocmd FileType dockerfile setlocal tabstop=4 shiftwidth=4 expandtab
+	autocmd FileType yaml setlocal tabstop=4 shiftwidth=4 expandtab
+	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType markdown setlocal tabstop=4 shiftwidth=4 expandtab wrap
+	autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
+augroup END
 
 " Uncomment and configure as needed
 " set termguicolors
@@ -118,7 +121,7 @@ if has('vim_starting')
 	set runtimepath+=expand("~/.cache/dein")
 
 	if !isdirectory(expand('~/.cache/dein'))
-		echo "Please install dein.vim by running the following command:"
+		echo 'Please install dein.vim by running the following command:'
 		echo "sh -c '$(curl -fsSL https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh)'"
 	endif
 endif
@@ -197,9 +200,12 @@ endif
 syntax enable
 
 " GitGutter ColorSetting
-autocmd ColorScheme * highlight SignColumn		ctermbg=NONE
-autocmd ColorScheme * highlight GitGutterAdd	ctermfg=Green ctermbg=NONE
-autocmd ColorScheme * highlight GitGutterChange	ctermfg=Yellow ctermbg=NONE
-autocmd ColorScheme * highlight GitGutterDelete	ctermfg=Red ctermbg=NONE
+augroup ColorSchemeSettings
+	autocmd!
+	autocmd ColorScheme * highlight SignColumn		ctermbg=NONE
+	autocmd ColorScheme * highlight GitGutterAdd	ctermfg=Green ctermbg=NONE
+	autocmd ColorScheme * highlight GitGutterChange	ctermfg=Yellow ctermbg=NONE
+	autocmd ColorScheme * highlight GitGutterDelete	ctermfg=Red ctermbg=NONE
+augroup END
 
 colorscheme default
