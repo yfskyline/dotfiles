@@ -157,6 +157,7 @@ bindkey '^[[1;5D' backward-word                           # CTRL+<- for move lef
 # Aliases
 alias lah='ls -lah'
 alias ll='ls -l'
+alias l='ls'
 alias sl='ls'
 alias relogin='exec $SHELL -l'
 alias rm='rm -i'
