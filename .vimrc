@@ -168,6 +168,9 @@ endif
 let g:airline_theme = 'powerlineish'
 let g:airline_section_x = airline#section#create_right(['%{&modified?"⚡":"✔"}'])
 let g:ale_linters = {
+	\ 'c': ['clangd', 'cppcheck', 'cpplint'],
+	\ 'cpp': ['clangd', 'cppcheck', 'cpplint'],
+	\ 'rust': ['cargo'],
 	\ 'python': ['flake8'],
 	\ 'javascript': ['eslint'],
 	\ 'typescript': ['eslint'],
@@ -175,14 +178,48 @@ let g:ale_linters = {
 	\ 'html': ['htmlhint'],
 	\ 'json': ['jsonlint'],
 	\ 'yaml': ['yamllint'],
+	\ 'toml': ['dprint'],
+	\ 'xml': ['xmllint'],
 	\ 'markdown': ['markdownlint'],
 	\ 'dockerfile': ['hadolint'],
+	\ 'ansible': ['ansible-lint'],
 	\ 'vim': ['vint'],
 	\ 'sh': ['shellcheck'],
 	\ 'bash': ['shellcheck'],
 	\ 'zsh': ['shellcheck'],
+	\ 'tcl': ['nagelfar'],
+	\ 'sql': ['sqlint'],
+	\ 'tex': ['chktex'],
+	\ 'gitcommit': ['gitlint'],
 	\}
 let g:ale_sign_column_always = 1
+let g:ale_fix_on_save = 0
+let g:ale_fixers = {
+	\ 'python': ['black'],
+	\ 'javascript': ['prettier'],
+	\ 'typescript': ['prettier'],
+	\ 'sh': ['shfmt'],
+	\ 'bash': ['shfmt'],
+	\ 'zsh': ['shfmt'],
+	\ 'css': ['prettier'],
+	\ 'html': ['prettier'],
+	\ 'json': ['prettier'],
+	\ 'yaml': ['prettier'],
+	\ 'toml': ['prettier'],
+	\ 'markdown': ['prettier'],
+	\ 'xml': ['xmlformat'],
+	\ 'yang': [],
+	\ 'c': ['clang-format'],
+	\ 'cpp': ['clang-format'],
+	\ 'rust': ['rustfmt'],
+	\ 'sql': ['sqlfluff'],
+	\ 'tcl': [],
+	\ 'dockerfile': [],
+	\ 'ansible': ['ansible-lint'],
+	\ 'vim': [],
+	\ 'tex': ['latexindent'],
+	\ 'gitcommit': ['prettier'],
+\}
 nmap <silent> <C-n> :ALENext<CR>
 nmap <silent> <C-p> :ALEPrevious<CR>
 nmap <silent> <C-j> :ALENext<CR>
