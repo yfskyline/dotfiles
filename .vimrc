@@ -248,5 +248,6 @@ augroup ColorSchemeSettings
 	autocmd ColorScheme * highlight GitGutterChange	ctermfg=Yellow ctermbg=NONE
 	autocmd ColorScheme * highlight GitGutterDelete	ctermfg=Red ctermbg=NONE
 augroup END
+set updatetime=250
 
 colorscheme default
