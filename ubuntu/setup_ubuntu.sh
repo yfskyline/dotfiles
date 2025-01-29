@@ -8,7 +8,7 @@ fi
 timedatectl set-timezone Asia/Tokyo
 add-apt-repository -y ppa:apt-fast/stable && apt update
 apt install apt-fast -y
-apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck
+apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq
 apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove
 
 # setup zsh

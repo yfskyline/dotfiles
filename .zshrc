@@ -148,11 +148,15 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 
 # key-bind
-bindkey -e                                                # enable emacs key-bind
+# enable emacs key-bind
+bindkey -e
 bindkey '^R' history-incremental-pattern-search-backward
-bindkey "^I" menu-complete                                # display option menu before completion
-bindkey '^[[1;5C' forward-word                            # CTRL+-> for move right word
-bindkey '^[[1;5D' backward-word                           # CTRL+<- for move left word
+# display option menu before completion
+bindkey "^I" menu-complete
+# CTRL+-> for move right word
+bindkey '^[[1;5C' forward-word
+# CTRL+<- for move left word
+bindkey '^[[1;5D' backward-word
 
 # Aliases
 alias lah='ls -lah'
@@ -181,7 +185,7 @@ alias gd='git diff'
 alias gp='git push'
 alias ga='git add'
 alias gl='git log'
-alias grep='egrep --color --exclude-dir=.git -I'
+alias grep='grep -E --color --exclude-dir=.git -I'
 alias v='vim'
 alias vi='vim'
 alias vmi='vim'
@@ -197,27 +201,31 @@ alias color='for fore in `seq 30 37`; do printf "\e[${fore}m \\\e[${fore}m \e[m\
 alias -g L='| less'
 alias -g G='| grep'
 
+# OS specific alias
 if [ "$OS" = 'Linux' ]; then
-  alias pbcopy='xsel --clipboard --input'
-  alias pbpaste='xsel --clipboard --output'
-  alias ls='ls -F --color=auto'
-  alias -g C='| xsel --input --clipboard'
+	alias pbcopy='xsel --clipboard --input'
+	alias pbpaste='xsel --clipboard --output'
+	alias ls='ls -F --color=auto'
+	alias -g C='| xsel --input --clipboard'
+	alias fd='ffmpeg -hide_banner'
 elif [ "$OS" = 'Mac' ]; then
-  alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
-  alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
-  alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
-  alias wireshark='open -n /Applications/Wireshark.app/ '
-  alias ls='ls -G -F'
-  export CLICOLOR=1
-  alias -g C='| pbcopy'
+	alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
+	alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
+	alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
+	alias wireshark='open -n /Applications/Wireshark.app/ '
+	alias ls='ls -G -F'
+	export CLICOLOR=1
+	alias -g C='| pbcopy'
 fi
 
 
 # Completion
-zstyle ':completion:*:default' menu select=2                             # display completion menu when there are two or more candidates
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'                      # case insensitive
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin          # complete command name after 'sudo'
+# display completion menu when there are two or more candidates
+zstyle ':completion:*:default' menu select=2
+# case insensitive
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# complete command name after 'sudo'
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'            # ps コマンドのプロセス名補完
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
