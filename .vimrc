@@ -183,6 +183,10 @@ let g:ale_linters = {
 	\ 'zsh': ['shellcheck'],
 	\}
 let g:ale_sign_column_always = 1
+nmap <silent> <C-n> :ALENext<CR>
+nmap <silent> <C-p> :ALEPrevious<CR>
+nmap <silent> <C-j> :ALENext<CR>
+nmap <silent> <C-k> :ALEPrevious<CR>
 
 " Highlight Full-width Space
 function! FullSpace()
