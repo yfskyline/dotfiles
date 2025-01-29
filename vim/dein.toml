@@ -28,5 +28,5 @@ repo = 'airblade/vim-gitgutter'
 desc = "A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks"
 
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'dense-analysis/ale'
 desc = "Asynchronous Lint Engine for Vim and NeoVim with support for many languages"
