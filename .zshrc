@@ -207,7 +207,7 @@ if [ "$OS" = 'Linux' ]; then
 	alias pbpaste='xsel --clipboard --output'
 	alias ls='ls -F --color=auto'
 	alias -g C='| xsel --input --clipboard'
-	alias fd='ffmpeg -hide_banner'
+	alias fd='fdfind'
 elif [ "$OS" = 'Mac' ]; then
 	alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
 	alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
