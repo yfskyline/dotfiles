@@ -27,12 +27,12 @@ test -d $HOME/.zplug || curl -sL --proto-redir -all,https https://raw.githubuser
 if [ $OS = 'Linux' ]; then
 	test $(stat $HOME/.zplug -c '%u') -eq $(id -u) || sudo chown -R $(whoami) $HOME/.zplug
 elif [ $OS = 'Mac' ]; then
-	test $(stat -f '%u' $HOME/.zplug) -eq $(id -u) || sudo chown -R $(whoami) $HOME/.zplug
+	test "$(stat -f '%u' $HOME/.zplug)" -eq "$(id -u)" || sudo chown -R "$(whoami)" "$HOME"/.zplug
 	if [ $(uname -m) = 'x86_64' ]; then
 		test $(stat -f '%u' /usr/local/share/zsh) -eq $(id -u) || sudo chown -LR $(whoami) /usr/local/share/
 	fi
 fi
-source $HOME/.zplug/init.zsh
+. "$HOME"/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "mafredri/zsh-async"                     # asynchronous processing
 zplug "zsh-users/zsh-syntax-highlighting"      # Syntax Highlight
@@ -50,7 +50,7 @@ if ! zplug check --verbose; then
 fi
 
 # install dein.vim if it has not been installed
-test -e $HOME/.cache/dein || sh $HOME/dotfiles/vim/install_dein.sh
+test -e "$HOME"/.cache/dein || sh "$HOME"/dotfiles/vim/install_dein.sh
 
 # PATH
 zplug load # source zplug plugins and add commands to $PATH
@@ -91,9 +91,9 @@ fi
 
 
 # Environmental Variable
-export LANG=en_US.UTF-8        # ja_JP.UTF-8 / C.UTF-8
+export LANG=en_US.UTF-8
 export LC_ALL=$LANG
-export EDITOR=vim              # set vim as a default editor
+export EDITOR=vim
 export PYTHONIOENCODING=utf-8
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # use LS_COLORS in completion menu
@@ -299,4 +299,4 @@ fi
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-cat $HOME/dotfiles/asciiart_skyline.txt
+cat "$HOME"/dotfiles/asciiart_skyline.txt
