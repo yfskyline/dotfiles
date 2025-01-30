@@ -1,7 +1,18 @@
 #!/bin/bash
 
+# define color / log headers
+RED="\e[31;1m"
+GREEN="\e[32;1m"
+YELLOW="\e[33;1m"
+BLUE="\e[34;1m"
+CYAN="\033[36;1m"
+RESET="\e[0m"
+SUCCESS="${GREEN}[SUCCESS]${RESET}"
+FAILED="${RED}[FAILED ]${RESET}"
+LOG="${CYAN}[LOG    ]${RESET}"
+
 if [ "$EUID" -ne 0 ]; then
-  echo "Please run as root"
+  echo -e "$FAILED Please run as root"
   exit 1
 fi
 
@@ -20,7 +31,7 @@ docker run hello-world
 
 systemctl start docker
 systemctl enable docker
-systemctl status docker
+echo -e "$LOG: $(systemctl is-active docker)"
 echo "docker info"
 docker info
 usermod -aG docker "$SUDO_USER"
