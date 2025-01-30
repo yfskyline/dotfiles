@@ -1,4 +1,4 @@
-# define message
+# define color / log headers
 RED="\e[31;1m"
 GREEN="\e[32;1m"
 YELLOW="\e[33;1m"
