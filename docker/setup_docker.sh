@@ -31,7 +31,7 @@ docker run hello-world
 
 systemctl start docker
 systemctl enable docker
-echo -e "$LOG: $(systemctl is-active docker)"
+echo -e "$LOG docker status: $(systemctl is-active docker)"
 if systemctl is-active docker; then
   echo -e "$SUCCESS Docker installed successfully"
 else
