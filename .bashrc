@@ -104,63 +104,7 @@ precmd() {
 }
 
 # Aliases
-alias lah='ls -lah'
-alias ll='ls -l'
-alias l='ls'
-alias sl='ls'
-alias relogin='exec $SHELL -l'
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-alias mkdir='mkdir -p'
-alias py='python3 '
-alias python='python3'
-alias pip='pip3'
-alias activate="source ./bin/activate"
-alias youtube-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' "
-alias yt='yt-dlp --merge-output-format mp4 -f "bestvideo+bestaudio/best" -o "%(title)s" --add-metadata --cookies-from-browser chrome'
-alias fig='docker-compose'
-alias ffprobe='ffprobe -hide_banner'
-alias g='git'
-alias gb='git branch'
-alias gs='git status'
-alias gc='git checkout'
-alias gcm='git commit -m'
-alias gd='git diff'
-alias gp='git push'
-alias ga='git add'
-alias gl='git log'
-alias grep='grep -E --color --exclude-dir=.git -I'
-alias v='vim'
-alias vi='vim'
-alias vmi='vim'
-alias mtr='mtr -z'
-alias less='less -iNM --no-init'
-alias sudo='sudo ' # enable aliasses after "sudo "
-alias deploy='sudo containerlab deploy'
-alias destroy='sudo containerlab destroy'
-alias ffmpeg='ffmpeg -hide_banner'
-
-# Global Alias
-alias -g L='| less'
-alias -g G='| grep'
-
-# OS specific alias
-if [ "$OS" = 'Linux' ]; then
-	alias pbcopy='xsel --clipboard --input'
-	alias pbpaste='xsel --clipboard --output'
-	alias ls='ls -F --color=auto'
-	alias -g C='| xsel --input --clipboard'
-	alias fd='fdfind'
-elif [ "$OS" = 'Mac' ]; then
-	alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
-	alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
-	alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
-	alias wireshark='open -n /Applications/Wireshark.app/ '
-	alias ls='ls -G -F'
-	export CLICOLOR=1
-	alias -g C='| pbcopy'
-fi
+[ -f ~/dotfiles/.aliases.sh ] && source ~/dotfiles/.aliases.sh
 
 stty stop undef              # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
 
