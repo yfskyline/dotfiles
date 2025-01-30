@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # define color / log headers
 RED="\e[31;1m"
@@ -30,7 +30,7 @@ apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y
 # setup zsh
 echo -e "$LOG Setup zsh..."
 cd /home/"$SUDO_USER"/dotfiles || exit 1
-su - "$SUDO_USER" -c bash dotfilesLink.sh
+su - "$SUDO_USER" -c bash "$HOME"/dotfiles/dotfilesLink.sh
 chsh "$SUDO_USER" -s "$(which zsh)"
 
 # modify motd
