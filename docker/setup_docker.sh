@@ -32,6 +32,12 @@ docker run hello-world
 systemctl start docker
 systemctl enable docker
 echo -e "$LOG: $(systemctl is-active docker)"
+if systemctl is-active docker; then
+  echo -e "$SUCCESS Docker installed successfully"
+else
+  echo -e "$FAILED Docker installation failed"
+  exit 1
+fi
 echo "docker info"
 docker info
 usermod -aG docker "$SUDO_USER"
