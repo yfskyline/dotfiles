@@ -6,9 +6,9 @@ OS_NAME=$(uname -s)
 if [ "$OS_NAME" = 'Darwin' ]; then
 	OS='Mac'
 elif [ "${OS_NAME:0:5}" = 'Linux' ]; then
-    OS='Linux'
+	OS='Linux'
 elif [ "${OS_NAME:0:10}" = 'MINGW32_NT' ]; then
-    OS='Cygwin'
+	OS='Cygwin'
 else
 	echo -e "${LOG}Your platform ($(uname -a)) is not supported."
 	exit 1
