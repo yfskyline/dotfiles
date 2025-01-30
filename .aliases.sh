@@ -37,16 +37,23 @@ alias destroy='sudo containerlab destroy'
 alias ffmpeg='ffmpeg -hide_banner'
 alias color='for fore in `seq 30 37`; do printf "\e[${fore}m \\\e[${fore}m \e[m\n"; for mode in 1 4 5; do printf "\e[${fore};${mode}m \\\e[${fore};${mode}m \e[m"; for back in `seq 40 47`; do printf "\e[${fore};${back};${mode}m \\\e[${fore};${back};${mode}m \e[m"; done; echo; done; echo; done; printf " \\\e[m\n"'
 
-# Global Alias
-alias -g L='| less'
-alias -g G='| grep'
+if [[ -n "$ZSH_VERSION" ]]; then
+	# Global Alias
+	alias -g L='| less'
+	alias -g G='| grep'
+	if [ "$OS" = 'Linux' ]; then
+		alias -g C='| xsel --input --clipboard'
+	elif [ "$OS" = 'Mac' ]; then
+		alias -g C='| pbcopy'
+	fi
+fi
+
 
 # OS specific alias
 if [ "$OS" = 'Linux' ]; then
 	alias pbcopy='xsel --clipboard --input'
 	alias pbpaste='xsel --clipboard --output'
 	alias ls='ls -F --color=auto'
-	alias -g C='| xsel --input --clipboard'
 	alias fd='fdfind'
 elif [ "$OS" = 'Mac' ]; then
 	alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
@@ -55,5 +62,4 @@ elif [ "$OS" = 'Mac' ]; then
 	alias wireshark='open -n /Applications/Wireshark.app/ '
 	alias ls='ls -G -F'
 	export CLICOLOR=1
-	alias -g C='| pbcopy'
 fi
