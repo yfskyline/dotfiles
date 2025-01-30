@@ -29,7 +29,7 @@ fi
 if [ $OS = 'Linux' ]; then
 	echo -e "${LOG}installing pyenv..."
 	sudo apt update
-	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+	git clone https://github.com/pyenv/pyenv.git "$HOME"/.pyenv
 	eval "$(pyenv init --path)"
 elif [ $OS = 'Mac' ]; then
 	if [ "$(uname -m)" = 'x86_64' ]; then

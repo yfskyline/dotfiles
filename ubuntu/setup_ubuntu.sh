@@ -57,28 +57,28 @@ pro config set apt_news=false
 
 # setup python
 echo -e "$LOG Setup python..."
-sh /home/"$SUDO_USER"/dotfiles/python/setup_python.sh
+sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/python/setup_python.sh
 
 # setup vim
 echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
-sh vim/install_dein.sh
-pip install vim-vint
-pip install --upgrade setuptools
+sudo -u "$SUDO_USER" "$SUDO_USER"vim/install_dein.sh
+sudo -u "$SUDO_USER" pip install vim-vint
+sudo -u "$SUDO_USER" pip install --upgrade setuptools
 
 # setup nodejs
 echo -e "$LOG Setup nodejs..."
-sh /home/"$SUDO_USER"/dotfiles/nodejs/install_nvm.sh
-sh /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh
+sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_nvm.sh
+sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh
 
 # setup ssh
 echo -e "$LOG Setup ssh..."
-su - "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh
+sudo -u "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh
 
 # setup docker
 echo -e "$LOG Setup docker..."
 sh /home/"$SUDO_USER"/dotfiles/docker/setup_docker.sh
 
-su - "$SUDO_USER" -c zsh
+sudo -u "$SUDO_USER" zsh
 # shellcheck source=/home/skyline/dotfiles/.zshrc
 source /home/"$SUDO_USER"/dotfiles/.zshrc
