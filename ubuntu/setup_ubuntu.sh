@@ -30,7 +30,7 @@ apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y
 # setup zsh
 echo -e "$LOG Setup zsh..."
 cd /home/"$SUDO_USER"/dotfiles || exit 1
-su - "$SUDO_USER" -c bash "$HOME"/dotfiles/dotfilesLink.sh
+sudo -u "$SUDO_USER" "$HOME"/dotfiles/dotfilesLink.sh
 chsh "$SUDO_USER" -s "$(which zsh)"
 
 # modify motd
@@ -62,7 +62,7 @@ sh /home/"$SUDO_USER"/dotfiles/python/setup_python.sh
 # setup vim
 echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
-sh vim/install_NeoBundle.sh
+sh vim/install_dein.sh
 pip install vim-vint
 pip install --upgrade setuptools
 
