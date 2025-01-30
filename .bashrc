@@ -103,17 +103,6 @@ precmd() {
 	set_prompt
 }
 
-# key-bind
-# enable emacs key-bind
-bindkey -e
-bindkey '^R' history-incremental-pattern-search-backward
-# display option menu before completion
-bindkey "^I" menu-complete
-# CTRL+-> for move right word
-bindkey '^[[1;5C' forward-word
-# CTRL+<- for move left word
-bindkey '^[[1;5D' backward-word
-
 # Aliases
 alias lah='ls -lah'
 alias ll='ls -l'
