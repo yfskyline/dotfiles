@@ -77,7 +77,7 @@ su - "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh
 
 # setup docker
 echo -e "$LOG Setup docker..."
-sh /home/"$SUDO_USER"/dotfiles/docker/install_docker.sh
+sh /home/"$SUDO_USER"/dotfiles/docker/setup_docker.sh
 
 su - "$SUDO_USER" -c zsh
 # shellcheck source=/home/skyline/dotfiles/.zshrc
