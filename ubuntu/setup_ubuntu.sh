@@ -42,7 +42,7 @@ apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y
 # setup zsh
 echo -e "$LOG Setup zsh..."
 cd /home/"$SUDO_USER"/dotfiles || exit 1
-if sudo -u "$SUDO_USER" "$HOME"/dotfiles/dotfilesLink.sh; then
+if sudo -u "$SUDO_USER" "$SUDO_USER"/dotfiles/dotfilesLink.sh; then
   echo -e "$SUCCESS zsh setup completed"
 else
   echo -e "$FAILED zsh setup failed"
@@ -66,7 +66,11 @@ rm -f /var/cache/motd-news
 
 # setup cron
 echo -e "$LOG Setup cron..."
-echo "*/10 * * * * cd $HOME/dotfiles/ && git pull" >> /etc/crontab
+if echo "*/10 * * * * cd $HOME/dotfiles/ && git pull" >> /etc/crontab; then
+  echo -e "$SUCCESS Cron setup completed"
+else
+  echo -e "$FAILED Cron setup failed"
+fi
 
 # ubuntu pro
 echo -e "$LOG Setup ubuntu pro..."
