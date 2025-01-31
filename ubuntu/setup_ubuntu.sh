@@ -18,20 +18,40 @@ fi
 
 echo -e "$LOG Setup timezone..."
 timedatectl set-timezone Asia/Tokyo
+if $?; then
+  echo -e "$SUCCESS Timezone set to Asia/Tokyo"
+else
+  echo -e "$FAILED Timezone set failed"
+fi
 
 echo -e "$LOG Setup apt-fast command..."
 add-apt-repository -y ppa:apt-fast/stable && apt update
 apt install apt-fast -y
+if $?; then
+  echo -e "$SUCCESS apt-fast installed"
+else
+  echo -e "$FAILED apt-fast install failed"
+fi
 
 echo -e "$LOG Setup basic packages..."
 apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq
 apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y
+if $?; then
+  echo -e "$SUCCESS Basic packages installed"
+else
+  echo -e "$FAILED Basic packages install failed"
+fi
 
 # setup zsh
 echo -e "$LOG Setup zsh..."
 cd /home/"$SUDO_USER"/dotfiles || exit 1
 sudo -u "$SUDO_USER" "$HOME"/dotfiles/dotfilesLink.sh
 chsh "$SUDO_USER" -s "$(which zsh)"
+if $?; then
+  echo -e "$SUCCESS zsh setup completed"
+else
+  echo -e "$FAILED zsh setup failed"
+fi
 
 # modify motd
 echo -e "$LOG Setup motd..."
@@ -58,26 +78,61 @@ pro config set apt_news=false
 # setup python
 echo -e "$LOG Setup python..."
 sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/python/setup_python.sh
+if $?; then
+  echo -e "$SUCCESS Python setup completed"
+else
+  echo -e "$FAILED Python setup failed"
+fi
 
 # setup vim
 echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
 sudo -u "$SUDO_USER" "$SUDO_USER"vim/install_dein.sh
-sudo -u "$SUDO_USER" pip install vim-vint
 sudo -u "$SUDO_USER" pip install --upgrade setuptools
+sudo -u "$SUDO_USER" pip install vim-vint
+if $?; then
+  echo -e "$SUCCESS Vim setup completed"
+else
+  echo -e "$FAILED Vim setup failed"
+fi
 
 # setup nodejs
 echo -e "$LOG Setup nodejs..."
 sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_nvm.sh
+if $?; then
+  echo -e "$SUCCESS Nvm setup completed"
+else
+  echo -e "$FAILED Nvm setup failed"
+fi
 sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh
+if $?; then
+  echo -e "$SUCCESS Yarn setup completed"
+else
+  echo -e "$FAILED Yarn setup failed"
+fi
+if $?; then
+  echo -e "$SUCCESS Nodejs setup completed"
+else
+  echo -e "$FAILED Nodejs setup failed"
+fi
 
 # setup ssh
 echo -e "$LOG Setup ssh..."
 sudo -u "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh
+if $?; then
+  echo -e "$SUCCESS Ssh setup completed"
+else
+  echo -e "$FAILED Ssh setup failed"
+fi
 
 # setup docker
 echo -e "$LOG Setup docker..."
 sh /home/"$SUDO_USER"/dotfiles/docker/setup_docker.sh
+if $?; then
+  echo -e "$SUCCESS Docker setup completed"
+else
+  echo -e "$FAILED Docker setup failed"
+fi
 
 sudo -u "$SUDO_USER" zsh
 # shellcheck source=/home/skyline/dotfiles/.zshrc
