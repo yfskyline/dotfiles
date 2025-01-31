@@ -44,7 +44,7 @@ else
 	exit 1
 fi
 pyenv -v
-echo -e "${SUCCESS}Successfully pyenv installed."
+echo -e "${SUCCESS} pyenv is installed."
 
 # install python
 pyenv install $PYTHON_VERSION
