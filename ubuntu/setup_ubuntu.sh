@@ -75,6 +75,9 @@ mv /etc/apt/apt.conf.d/{,old/}20apt-esm-hook.conf
 touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
 pro config set apt_news=false
 
+# setup git
+sudo -u "$SUDO_USER" /home/"SUDO_USER"/dotfiles/git/setup_git.sh
+
 # setup python
 echo -e "$LOG Setup python..."
 sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/python/setup_python.sh
