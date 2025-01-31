@@ -17,8 +17,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 echo -e "$LOG Setup timezone..."
-timedatectl set-timezone Asia/Tokyo
-if $?; then
+if timedatectl set-timezone Asia/Tokyo; then
   echo -e "$SUCCESS Timezone set to Asia/Tokyo"
 else
   echo -e "$FAILED Timezone set failed"
@@ -26,28 +25,29 @@ fi
 
 echo -e "$LOG Setup apt-fast command..."
 add-apt-repository -y ppa:apt-fast/stable && apt update
-apt install apt-fast -y
-if $?; then
+if apt install apt-fast -y; then
   echo -e "$SUCCESS apt-fast installed"
 else
   echo -e "$FAILED apt-fast install failed"
 fi
 
 echo -e "$LOG Setup basic packages..."
-apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq
-apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y
-if $?; then
+if apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq; then
   echo -e "$SUCCESS Basic packages installed"
 else
   echo -e "$FAILED Basic packages install failed"
 fi
+apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y
 
 # setup zsh
 echo -e "$LOG Setup zsh..."
 cd /home/"$SUDO_USER"/dotfiles || exit 1
-sudo -u "$SUDO_USER" "$HOME"/dotfiles/dotfilesLink.sh
-chsh "$SUDO_USER" -s "$(which zsh)"
-if $?; then
+if sudo -u "$SUDO_USER" "$HOME"/dotfiles/dotfilesLink.sh; then
+  echo -e "$SUCCESS zsh setup completed"
+else
+  echo -e "$FAILED zsh setup failed"
+fi
+if chsh "$SUDO_USER" -s "$(which zsh)"; then
   echo -e "$SUCCESS zsh setup completed"
 else
   echo -e "$FAILED zsh setup failed"
@@ -76,12 +76,11 @@ touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
 pro config set apt_news=false
 
 # setup git
-sudo -u "$SUDO_USER" /home/"SUDO_USER"/dotfiles/git/setup_git.sh
+sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/git/setup_git.sh
 
 # setup python
 echo -e "$LOG Setup python..."
-sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/python/setup_python.sh
-if $?; then
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/python/setup_python.sh; then
   echo -e "$SUCCESS Python setup completed"
 else
   echo -e "$FAILED Python setup failed"
@@ -92,8 +91,7 @@ echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
 sudo -u "$SUDO_USER" "$SUDO_USER"vim/install_dein.sh
 sudo -u "$SUDO_USER" pip install --upgrade setuptools
-sudo -u "$SUDO_USER" pip install vim-vint
-if $?; then
+if sudo -u "$SUDO_USER" pip install vim-vint; then
   echo -e "$SUCCESS Vim setup completed"
 else
   echo -e "$FAILED Vim setup failed"
@@ -101,19 +99,17 @@ fi
 
 # setup nodejs
 echo -e "$LOG Setup nodejs..."
-sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_nvm.sh
-if $?; then
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_nvm.sh; then
   echo -e "$SUCCESS Nvm setup completed"
 else
   echo -e "$FAILED Nvm setup failed"
 fi
-sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh
-if $?; then
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh; then
   echo -e "$SUCCESS Yarn setup completed"
 else
   echo -e "$FAILED Yarn setup failed"
 fi
-if $?; then
+if [ $? -eq 0 ]; then
   echo -e "$SUCCESS Nodejs setup completed"
 else
   echo -e "$FAILED Nodejs setup failed"
@@ -121,8 +117,7 @@ fi
 
 # setup ssh
 echo -e "$LOG Setup ssh..."
-sudo -u "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh
-if $?; then
+if sudo -u "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh; then
   echo -e "$SUCCESS Ssh setup completed"
 else
   echo -e "$FAILED Ssh setup failed"
@@ -130,8 +125,7 @@ fi
 
 # setup docker
 echo -e "$LOG Setup docker..."
-sh /home/"$SUDO_USER"/dotfiles/docker/setup_docker.sh
-if $?; then
+if sh /home/"$SUDO_USER"/dotfiles/docker/setup_docker.sh; then
   echo -e "$SUCCESS Docker setup completed"
 else
   echo -e "$FAILED Docker setup failed"
