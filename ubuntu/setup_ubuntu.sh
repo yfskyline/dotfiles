@@ -25,6 +25,8 @@ else
 	TARGET_USER="$SUDO_USER"
 	TARGET_HOME="/home/$SUDO_USER"
 fi
+echo -e "$LOG TARGET_USER: $TARGET_USER"
+echo -e "$LOG TARGET_HOME: $TARGET_HOME"
 
 
 echo -e "$LOG Setup timezone..."
@@ -113,7 +115,7 @@ fi
 
 
 # setup git
-if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/git/setup_git.sh; then
+if sudo -E -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/git/setup_git.sh; then
 	echo -e "$SUCCESS Git setup completed"
 else
 	echo -e "$FAILED Git setup failed"

@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ -n "$1" ]; then
+  TARGET_USER=$1
+  echo "TARGET_USER=$TARGET_USER"
+elif [ -n "$TARGET_USER" ]; then
+  echo "TARGET_USER=$TARGET_USER"
+else
+  echo "TARGET_USER is not set"
+  exit 1
+fi
+
 git config --global user.name "Yuta Fukagawa"
 git config --global user.email 25516089+yfskyline@users.noreply.github.com
 git config --global core.editor vim
