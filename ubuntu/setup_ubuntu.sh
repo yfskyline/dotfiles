@@ -24,7 +24,16 @@ else
 fi
 
 echo -e "$LOG Setup apt-fast command..."
-add-apt-repository -y ppa:apt-fast/stable && apt update
+if add-apt-repository -y ppa:apt-fast/stable; then
+  echo -e "$SUCCESS apt-fast repository added"
+else
+  echo -e "$FAILED apt-fast repository add failed"
+fi
+if apt update; then
+  echo -e "$SUCCESS apt-fast repository updated"
+else
+  echo -e "$FAILED apt-fast repository update failed"
+fi
 if apt install apt-fast -y; then
   echo -e "$SUCCESS apt-fast installed"
 else
@@ -37,12 +46,17 @@ if apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find r
 else
   echo -e "$FAILED Basic packages install failed"
 fi
-apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y
+echo -e "$LOG package update..."
+if apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y; then
+  echo -e "$SUCCESS package update completed"
+else
+  echo -e "$FAILED package update failed"
+fi
 
 # setup zsh
 echo -e "$LOG Setup zsh..."
 cd /home/"$SUDO_USER"/dotfiles || exit 1
-if sudo -u "$SUDO_USER" "$SUDO_USER"/dotfiles/dotfilesLink.sh; then
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/dotfilesLink.sh; then
   echo -e "$SUCCESS zsh setup completed"
 else
   echo -e "$FAILED zsh setup failed"
@@ -80,7 +94,11 @@ touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
 pro config set apt_news=false
 
 # setup git
-sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/git/setup_git.sh
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/git/setup_git.sh; then
+  echo -e "$SUCCESS Git setup completed"
+else
+  echo -e "$FAILED Git setup failed"
+fi
 
 # setup python
 echo -e "$LOG Setup python..."
@@ -93,8 +111,11 @@ fi
 # setup vim
 echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
+echo -e "$LOG Setup vim(install dein.vim)..."
 sudo -u "$SUDO_USER" "$SUDO_USER"vim/install_dein.sh
+echo -e "$LOG Setup vim(install setuptools)..."
 sudo -u "$SUDO_USER" pip install --upgrade setuptools
+echo -e "$LOG Setup vim(install vim-vint)..."
 if sudo -u "$SUDO_USER" pip install vim-vint; then
   echo -e "$SUCCESS Vim setup completed"
 else
@@ -103,12 +124,12 @@ fi
 
 # setup nodejs
 echo -e "$LOG Setup nodejs..."
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_nvm.sh; then
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/setup_nodejs.sh; then
   echo -e "$SUCCESS Nvm setup completed"
 else
   echo -e "$FAILED Nvm setup failed"
 fi
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/install_yarn.sh; then
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/setup_yarn.sh; then
   echo -e "$SUCCESS Yarn setup completed"
 else
   echo -e "$FAILED Yarn setup failed"
