@@ -11,7 +11,7 @@ SUCCESS="${GREEN}[SUCCESS]${RESET}"
 FAILED="${RED}[FAILED ]${RESET}"
 LOG="${CYAN}[LOG    ]${RESET}"
 
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
   echo -e "$FAILED Please run as root"
   exit 1
 fi
