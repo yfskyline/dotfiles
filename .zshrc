@@ -12,9 +12,9 @@ LOG="${CYAN}[LOG    ]${RESET}"
 # set $OS
 if [ "$(uname)" = 'Darwin' ]; then
 	OS='Mac'
-elif [ "$(expr substr $(uname -s) 1 5)" = 'Linux' ]; then
+elif [ "$(uname -s | cut -c1-5)" = 'Linux' ]; then
 	OS='Linux'
-elif [ "$(expr substr $(uname -s) 1 10)" = 'MINGW32_NT' ]; then
+elif [ "$(uname -s | cut -c1-10)" = 'MINGW32_NT' ]; then
 	OS='Cygwin'
 else
 	echo -e "${LOG}Your platform ($(uname -a)) is not supported."
