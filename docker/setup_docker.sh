@@ -38,6 +38,6 @@ else
   echo -e "$FAILED Docker installation failed"
   exit 1
 fi
-echo "docker info"
-docker info
+echo "docker version"
+docker version
 usermod -aG docker "$SUDO_USER"

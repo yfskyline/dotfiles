@@ -142,7 +142,7 @@ fi
 
 # setup ssh
 echo -e "$LOG Setup ssh..."
-if sudo -u "$SUDO_USER" -c /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh; then
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh; then
   echo -e "$SUCCESS Ssh setup completed"
 else
   echo -e "$FAILED Ssh setup failed"
