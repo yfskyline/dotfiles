@@ -40,6 +40,16 @@ else
   echo -e "$FAILED apt-fast install failed"
 fi
 
+# dotfiles link
+echo -e "$LOG basic dotfiles link..."
+if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/dotfilesLink.sh; then
+  echo -e "$SUCCESS dotfiles setup completed"
+else
+  echo -e "$FAILED dotfiles setup failed"
+  exit 1
+fi
+
+# install basic packages
 echo -e "$LOG Setup basic packages..."
 if apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq; then
   echo -e "$SUCCESS Basic packages installed"
@@ -54,17 +64,12 @@ else
 fi
 
 # setup zsh
-echo -e "$LOG Setup zsh..."
-cd /home/"$SUDO_USER"/dotfiles || exit 1
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/dotfilesLink.sh; then
-  echo -e "$SUCCESS zsh setup completed"
-else
-  echo -e "$FAILED zsh setup failed"
-fi
+echo -e "$LOG chsh to zsh..."
 if chsh "$SUDO_USER" -s "$(which zsh)"; then
-  echo -e "$SUCCESS zsh setup completed"
+  echo -e "$SUCCESS chsh to zsh completed"
 else
-  echo -e "$FAILED zsh setup failed"
+  echo -e "$FAILED chsh to zsh failed"
+  exit 1
 fi
 
 # modify motd
