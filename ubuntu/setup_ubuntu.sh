@@ -16,6 +16,16 @@ if [ "$(id -u)" -ne 0 ]; then
 	echo -e "$FAILED Please run as root"
 	exit 1
 fi
+if [ -z "$SUDO_USER" ]; then
+	echo -e "$WARNING SUDO_USER is not set. Falling back to root user"
+	TARGET_USER="root"
+	TARGET_HOME="/root"
+	exit 1
+else
+	TARGET_USER="$SUDO_USER"
+	TARGET_HOME="/home/$SUDO_USER"
+fi
+
 
 echo -e "$LOG Setup timezone..."
 if timedatectl set-timezone Asia/Tokyo; then
@@ -43,7 +53,7 @@ fi
 
 # dotfiles link
 echo -e "$LOG basic dotfiles link..."
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/dotfilesLink.sh; then
+if sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/dotfilesLink.sh; then
 	echo -e "$SUCCESS dotfiles setup completed"
 else
 	echo -e "$FAILED dotfiles setup failed"
@@ -66,7 +76,7 @@ fi
 
 # setup zsh
 echo -e "$LOG chsh to zsh..."
-if chsh "$SUDO_USER" -s "$(which zsh)"; then
+if chsh "$TARGET_USER" -s "$(which zsh)"; then
 	echo -e "$SUCCESS chsh to zsh completed"
 else
 	echo -e "$FAILED chsh to zsh failed"
@@ -103,7 +113,7 @@ fi
 
 
 # setup git
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/git/setup_git.sh; then
+if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/git/setup_git.sh; then
 	echo -e "$SUCCESS Git setup completed"
 else
 	echo -e "$FAILED Git setup failed"
@@ -111,7 +121,7 @@ fi
 
 # setup python
 echo -e "$LOG Setup python..."
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/python/setup_python.sh; then
+if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/python/setup_python.sh; then
 	echo -e "$SUCCESS Python setup completed"
 else
 	echo -e "$FAILED Python setup failed"
@@ -121,11 +131,11 @@ fi
 echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
 echo -e "$LOG Setup vim(install dein.vim)..."
-sudo -u "$SUDO_USER" "$SUDO_USER"vim/install_dein.sh
+sudo -u "$TARGET_USER" "$TARGET_USER"vim/install_dein.sh
 echo -e "$LOG Setup vim(install setuptools)..."
-sudo -u "$SUDO_USER" pip install --upgrade setuptools
+sudo -u "$TARGET_USER" pip install --upgrade setuptools
 echo -e "$LOG Setup vim(install vim-vint)..."
-if sudo -u "$SUDO_USER" pip install vim-vint; then
+if sudo -u "$TARGET_USER" pip install vim-vint; then
 	echo -e "$SUCCESS Vim setup completed"
 else
 	echo -e "$FAILED Vim setup failed"
@@ -133,12 +143,12 @@ fi
 
 # setup nodejs
 echo -e "$LOG Setup nodejs..."
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/setup_nodejs.sh; then
+if sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/nodejs/setup_nodejs.sh; then
 	echo -e "$SUCCESS Nvm setup completed"
 else
 	echo -e "$FAILED Nvm setup failed"
 fi
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/nodejs/setup_yarn.sh; then
+if sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/nodejs/setup_yarn.sh; then
 	echo -e "$SUCCESS Yarn setup completed"
 else
 	echo -e "$FAILED Yarn setup failed"
@@ -151,7 +161,7 @@ fi
 
 # setup ssh
 echo -e "$LOG Setup ssh..."
-if sudo -u "$SUDO_USER" /home/"$SUDO_USER"/dotfiles/ssh/setup_authorized_keys.sh; then
+if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/ssh/setup_authorized_keys.sh; then
 	echo -e "$SUCCESS Ssh setup completed"
 else
 	echo -e "$FAILED Ssh setup failed"
@@ -159,12 +169,12 @@ fi
 
 # setup docker
 echo -e "$LOG Setup docker..."
-if sh /home/"$SUDO_USER"/dotfiles/docker/setup_docker.sh; then
+if sh "$TARGET_HOME"/dotfiles/docker/setup_docker.sh; then
 	echo -e "$SUCCESS Docker setup completed"
 else
 	echo -e "$FAILED Docker setup failed"
 fi
 
-sudo -u "$SUDO_USER" zsh
+# sudo -u "$TARGET_USER" zsh
 # shellcheck source=/home/skyline/dotfiles/.zshrc
-source /home/"$SUDO_USER"/dotfiles/.zshrc
+source "$TARGET_HOME"/dotfiles/.zshrc
