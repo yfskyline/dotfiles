@@ -18,8 +18,8 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 if [ -z "$SUDO_USER" ]; then
 	echo -e "$WARNING SUDO_USER is not set. Falling back to root user"
-	TARGET_USER="root"
-	TARGET_HOME="/root"
+	export TARGET_USER="root"
+	export TARGET_HOME="/root"
 	exit 1
 else
 	TARGET_USER="$SUDO_USER"
