@@ -17,7 +17,12 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 apt update
-apt install ca-certificates curl
+if apt install ca-certificates curl; then
+	echo -e "$SUCCESS Installed required packages(ca-certificates and curl)"
+else
+	echo -e "$FAILED Failed to install ca-certificates and curl"
+	exit 1
+fi
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 chmod a+r /etc/apt/keyrings/docker.asc
@@ -26,8 +31,19 @@ echo \
 	$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
 	sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt update
-apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-docker run hello-world
+if apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin; then
+	echo -e "$SUCCESS Docker installed successfully"
+else
+	echo -e "$FAILED Docker installation failed"
+	exit 1
+fi
+
+if docker run hello-world > /dev/null; then
+	echo -e "$SUCCESS Docker installed successfully"
+else
+	echo -e "$FAILED Docker installation failed"
+	exit 1
+fi
 
 systemctl start docker
 systemctl enable docker
@@ -38,7 +54,7 @@ else
 	echo -e "$FAILED Docker installation failed"
 	exit 1
 fi
-echo "$LOG docker version"
+echo -e "$LOG docker version"
 docker version | grep -v 'commit|Commit|Experimental'
 if usermod -aG docker "$SUDO_USER"; then
 	echo -e "$SUCCESS Added $SUDO_USER to docker group"
