@@ -17,7 +17,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 apt update -qq
-if apt install -qq ca-certificates curl; then
+if apt-get install -qq ca-certificates curl; then
 	echo -e "$SUCCESS Installed required packages(ca-certificates and curl)"
 else
 	echo -e "$FAILED Failed to install ca-certificates and curl"
@@ -31,7 +31,7 @@ echo \
 	$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
 	sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt update -qq
-if apt install -qq docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin > /dev/null; then
+if apt-get install -qq docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin; then
 	echo -e "$SUCCESS packages required by Docker has installed successfully"
 else
 	echo -e "$FAILED Docker installation failed"
