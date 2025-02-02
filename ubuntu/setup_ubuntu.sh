@@ -124,7 +124,7 @@ fi
 
 # setup python
 echo -e "$LOG Setup python..."
-if HOME="$TARGET_HOME" "$TARGET_HOME"/dotfiles/python/setup_python.sh "$TARGET_USER"; then
+if HOME="$TARGET_HOME" bash "$TARGET_HOME"/dotfiles/python/setup_python.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Python setup completed"
 else
 	echo -e "$FAILED Python setup failed"
@@ -164,7 +164,7 @@ fi
 
 # setup ssh
 echo -e "$LOG Setup ssh..."
-if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/ssh/setup_authorized_keys.sh "$TARGET_USER"; then
+if bash "$TARGET_HOME"/dotfiles/ssh/setup_authorized_keys.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS SSH setup completed"
 else
 	echo -e "$FAILED SSH setup failed"

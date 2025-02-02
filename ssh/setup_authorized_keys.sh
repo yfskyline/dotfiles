@@ -5,8 +5,16 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
+if [ -n "$1" ]; then
+	echo -n "Enter the username: "
+	read -r TARGET_USER
+else
+	TARGET_USER="$1"
+	echo "Using $TARGET_USER as the target user"
+fi
+
 # Add ssh keys to the user
-su - "$SUDO_USER" -c ssh-import-id gh:yfskyline
+su - "$TARGET_USER" -c ssh-import-id gh:yfskyline
 # mkdir -p /home/"$SUDO_USER"/.ssh
 # curl https://github.com/yfskyline.keys >> /home/"$SUDO_USER"/.ssh/authorized_keys
 # chown "$SUDO_USER":"$SUDO_USER" /home/"$SUDO_USER"/.ssh/authorized_keys
