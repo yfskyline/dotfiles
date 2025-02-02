@@ -181,4 +181,4 @@ fi
 # sudo -u "$TARGET_USER" zsh
 # shellcheck source=/home/skyline/dotfiles/.zshrc
 # zsh -i source "$TARGET_HOME"/dotfiles/.zshrc && exit 0
-sudo -u "TARGET_USER" zsh -i -c exit 0
+sudo -u "$TARGET_USER" zsh -i -c exit 0
