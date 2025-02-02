@@ -2,11 +2,14 @@
 
 if [ -n "$1" ]; then
   TARGET_USER=$1
-  echo "TARGET_USER=$TARGET_USER"
+  echo "TARGET_USER=$1"
+  echo "Setting up git..."
 elif [ -n "$TARGET_USER" ]; then
   echo "TARGET_USER=$TARGET_USER"
+  echo "Setting up git..."
 else
   echo "TARGET_USER is not set"
+  echo "Usage: ./setup_git.sh <username>"
   exit 1
 fi
 

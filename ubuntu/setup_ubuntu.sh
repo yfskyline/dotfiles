@@ -115,7 +115,7 @@ fi
 
 
 # setup git
-if sudo -E -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/git/setup_git.sh; then
+if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/git/setup_git.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Git setup completed"
 else
 	echo -e "$FAILED Git setup failed"
