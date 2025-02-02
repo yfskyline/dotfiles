@@ -6,10 +6,11 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 if [ -n "$1" ]; then
+	TARGET_USER="$1"
+	echo "Using $TARGET_USER as the target user"
+else
 	echo -n "Enter the username: "
 	read -r TARGET_USER
-else
-	TARGET_USER="$1"
 	echo "Using $TARGET_USER as the target user"
 fi
 
