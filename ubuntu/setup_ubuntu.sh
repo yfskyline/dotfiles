@@ -115,6 +115,7 @@ fi
 
 
 # setup git
+echo -e "$LOG Setup git..."
 if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/git/setup_git.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Git setup completed"
 else
@@ -164,9 +165,9 @@ fi
 # setup ssh
 echo -e "$LOG Setup ssh..."
 if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/ssh/setup_authorized_keys.sh; then
-	echo -e "$SUCCESS Ssh setup completed"
+	echo -e "$SUCCESS SSH setup completed"
 else
-	echo -e "$FAILED Ssh setup failed"
+	echo -e "$FAILED SSH setup failed"
 fi
 
 # setup docker
@@ -179,4 +180,5 @@ fi
 
 # sudo -u "$TARGET_USER" zsh
 # shellcheck source=/home/skyline/dotfiles/.zshrc
-source "$TARGET_HOME"/dotfiles/.zshrc
+# zsh -i source "$TARGET_HOME"/dotfiles/.zshrc && exit 0
+sudo -u "TARGET_USER" zsh -i -c exit 0
