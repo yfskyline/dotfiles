@@ -37,7 +37,7 @@ else
 fi
 
 echo -e "$LOG Setup apt-fast command..."
-if add-apt-repository -y ppa:apt-fast/stable; then
+if add-apt-repository -y ppa:apt-fast/stable > /dev/null; then
 	echo -e "$SUCCESS apt-fast repository added"
 else
 	echo -e "$FAILED apt-fast repository add failed"
