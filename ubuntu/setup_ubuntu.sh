@@ -124,7 +124,7 @@ fi
 
 # setup python
 echo -e "$LOG Setup python..."
-if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/python/setup_python.sh; then
+if HOME="$TARGET_HOME" "$TARGET_HOME"/dotfiles/python/setup_python.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Python setup completed"
 else
 	echo -e "$FAILED Python setup failed"
@@ -172,7 +172,7 @@ fi
 
 # setup docker
 echo -e "$LOG Setup docker..."
-if bash "$TARGET_HOME"/dotfiles/docker/setup_docker.sh; then
+if bash "$TARGET_HOME"/dotfiles/docker/setup_docker.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Docker setup completed"
 else
 	echo -e "$FAILED Docker setup failed"
