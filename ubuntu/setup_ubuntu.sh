@@ -146,12 +146,12 @@ fi
 
 # setup nodejs
 echo -e "$LOG Setup nodejs..."
-if sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/nodejs/setup_nodejs.sh; then
+if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/nodejs/setup_nvm.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Nvm setup completed"
 else
 	echo -e "$FAILED Nvm setup failed"
 fi
-if sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/nodejs/setup_yarn.sh; then
+if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/nodejs/setup_yarn.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Yarn setup completed"
 else
 	echo -e "$FAILED Yarn setup failed"
