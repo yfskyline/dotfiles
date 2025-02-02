@@ -42,12 +42,12 @@ if add-apt-repository -y ppa:apt-fast/stable; then
 else
 	echo -e "$FAILED apt-fast repository add failed"
 fi
-if apt update; then
+if apt update -qq; then
 	echo -e "$SUCCESS apt-fast repository updated"
 else
 	echo -e "$FAILED apt-fast repository update failed"
 fi
-if apt install apt-fast -y; then
+if apt install -qq apt-fast -y; then
 	echo -e "$SUCCESS apt-fast installed"
 else
 	echo -e "$FAILED apt-fast install failed"
@@ -64,13 +64,13 @@ fi
 
 # install basic packages
 echo -e "$LOG Setup basic packages..."
-if apt-fast install -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq; then
+if apt-fast install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq; then
 	echo -e "$SUCCESS Basic packages installed"
 else
 	echo -e "$FAILED Basic packages install failed"
 fi
 echo -e "$LOG package update..."
-if apt-fast update && sudo apt-fast upgrade -y && apt-fast autoremove -y; then
+if apt-fast update -qq && sudo apt-fast upgrade -qq -y && apt-fast autoremove -qq -y; then
 	echo -e "$SUCCESS package update completed"
 else
 	echo -e "$FAILED package update failed"
