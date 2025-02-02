@@ -15,9 +15,9 @@ LOG="${CYAN}[LOG    ]${RESET}"
 if [ -n "$1" ]; then
 	TARGET_USER=$1
 	echo "$LOG TARGET_USER=$1"
-	echo "$LOG Setting up nvm for $TARGET_USER"""
+	echo "$LOG Setting up nvm for $TARGET_USER"
 elif [ -n "$TARGET_USER" ]; then
-	echo "$LOG Setting up nvm for $TARGET_USER"""
+	echo "$LOG Setting up nvm for $TARGET_USER"
 else
 	echo "$FAILED TARGET_USER is not set"
 	echo "$FAILED Usage: ./setup_nvm.sh <username>"
@@ -41,5 +41,5 @@ if [ $OS = 'Mac' ]; then
 	brew install nvm
 	mkdir -p /home/"$TARGET_USER"/.nvm
 elif [ $OS = 'Linux' ]; then
-	sudo -u "TARGET_USER" curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+	sudo -u "$TARGET_USER" curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 fi
