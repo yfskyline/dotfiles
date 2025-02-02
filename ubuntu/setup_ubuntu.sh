@@ -164,7 +164,7 @@ fi
 
 # setup ssh
 echo -e "$LOG Setup ssh..."
-if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/ssh/setup_authorized_keys.sh; then
+if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/ssh/setup_authorized_keys.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS SSH setup completed"
 else
 	echo -e "$FAILED SSH setup failed"
@@ -172,7 +172,7 @@ fi
 
 # setup docker
 echo -e "$LOG Setup docker..."
-if sh "$TARGET_HOME"/dotfiles/docker/setup_docker.sh; then
+if bash "$TARGET_HOME"/dotfiles/docker/setup_docker.sh; then
 	echo -e "$SUCCESS Docker setup completed"
 else
 	echo -e "$FAILED Docker setup failed"

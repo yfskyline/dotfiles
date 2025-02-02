@@ -24,4 +24,4 @@ git config --global pull.rebase true
 git config --global fetch.prune true
 git config --list
 
-mkdir -p ~/.config/git && cp /home/"$TARGET_USER"/dotfiles/git/.gitignore_global ~/.config/git/ignore
+mkdir -p ~/.config/git && cp /home/"$TARGET_USER"/dotfiles/git/.gitignore_global /home/"$TARGET_USER"/.config/git/ignore

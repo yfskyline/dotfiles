@@ -30,3 +30,7 @@ desc = "A Vim plugin which shows a git diff in the gutter (sign column) and stag
 [[plugins]]
 repo = 'dense-analysis/ale'
 desc = "Asynchronous Lint Engine for Vim and NeoVim with support for many languages"
+
+[[plugins]]
+repo = 'octol/vim-cpp-enhanced-highlight'
+desc = "Additional Vim syntax highlighting for C++ (including C++11/14/17)"
