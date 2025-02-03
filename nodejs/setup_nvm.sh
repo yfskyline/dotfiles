@@ -1,6 +1,8 @@
 #!/bin/bash
 # Install nvm
 
+NODEJS_VERSION=v22.13.1
+
 # define color / log headers
 RED="\e[31;1m"
 GREEN="\e[32;1m"
@@ -41,5 +43,14 @@ if [ $OS = 'Mac' ]; then
 	sudo -u "$TARGET_USER" brew install nvm
 	sudo -u "TARGET_USER" mkdir -p /home/"$TARGET_USER"/.nvm
 elif [ $OS = 'Linux' ]; then
-	sudo -u "$TARGET_USER" curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+	if sudo -u "$TARGET_USER" curl -fsSL -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash > /dev/null; then
+		echo -e "$SUCCESS Setup nvm"
+	else
+		echo -e "$FAILED Failed to setup nvm"
+		exit 1
+	fi
 fi
+
+# install nodejs
+sudo -u "$TARGET_USER" bash -c 'export NVM_DIR="$HOME"/.nvm; source $NVM_DIR/nvm.sh; nvm install '"$NODEJS_VERSION"
+sudo -u "$TARGET_USER" bash -c 'export NVM_DIR="$HOME"/.nvm; source $NVM_DIR/nvm.sh; nvm use '"$NODEJS_VERSION"
