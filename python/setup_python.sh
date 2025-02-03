@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PYTHON_VERSION=3.13.1
+PYTHON_VERSION=3.13.0
 
 # define message
 RED="\e[31;1m"
