@@ -44,18 +44,30 @@ else
 	exit 1
 fi
 
+# install required packages
+sudo apt update -qq
+sudo apt-get install -qq -y build-essential libssl-dev  zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
 # install pyenv if it has not been installed
 if [ $OS = 'Linux' ]; then
-	echo -e "${LOG}installing pyenv..."
-	apt update
-	sudo -u "$TARGET_USER" git clone https://github.com/pyenv/pyenv.git /home/"$TARGET_USER"/.pyenv
-	sudo -u "$TARGET_USER" bash -c eval "$(pyenv init --path)"
+	echo -e "${LOG} installing pyenv..."
+	if [ -e /home/"$TARGET_USER"/.pyenv ]; then
+		echo -e "$LOG pyenv is already installed"
+	else
+		sudo -u "$TARGET_USER" git clone https://github.com/pyenv/pyenv.git /home/"$TARGET_USER"/.pyenv
+	fi
+	# sudo -u "$TARGET_USER" bash -c eval "$(pyenv init --path)"
+	if sudo -u "$TARGET_USER" bash -c 'export PYENV_ROOT="$HOME/.pyenv"; export PATH="$PYENV_ROOT/bin:$PATH"; eval "$("$PYENV_ROOT/bin/pyenv" init --path)"'; then
+		echo -e "$SUCCESS setuped pyenv"
+	else
+		echo -e "$FAILED failed to setup pyenv"
+	fi
 elif [ $OS = 'Mac' ]; then
 	if [ "$(uname -m)" = 'x86_64' ]; then
 		echo -e "${FAILED}Your platform ($(uname -a)) is not supported."
 		exit 1
 	else
-		echo -e "${LOG}installing pyenv..."
+		echo -e "${LOG} installing pyenv..."
 		sudo -u "$TARGET_USER" brew install pyenv
 	fi
 else
@@ -63,16 +75,16 @@ else
 	exit 1
 fi
 
-if sudo -u "$TARGET_USER" pyenv -v; then
+if sudo -u "$TARGET_USER" bash -c 'export PYENV_ROOT="$HOME/.pyenv"; export PATH="$PYENV_ROOT/bin:$PATH"; pyenv -v'; then
 	echo -e "${SUCCESS} pyenv is installed."
 else
-	echo -e "${FAILED} pyenv is not installed."
+	echo -e "${FAILED} failed to install pyenv"
 	exit 1
 fi
 
 # install python
-sudo -u "$TARGET_USER" pyenv install $PYTHON_VERSION
-sudo -u "$TARGET_USER" pyenv global $PYTHON_VERSION
+sudo -u "$TARGET_USER" bash -c 'export PYENV_ROOT="$HOME/.pyenv"; export PATH="$PYENV_ROOT/bin:$PATH"; pyenv install --skip-existing '"$PYTHON_VERSION"
+sudo -u "$TARGET_USER" bash -c 'export PYENV_ROOT="$HOME/.pyenv"; export PATH="$PYENV_ROOT/bin:$PATH"; pyenv global '"$PYTHON_VERSION"
 
 # Install Linter
 sudo -u "$TARGET_USER" pip install flake8
