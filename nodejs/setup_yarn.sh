@@ -37,8 +37,8 @@ else
 fi
 
 if [ $OS = 'Mac' ]; then
-	sudo -u "$TARGET_USER" brew install yarn
+	sudo -u "$TARGET_USER" bash --login -c 'brew install yarn'
 elif [ $OS = 'Linux' ]; then
-	sudo -u "$TARGET_USER" npm -g install yarn
-	sudo -u "$TARGET_USER" yarn -v
+	sudo -u "$TARGET_USER" bash --login -c 'npm -g install yarn'
+	sudo -u "$TARGET_USER" bash --login -c 'yarn -v'
 fi
