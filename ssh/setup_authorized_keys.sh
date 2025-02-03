@@ -15,7 +15,7 @@ else
 fi
 
 # Add ssh keys to the user
-su - "$TARGET_USER" -c ssh-import-id gh:yfskyline
+su - "$TARGET_USER" -c 'ssh-import-id gh:yfskyline'
 # mkdir -p /home/"$SUDO_USER"/.ssh
 # curl https://github.com/yfskyline.keys >> /home/"$SUDO_USER"/.ssh/authorized_keys
 # chown "$SUDO_USER":"$SUDO_USER" /home/"$SUDO_USER"/.ssh/authorized_keys
