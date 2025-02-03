@@ -134,7 +134,7 @@ fi
 echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
 echo -e "$LOG Setup vim(install dein.vim)..."
-sudo -u "$TARGET_USER" "$TARGET_USER"vim/install_dein.sh
+sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/vim/install_dein.sh "$TARGET_USER"
 echo -e "$LOG Setup vim(install setuptools)..."
 sudo -u "$TARGET_USER" pip install --upgrade setuptools
 echo -e "$LOG Setup vim(install vim-vint)..."
