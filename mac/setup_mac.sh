@@ -3,7 +3,6 @@
 # Mac Setup script
 # 
 
-sh "$HOME"/dotfiles/setup_git.sh
 # define color / log headers
 RED="\e[31;1m"
 GREEN="\e[32;1m"
@@ -25,6 +24,13 @@ else
 	echo -e "$FAILED dotfiles setup failed"
 fi
 
+# setup git
+echo -e "$LOG setup git..."
+if sh "$HOME"/dotfiles/git/setup_git.sh; then
+	echo -e "$SUCCESS git setup completed"
+else
+	echo -e "$FAILED git setup failed"
+fi
 
 # install xcode-select
 if [ ! -x "$(xcode-select --print-path)" ]; then
