@@ -103,7 +103,7 @@ softwareupdate --all --install --force
 
 # setup ssh
 echo -e "$LOG setup ssh..."
-if bash "$HOME"/dotfiles/ssh/setup_ssh.sh; then
+if bash "$HOME"/dotfiles/ssh/setup_authorized_keys.sh; then
 	echo -e "$SUCCESS ssh setup completed"
 else
 	echo -e "$FAILED ssh setup failed"
