@@ -70,13 +70,13 @@ fi
 
 # setup nodejs
 echo -e "$LOG setup nvm / nodejs..."
-if "$HOME"/dotfiles/nodejs/setup_nvm.sh $USER; then
+if "$HOME"/dotfiles/nodejs/setup_nvm.sh "$USER"; then
 	echo -e "$SUCCESS nvm setup completed"
 else
 	echo -e "$FAILED nvm setup failed"
 fi
 echo -e "$LOG setup yarn..."
-if "$HOME"/dotfiles/nodejs/setup_yarn.sh $USER; then
+if "$HOME"/dotfiles/nodejs/setup_yarn.sh "$USER"; then
 	echo -e "$SUCCESS yarn setup completed"
 else
 	echo -e "$FAILED yarn setup failed"
@@ -105,6 +105,19 @@ open -a karabiner-elements
 # update App Store apps
 echo -e "$LOG Update App Store apps..."
 softwareupdate --all --install --force
+
+# setup ssh
+echo -e "$LOG setup ssh..."
+if bash "$HOME"/dotfiles/ssh/setup_ssh.sh; then
+	echo -e "$SUCCESS ssh setup completed"
+else
+	echo -e "$FAILED ssh setup failed"
+fi
+if cd "$HOME" && git clone git@github.com:yfskyline/ssh-config.git && bash "$HOME"/ssh-config/configLink.sh; then
+	echo -e "$SUCCESS ssh-config cloned"
+else
+	echo -e "$FAILED ssh-config clone failed"
+fi
 
 # display macOS version
 echo -e "$LOG macOS version..."
