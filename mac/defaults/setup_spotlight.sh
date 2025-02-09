@@ -2,7 +2,9 @@
 # Spotlight
 
 # display 'developer'
-touch /Applications/Xcode.app
+if [ ! -e /Applications/Xcode.app ]; then
+	sudo touch /Applications/Xcode.app
+fi
 
 defaults write com.apple.spotlight version -int 7
 
