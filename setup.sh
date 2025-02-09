@@ -21,10 +21,10 @@ fi
 if [ -n "$1" ]; then
 	echo -e "$LOG TARGET_USER=$1"
 	TARGET_USER=$1
-	echo -e "$LOG Setting up python for $1"
+	echo -e "$LOG Setting up for $1"
 elif [ -n "$TARGET_USER" ]; then
 	echo -e "$LOG TARGET_USER=$TARGET_USER"
-	echo -e "$LOG Setting up python for $TARGET_USER"
+	echo -e "$LOG Setting up for $TARGET_USER"
 else
 	echo -e "${FAILED} TARGET_USER is not set."
 	echo -e "${FAILED} Usage: ./setup.sh <username>"
