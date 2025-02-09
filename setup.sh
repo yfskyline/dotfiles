@@ -44,7 +44,7 @@ else
 fi
 
 if [ "$OS" = 'Mac' ]; then
-	if sudo -u "$TARGET_USER" bash -c 'export HOME=/Users/$TARGET_USER; export USER=$TARGET_USER; mac/setup_mac.sh'; then
+	if mac/setup_mac.sh; then
 		echo -e "$SUCCESS"
 	else
 		echo -e "$FAILED"
