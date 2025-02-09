@@ -78,16 +78,24 @@ killall SystemUIServer
 
 # open apps which are required to GUI setup
 echo -e "$LOG Open apps..."
+echo -e "$LOG Open Google Chrome... Login your Google account"
 open -a "Google Chrome"
+echo -e "$LOG Open 1Password... Login your 1Password account"
 open -a "1Password 7"
+echo -e "$LOG Open slack... Login your slack workspaces"
 open -a slack
+echo -e "$LOG Open LINE... Login your LINE account"
 open -a line
+echo -e "$LOG Open snippety... Login with your Apple account"
 open -a snippety
-open -a hammerspoon
-open -a deepl
+echo -e "$LOG Open snippety... Login with your Apple account"
 open -a discord
+echo -e "$LOG Open Zoom... Login with your Zoom account"
 open -a zoom.us
+echo -e "$LOG Open ChatGPT... Login with your ChatGPT account"
+open -a chatgpt
 open -a karabiner-elements
+open -a hammerspoon
 
 # update App Store apps
 echo -e "$LOG Update App Store apps..."
