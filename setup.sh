@@ -12,25 +12,6 @@ FAILED="${RED}[FAILED ]${RESET}"
 WARNING="${YELLOW}[WARNING]${RESET}"
 LOG="${CYAN}[LOG    ]${RESET}"
 
-if [ "$(id -u)" -ne 0 ]; then
-	echo -e "${FAILED} This script must be run as root."
-	echo -e "${LOG} Usage: sudo bash ./setup.sh"
-	exit 1
-fi
-
-if [ -n "$1" ]; then
-	echo -e "$LOG TARGET_USER=$1"
-	TARGET_USER=$1
-	echo -e "$LOG Setting up for $1"
-elif [ -n "$TARGET_USER" ]; then
-	echo -e "$LOG TARGET_USER=$TARGET_USER"
-	echo -e "$LOG Setting up for $TARGET_USER"
-else
-	echo -e "${FAILED} TARGET_USER is not set."
-	echo -e "${FAILED} Usage: ./setup.sh <username>"
-	exit 1
-fi
-
 # set $OS
 if [ "$(uname)" = 'Darwin' ]; then
 	OS='Mac'
@@ -44,12 +25,32 @@ else
 fi
 
 if [ "$OS" = 'Mac' ]; then
+	echo -e "${LOG} Setting up for Mac"
 	if mac/setup_mac.sh; then
 		echo -e "$SUCCESS"
 	else
 		echo -e "$FAILED"
 	fi
 elif [ "$OS" = 'Linux' ]; then
+	if [ "$(id -u)" -ne 0 ]; then
+		echo -e "${FAILED} This script must be run as root."
+		echo -e "${LOG} Usage: sudo bash ./setup.sh"
+		exit 1
+	fi
+
+	if [ -n "$1" ]; then
+		echo -e "$LOG TARGET_USER=$1"
+		TARGET_USER=$1
+		echo -e "$LOG Setting up for $1"
+	elif [ -n "$TARGET_USER" ]; then
+		echo -e "$LOG TARGET_USER=$TARGET_USER"
+		echo -e "$LOG Setting up for $TARGET_USER"
+	else
+		echo -e "${FAILED} TARGET_USER is not set."
+		echo -e "${FAILED} Usage: ./setup.sh <username>"
+		exit 1
+	fi
+
 	if sudo -u "$TARGET_USER" linux/setup_ubuntu.sh; then
 		echo -e "$SUCCESS"
 	else
