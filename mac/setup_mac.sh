@@ -55,19 +55,6 @@ fi
 
 mkdir -p ~/dev
 
-# setup vim
-echo -e "$LOG setup vim..."
-if "$HOME"/dotfiles/vim/install_dein.sh "$USER"; then
-	echo -e "$SUCCESS dein.vim installed"
-else
-	echo -e "$FAILED dein.vim install failed"
-fi
-if sh "$HOME"/dotfiles/vim/setup_vim.sh; then
-	echo -e "$SUCCESS vim setup completed"
-else
-	echo -e "$FAILED vim setup failed"
-fi
-
 # setup nodejs
 echo -e "$LOG setup nvm / nodejs..."
 if "$HOME"/dotfiles/nodejs/setup_nvm.sh "$USER"; then
@@ -124,6 +111,14 @@ if sudo bash "$HOME"/dotfiles/python/setup_python.sh "$USER"; then
 	echo -e "$SUCCESS python setup completed"
 else
 	echo -e "$FAILED python setup failed"
+fi
+
+# setup vim
+echo -e "$LOG setup vim..."
+if "$HOME"/dotfiles/vim/install_dein.sh "$USER"; then
+	echo -e "$SUCCESS dein.vim installed"
+else
+	echo -e "$FAILED dein.vim install failed"
 fi
 
 # display macOS version
