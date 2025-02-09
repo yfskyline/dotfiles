@@ -33,20 +33,25 @@ else
 fi
 
 # install xcode-select
+echo -e "$LOG xcode-select install..."
 if [ ! -x "$(xcode-select --print-path)" ]; then
 	xcode-select --install
 fi
 
 # install Homebrew
+echo -e "$LOG Homebrew install..."
 if [ ! -x "$(which brew)" ]; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	echo "eval '$(/opt/homebrew/bin/brew shellenv)'" >> ~/.zprofile
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 	brew update
 fi
-
-brew bundle --file "$HOME"/dotfiles/mac/Brewfile
-
+echo -e "$LOG install Homebrew bundle packages..."
+if brew bundle --file "$HOME"/dotfiles/mac/Brewfile; then
+	echo -e "$SUCCESS Homebrew bundle packages installed"
+else
+	echo -e "$FAILED Homebrew bundle packages install failed"
+fi
 
 mkdir -p ~/dev
 
