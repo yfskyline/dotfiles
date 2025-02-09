@@ -57,7 +57,7 @@ mkdir -p ~/dev
 
 # setup vim
 echo -e "$LOG setup vim..."
-if $HOME/dotfiles/vim/install_dein.sh $USER; then
+if "$HOME"/dotfiles/vim/install_dein.sh "$USER"; then
 	echo -e "$SUCCESS dein.vim installed"
 else
 	echo -e "$FAILED dein.vim install failed"
@@ -117,6 +117,13 @@ if cd "$HOME" && git clone git@github.com:yfskyline/ssh-config.git && bash "$HOM
 	echo -e "$SUCCESS ssh-config cloned"
 else
 	echo -e "$FAILED ssh-config clone failed"
+fi
+
+# setup python
+if sudo bash "$HOME"/dotfiles/python/setup_python.sh "$USER"; then
+	echo -e "$SUCCESS python setup completed"
+else
+	echo -e "$FAILED python setup failed"
 fi
 
 # display macOS version
