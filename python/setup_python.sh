@@ -11,6 +11,7 @@ CYAN="\e[36;1m"
 RESET="\e[0m"
 SUCCESS="${GREEN}[SUCCESS]${RESET}"
 FAILED="${RED}[FAILED ]${RESET}"
+WARNING="${YELLOW}[WARNING]${RESET}"
 LOG="${CYAN}[LOG    ]${RESET}"
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -31,7 +32,6 @@ else
 	exit 1
 fi
 
-
 # set $OS
 if [ "$(uname)" = 'Darwin' ]; then
 	OS='Mac'
@@ -44,12 +44,12 @@ else
 	exit 1
 fi
 
-# install required packages
-sudo apt update -qq
-sudo apt-get install -qq -y build-essential libssl-dev  zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-
 # install pyenv if it has not been installed
 if [ $OS = 'Linux' ]; then
+	# install required packages
+	echo -e "${LOG} installing required packages(pyenv)..."
+	sudo apt update -qq
+	sudo apt-get install -qq -y build-essential libssl-dev  zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 	echo -e "${LOG} installing pyenv..."
 	if [ -e /home/"$TARGET_USER"/.pyenv ]; then
 		echo -e "$LOG pyenv is already installed"
