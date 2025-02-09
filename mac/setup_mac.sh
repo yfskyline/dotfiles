@@ -55,6 +55,33 @@ fi
 
 mkdir -p ~/dev
 
+# setup vim
+echo -e "$LOG setup vim..."
+if $HOME/dotfiles/vim/install_dein.sh $USER; then
+	echo -e "$SUCCESS dein.vim installed"
+else
+	echo -e "$FAILED dein.vim install failed"
+fi
+if sh "$HOME"/dotfiles/vim/setup_vim.sh; then
+	echo -e "$SUCCESS vim setup completed"
+else
+	echo -e "$FAILED vim setup failed"
+fi
+
+# setup nodejs
+echo -e "$LOG setup nvm / nodejs..."
+if "$HOME"/dotfiles/nodejs/setup_nvm.sh $USER; then
+	echo -e "$SUCCESS nvm setup completed"
+else
+	echo -e "$FAILED nvm setup failed"
+fi
+echo -e "$LOG setup yarn..."
+if "$HOME"/dotfiles/nodejs/setup_yarn.sh $USER; then
+	echo -e "$SUCCESS yarn setup completed"
+else
+	echo -e "$FAILED yarn setup failed"
+fi
+
 # setup scripts
 sh "$HOME"/dotfiles/mac/defaults/index.sh
 
