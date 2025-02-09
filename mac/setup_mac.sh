@@ -26,7 +26,7 @@ fi
 
 # setup git
 echo -e "$LOG setup git..."
-if sh "$HOME"/dotfiles/git/setup_git.sh; then
+if sh "$HOME"/dotfiles/git/setup_git.sh "$USER"; then
 	echo -e "$SUCCESS git setup completed"
 else
 	echo -e "$FAILED git setup failed"
