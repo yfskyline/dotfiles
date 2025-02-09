@@ -29,7 +29,9 @@ if [ $OS = 'Mac' ]; then
 	ln -sf ~/dotfiles/mac/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
 
 	# Visual Studio Code
+	mkdir -p ~/Library/Application\ Support/Code/User/
 	ln -sf ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+	mkdir -p ~/.vscode
 	ln -sf ~/dotfiles/vscode/argv.json ~/.vscode/argv.json
 	# Interface Theme: Dark
 	# Editor Theme: night
