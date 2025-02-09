@@ -70,7 +70,12 @@ else
 fi
 
 # setup scripts
-sh "$HOME"/dotfiles/mac/defaults/index.sh
+echo -e "$LOG macOS system configuration setup scripts..."
+if bash "$HOME"/dotfiles/mac/defaults/index.sh; then
+	echo -e "$SUCCESS macOS system configuration setup completed"
+else
+	echo -e "$FAILED macOS system configuration setup failed"
+fi
 
 # CoreFoundation Preferences
 killall cfprefsd
@@ -103,7 +108,7 @@ softwareupdate --all --install --force
 
 # setup ssh
 echo -e "$LOG setup ssh..."
-if bash "$HOME"/dotfiles/ssh/setup_authorized_keys.sh; then
+if sudo bash "$HOME"/dotfiles/ssh/setup_authorized_keys.sh; then
 	echo -e "$SUCCESS ssh setup completed"
 else
 	echo -e "$FAILED ssh setup failed"
