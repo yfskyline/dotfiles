@@ -5,6 +5,7 @@ if [ -n "$1" ]; then
 	echo "TARGET_USER=$1"
 	echo "Setting up git..."
 elif [ -n "$TARGET_USER" ]; then
+	TARGET_USER=$USER
 	echo "TARGET_USER=$TARGET_USER"
 	echo "Setting up git..."
 else
