@@ -51,6 +51,8 @@ sh "$HOME"/dotfiles/mac/defaults/index.sh
 killall cfprefsd
 killall SystemUIServer
 
+# open apps which are required to GUI setup
+echo -e "$LOG Open apps..."
 open -a "Google Chrome"
 open -a "1Password 7"
 open -a slack
@@ -59,10 +61,11 @@ open -a snippety
 open -a hammerspoon
 open -a deepl
 open -a discord
-open -a firefox
 open -a zoom.us
 open -a karabiner-elements
 
+# update App Store apps
+echo -e "$LOG Update App Store apps..."
 softwareupdate --all --install --force
 
 # display macOS version
