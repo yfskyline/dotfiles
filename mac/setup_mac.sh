@@ -2,15 +2,26 @@
 # 
 # Mac Setup script
 # 
-sw_vers
 
 sh "$HOME"/dotfiles/mac/dotfilesLink.sh
 sh "$HOME"/dotfiles/setup_git.sh
+# define color / log headers
+RED="\e[31;1m"
+GREEN="\e[32;1m"
+YELLOW="\e[33;1m"
+BLUE="\e[34;1m"
+CYAN="\e[36;1m"
+RESET="\e[0m"
+SUCCESS="${GREEN}[SUCCESS]${RESET}"
+FAILED="${RED}[FAILED ]${RESET}"
+WARNING="${YELLOW}[WARNING]${RESET}"
+LOG="${CYAN}[LOG    ]${RESET}"
 
 # Karabiner-Elements config
 mkdir -p ~/.config/karabiner
 ln -sf ~/dotfiles/mac/karabiner/assets ~/.config/karabiner/assets
 ln -sf ~/dotfiles/mac/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
+echo -e "${BLUE}Mac Setup Script${RESET}"
 
 
 # install xcode-select
@@ -58,3 +69,7 @@ open -a zoom.us
 open -a karabiner-elements
 
 softwareupdate --all --install --force
+
+# display macOS version
+echo -e "$LOG macOS version..."
+sw_vers
