@@ -3,7 +3,6 @@
 # Mac Setup script
 # 
 
-sh "$HOME"/dotfiles/mac/dotfilesLink.sh
 sh "$HOME"/dotfiles/setup_git.sh
 # define color / log headers
 RED="\e[31;1m"
@@ -17,11 +16,14 @@ FAILED="${RED}[FAILED ]${RESET}"
 WARNING="${YELLOW}[WARNING]${RESET}"
 LOG="${CYAN}[LOG    ]${RESET}"
 
-# Karabiner-Elements config
-mkdir -p ~/.config/karabiner
-ln -sf ~/dotfiles/mac/karabiner/assets ~/.config/karabiner/assets
-ln -sf ~/dotfiles/mac/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
 echo -e "${BLUE}Mac Setup Script${RESET}"
+
+echo -e "$LOG basic dotfiles link..."
+if sh "$HOME"/dotfiles/dotfilesLink.sh; then
+	echo -e "$SUCCESS dotfiles setup completed"
+else
+	echo -e "$FAILED dotfiles setup failed"
+fi
 
 
 # install xcode-select
@@ -39,13 +41,6 @@ fi
 
 brew bundle --file "$HOME"/dotfiles/mac/Brewfile
 
-# Interface Theme: Dark
-# Editor Theme: night
-# ------------------------------------
-
-# Visual Studio Code
-# ln -sf ~/dotfiles/vscode/settings.json ~/settings.json
-# ln -sf ~/dotfiles/vscode/argv.json ~/.vscode/argv.json
 
 mkdir -p ~/dev
 
