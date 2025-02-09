@@ -27,7 +27,7 @@ elif [ -n "$TARGET_USER" ]; then
 	echo -e "$LOG Setting up python for $TARGET_USER"
 else
 	echo -e "${FAILED} TARGET_USER is not set."
-	echo -e "${FAILED} Usage: ./setup_python.sh <username>"
+	echo -e "${FAILED} Usage: ./setup.sh <username>"
 	exit 1
 fi
 
