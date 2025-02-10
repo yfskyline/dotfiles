@@ -15,7 +15,7 @@ FAILED="${RED}[FAILED ]${RESET}"
 WARNING="${YELLOW}[WARNING]${RESET}"
 LOG="${CYAN}[LOG    ]${RESET}"
 
-echo -e "${BLUE}Mac Setup Script${RESET}"
+printf "%sMac Setup Script%s\n" "${BLUE}" "${RESET}"
 
 echo -e "$LOG basic dotfiles link..."
 if sh "$HOME"/dotfiles/dotfilesLink.sh; then
