@@ -99,6 +99,8 @@ echo -e "$LOG Open Zoom... Login with your Zoom account"
 open -a zoom.us
 echo -e "$LOG Open ChatGPT... Login with your ChatGPT account"
 open -a chatgpt
+echo -e "$LOG Open notion... Login with your notion account"
+open -a notion
 open -a karabiner-elements
 open -a hammerspoon
 
