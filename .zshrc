@@ -71,7 +71,8 @@ if [ $OS = 'Linux' ]; then
 	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 elif [ $OS = 'Mac' ]; then
 	export NVM_DIR="$HOME/.nvm"
-	source $(brew --prefix nvm)/nvm.sh
+	[ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
+	[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
 # for user scripts
