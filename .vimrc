@@ -1,6 +1,5 @@
 " General Settings
 set number
-set relativenumber
 set cursorline
 set ruler
 set wildmenu
