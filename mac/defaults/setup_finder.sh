@@ -44,4 +44,6 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool "false"
 ## Cover-Flow-View: Flwv
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+
 killall Finder # enable Finder setting changes
