@@ -136,6 +136,23 @@ else
 	echo -e "$FAILED dein.vim install failed"
 fi
 
+# setup SMB config
+if [ -e "$HOME"/dotfiles/mac/esmb.conf ]; then
+	echo -e "$SUCCESS smb config already exists"
+else
+	if sudo ln -s "$HOME"/dotfiles/mac/esmb.conf; then
+		echo -e "$SUCCESS smb setup completed"
+	else
+		echo -e "$FAILED smb setup failed"
+	fi
+fi
+
+if sudo sysctl -w net.inet.tcp.delayed_ack=0; then
+	echo -e "$SUCCESS smb setup (delayed_ack=0) completed"
+else
+	echo -e "$FAILED smb setup (delayed_ack=0) completed"
+fi
+
 # display macOS version
 echo -e "$LOG macOS version..."
 sw_vers
