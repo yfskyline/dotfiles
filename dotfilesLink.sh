@@ -16,7 +16,7 @@ ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/.bashrc ~/.bashrc
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
-#ssh-import-id gh:yfskyline
+ln -sf ~/dotfiles/.gdbinit ~/.gdbinit
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.digrc ~/.digrc
 ln -sf ~/dotfiles/git/.gitignore_global ~/.gitignore_global
@@ -41,6 +41,7 @@ elif [ $OS = 'Linux' ]; then
 	ln -sf ~/dotfiles/vscode/argv.json ~/.vscode/argv.json
 	# Interface Theme: Dark
 	# Editor Theme: night
+	#ssh-import-id gh:yfskyline
 else
 	echo -e "${FAILED}Your platform ($(uname -a)) is not supported."
 	exit 1
