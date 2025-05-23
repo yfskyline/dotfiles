@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # set $OS
 if [ "$(uname)" = 'Darwin' ]; then
