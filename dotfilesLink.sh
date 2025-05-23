@@ -37,6 +37,8 @@ if [ $OS = 'Mac' ]; then
 	# Editor Theme: night
 elif [ $OS = 'Linux' ]; then
 	# Visual Studio Code
+	mkdir -p ~/.config/Code/User/
+	mkdir -p ~/.vscode
 	ln -sf ~/dotfiles/vscode/settings.json ~/.config/Code/User/settings.json
 	ln -sf ~/dotfiles/vscode/argv.json ~/.vscode/argv.json
 	# Interface Theme: Dark
