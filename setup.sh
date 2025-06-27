@@ -26,12 +26,20 @@ fi
 
 if [ "$OS" = 'Mac' ]; then
 	echo -e "${LOG} Setting up for Mac"
+	# check if the user is root.
+	if [ "$(id -u)" -ne 0 ]; then
+		echo -e "${FAILED} This script must be run as root."
+		echo -e "${LOG} Usage: sudo zsh ./setup.sh"
+		exit 1
+	fi
 	if mac/setup_mac.sh; then
 		echo -e "$SUCCESS"
 	else
 		echo -e "$FAILED"
 	fi
 elif [ "$OS" = 'Linux' ]; then
+	echo -e "${LOG} Setting up for Linux"
+	# check if the user is root.
 	if [ "$(id -u)" -ne 0 ]; then
 		echo -e "${FAILED} This script must be run as root."
 		echo -e "${LOG} Usage: sudo bash ./setup.sh"
