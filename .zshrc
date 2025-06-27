@@ -82,12 +82,17 @@ test -d $HOME/bin || mkdir $HOME/bin
 autoload -Uz colors && colors     # Use colors
 
 local now=$(date +"%s")
-[ -f ~/.zcompdump ] && local updated=$(date -r ~/.zcompdump +"%s")
 local threshold=$((60 * 60 * 24 * 7))
-if [ $((${now} - ${updated})) -gt ${threshold} ]; then
-	autoload -Uz compinit && compinit		# enable zsh completion
+
+if [ -f ~/.zcompdump ]; then
+	local updated=$(date -r ~/.zcompdump +"%s")
+	if [ $((${now} - ${updated})) -gt ${threshold} ]; then
+		autoload -Uz compinit && compinit		# enable zsh completion
+	else
+		autoload -Uz compinit && compinit -C	# enable zsh completion
+	fi
 else
-	autoload -Uz compinit && compinit -C	# enable zsh completion
+	autoload -Uz compinit && compinit
 fi
 
 
