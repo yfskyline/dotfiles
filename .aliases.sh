@@ -56,9 +56,9 @@ if [ "$OS" = 'Linux' ]; then
 	alias ls='ls -F --color=auto'
 	alias fd='fdfind'
 elif [ "$OS" = 'Mac' ]; then
-	alias gdb='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
-	alias gda='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
-	alias gdc='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
+	alias defaults_before='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
+	alias defaults_after='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt'
+	alias defaults_compare='diff before.txt after.txt; diff beforeCurrent.txt afterCurrent.txt'
 	alias wireshark='open -n /Applications/Wireshark.app/ '
 	alias ls='ls -G -F'
 	export CLICOLOR=1
