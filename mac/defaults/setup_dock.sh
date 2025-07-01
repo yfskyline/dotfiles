@@ -111,8 +111,5 @@ defaults write com.apple.dock expose-group-apps -bool true
 # Wipe all app icons from the Dock exclude Finder and Trash
 defaults write com.apple.dock persistent-apps -array
 
-# span display
-defaults write com.apple.spaces spans-displays -bool true
-
-# 設定を反映
+# apply the settings
 killall Dock
