@@ -137,10 +137,10 @@ else
 fi
 
 # setup SMB config
-if [ -e "$HOME"/dotfiles/mac/esmb.conf ]; then
+if [ -e /etc/nsmb.conf ]; then
 	echo -e "$SUCCESS smb config already exists"
 else
-	if sudo ln -s "$HOME"/dotfiles/mac/esmb.conf; then
+	if sudo ln -s "$HOME"/dotfiles/mac/nsmb.conf /etc/nsmb.conf; then
 		echo -e "$SUCCESS smb setup completed"
 	else
 		echo -e "$FAILED smb setup failed"
