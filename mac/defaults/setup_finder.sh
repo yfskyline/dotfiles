@@ -27,8 +27,9 @@ chflags nohidden ~/Library
 # Show files extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-# Avoid creating `.DS_Store` files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Avoid creating `.DS_Store` files on network volumes and usb modules
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool TRUE
 
 # Search within seeing directory
 defaults write com.apple.finder FXDefaultSearchScope -string SCcf
@@ -44,6 +45,5 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool "false"
 ## Cover-Flow-View: Flwv
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
 
 killall Finder # enable Finder setting changes

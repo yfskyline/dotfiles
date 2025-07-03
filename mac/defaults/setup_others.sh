@@ -11,16 +11,15 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 
 # Feedback
-## クラッシュレポートを無効化する
+## disable 'crash report'
 defaults write com.apple.CrashReporter DialogType -string "none"
-## フィードバックを送信しない
+## disable sending 'feedback'
 defaults write com.apple.appleseed.FeedbackAssistant "Autogather" -bool "false"
 
 
 ## 未確認のアプリケーションを実行する際のダイアログを無効にする
 
 
-
 # .DS_Store
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool "true"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool "true"
