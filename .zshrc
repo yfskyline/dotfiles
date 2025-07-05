@@ -240,7 +240,7 @@ if [ "$OS" = 'Mac' ]; then
 	# Use 1Password ssh-agent
 	export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 	test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
-	eval "$(gh completion -s zsh)"
+	#eval "$(gh completion -s zsh)"
 fi
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
