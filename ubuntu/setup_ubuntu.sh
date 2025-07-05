@@ -64,7 +64,7 @@ fi
 
 # install basic packages
 echo -e "$LOG Setup basic packages..."
-if apt-fast install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool; then
+if apt-fast install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool whois; then
 	echo -e "$SUCCESS Basic packages installed"
 else
 	echo -e "$FAILED Basic packages install failed"
