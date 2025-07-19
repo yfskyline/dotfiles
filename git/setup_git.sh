@@ -23,6 +23,7 @@ git config --global color.branch auto
 git config --global pull.ff only
 git config --global pull.rebase true
 git config --global fetch.prune true
+git config --global init.defaultBranch main
 git config --list
 
 # set $OS
