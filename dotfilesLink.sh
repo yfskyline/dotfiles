@@ -24,6 +24,10 @@ ln -sf ~/dotfiles/git/.gitignore_global ~/.gitignore_global
 
 # macos
 if [ $OS = 'Mac' ]; then
+	# HammerSpoon config
+	mkdir -p ~/.hammerspoon
+	ln -sf ~/dotfiles/mac/hammerspoon/init.lua ~/.hammerspoon/init.lua
+
 	# Karabiner-Elements config
 	mkdir -p ~/.config/karabiner
 	ln -sf ~/dotfiles/mac/karabiner/assets ~/.config/karabiner/assets
