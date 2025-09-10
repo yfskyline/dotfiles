@@ -42,20 +42,20 @@ elif [ "$OS" = 'Linux' ]; then
 	# check if the user is root.
 	if [ "$(id -u)" -ne 0 ]; then
 		echo -e "${FAILED} This script must be run as root."
-		echo -e "${LOG} Usage: sudo bash ./setup.sh"
+		echo -e "${LOG} Usage: sudo bash ./setup.sh <username>"
 		exit 1
 	fi
 
 	if [ -n "$1" ]; then
 		echo -e "$LOG TARGET_USER=$1"
 		TARGET_USER=$1
-		echo -e "$LOG Setting up for $1"
+		echo -e "$LOG Setting up for $TARGET_USER"
 	elif [ -n "$TARGET_USER" ]; then
 		echo -e "$LOG TARGET_USER=$TARGET_USER"
 		echo -e "$LOG Setting up for $TARGET_USER"
 	else
 		echo -e "${FAILED} TARGET_USER is not set."
-		echo -e "${FAILED} Usage: ./setup.sh <username>"
+		echo -e "${FAILED} Usage: sudo bash ./setup.sh <username>"
 		exit 1
 	fi
 
