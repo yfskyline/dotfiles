@@ -59,7 +59,7 @@ elif [ "$OS" = 'Linux' ]; then
 		exit 1
 	fi
 
-	if sudo -u "$TARGET_USER" /home/$TARGET_USER/ubuntu/setup_ubuntu.sh; then
+	if sudo -u "$TARGET_USER" bash /home/$TARGET_USER/dotfiles/ubuntu/setup_ubuntu.sh; then
 		echo -e "$SUCCESS"
 	else
 		echo -e "$FAILED"
