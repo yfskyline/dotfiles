@@ -13,7 +13,8 @@ set tabstop=4                                   " display width of TAB(^I)
 set shiftwidth=4                                " number of spaces for smart indent
 set whichwrap=b,s,h,l,<,>,[,],~
 set backspace=indent,eol,start
-set mouse=a
+set mouse=
+set clipboard=unnamedplus
 set laststatus=2
 set showmatch
 set history=10000
