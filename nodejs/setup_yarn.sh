@@ -2,12 +2,12 @@
 # Install yarn
 
 # define color / log headers
-RED="\e[31;1m"
-GREEN="\e[32;1m"
-YELLOW="\e[33;1m"
-BLUE="\e[34;1m"
+RED="\033[31;1m"
+GREEN="\033[32;1m"
+YELLOW="\033[33;1m"
+BLUE="\033[34;1m"
 CYAN="\033[36;1m"
-RESET="\e[0m"
+RESET="\033[0m"
 SUCCESS="${GREEN}[SUCCESS]${RESET}"
 FAILED="${RED}[FAILED ]${RESET}"
 LOG="${CYAN}[LOG    ]${RESET}"

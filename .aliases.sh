@@ -35,7 +35,7 @@ alias sudo='sudo ' # enable aliasses after "sudo "
 alias deploy='sudo containerlab deploy'
 alias destroy='sudo containerlab destroy'
 alias ffmpeg='ffmpeg -hide_banner'
-alias color='for fore in `seq 30 37`; do printf "\e[${fore}m \\\e[${fore}m \e[m\n"; for mode in 1 4 5; do printf "\e[${fore};${mode}m \\\e[${fore};${mode}m \e[m"; for back in `seq 40 47`; do printf "\e[${fore};${back};${mode}m \\\e[${fore};${back};${mode}m \e[m"; done; echo; done; echo; done; printf " \\\e[m\n"'
+alias color='for fore in `seq 30 37`; do printf "\033[${fore}m \\\033[${fore}m \033[m\n"; for mode in 1 4 5; do printf "\033[${fore};${mode}m \\\033[${fore};${mode}m \033[m"; for back in `seq 40 47`; do printf "\033[${fore};${back};${mode}m \\\033[${fore};${back};${mode}m \033[m"; done; echo; done; echo; done; printf " \\\033[m\n"'
 
 if [ -n "$ZSH_VERSION" ]; then
 	# Global Alias
