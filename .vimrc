@@ -4,6 +4,7 @@ set cursorline
 set ruler
 set wildmenu
 set showmode
+set showcmd
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
@@ -54,14 +55,9 @@ augroup END
 
 " Uncomment and configure as needed
 " set termguicolors
+" set background=light
 " set background=dark
 " set wildmode=list:longest
-" set nobackup					" do not make backup file
-" set noswapfile				" スワップファイルを作らない
-" set autoread					" 編集中のファイルが変更されたら自動で読み直す
-" set hidden					" バッファが編集中でもその他のファイルを開けるように
-" set showcmd					" 入力中のコマンドをステータスに表示する: 打ったコマンドをステータスラインの下に表示
-" set visualbell				" ビープ音を可視化
 
 
 " Enable movement by display lines when wrapping
