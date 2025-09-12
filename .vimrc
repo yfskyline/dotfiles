@@ -227,7 +227,7 @@ nmap <silent> <C-k> :ALEPrevious<CR>
 
 " Highlight Full-width Space
 function! FullSpace()
-	highlight FullSpace cterm=underline ctermfg=magenta guibg=darkgray
+	highlight FullSpace cterm=underline ctermbg=red ctermfg=magenta
 endfunction
 
 if has('syntax')
