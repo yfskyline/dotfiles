@@ -12,6 +12,8 @@
 	0hQVFhdaJGNsYXNzbmFtZVgkY2xhc3Nlc1dOU0NvbG9yohYYWE5TT2JqZWN0CBEaJCky
 	N0lMUVNXXWRseYCVl5meqbK6vQAAAAAAAAEBAAAAAAAAABkAAAAAAAAAAAAAAAAAAADG
 	</data>
+	<key>BookmarkRestorations</key>
+	<false/>
 	<key>CursorBlink</key>
 	<true/>
 	<key>CursorColor</key>
@@ -90,6 +92,8 @@
 	</data>
 	<key>CursorType</key>
 	<integer>0</integer>
+	<key>EnableSmoothResizing</key>
+	<false/>
 	<key>Font</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -208,8 +212,12 @@
 	</data>
 	<key>WindowTitle</key>
 	<string></string>
+	<key>columnCount</key>
+	<integer>68</integer>
 	<key>name</key>
 	<string>skyline</string>
+	<key>rowCount</key>
+	<integer>100</integer>
 	<key>shellExitAction</key>
 	<integer>1</integer>
 	<key>type</key>
