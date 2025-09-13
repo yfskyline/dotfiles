@@ -3,8 +3,10 @@ set number
 set cursorline
 set ruler
 set wildmenu
+" set wildmode=list:longest
 set showmode
 set showcmd
+
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
@@ -27,16 +29,17 @@ set wrapscan
 set virtualedit=onemore
 
 " Character Settings
-" set ambiwidth=double			" □や○文字が崩れる問題を解決
+set ambiwidth=single
 
 " Tab/Indent Settings
-" set list listchars=tab:\▸\-	" 不可視文字を可視化(タブが「▸-」と表示される)
-" set softtabstop=4				" 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
-" set autoindent				" 改行時に前の行のインデントを継続する
-" set smartindent				" 改行時に前の行の構文をチェックし次の行のインデントを増減する
+set list listchars=tab:\▸\-
+set softtabstop=4
+" set autoindent
+" set smartindent
 
 scriptencoding utf-8
 
+" Enable 'expandtab
 filetype plugin indent on
 augroup FileTypeSettings
 	autocmd!
@@ -52,12 +55,6 @@ augroup FileTypeSettings
 	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
 augroup END
-
-" Uncomment and configure as needed
-" set termguicolors
-" set background=light
-" set background=dark
-" set wildmode=list:longest
 
 
 " Enable movement by display lines when wrapping
@@ -235,6 +232,10 @@ if has('syntax')
 	call FullSpace()
 endif
 syntax enable
+
+" Color settings
+set notermguicolors
+set background=dark
 
 " GitGutter ColorSetting
 augroup ColorSchemeSettings
