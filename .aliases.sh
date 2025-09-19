@@ -51,11 +51,20 @@ fi
 
 # OS specific alias
 if [ "$OS" = 'Linux' ]; then
-	alias pbcopy='xsel --clipboard --input'
-	alias pbpaste='xsel --clipboard --output'
 	alias ls='ls -F --color=auto'
-	alias fd='fdfind'
-	alias apt='apt-fast'
+
+	if command -v fdfind >/dev/null 2>&1; then
+		alias fd='fdfind'
+	fi
+
+	if command -v xsel >/dev/null 2>&1; then
+		alias pbcopy='xsel --clipboard --input'
+		alias pbpaste='xsel --clipboard --output'
+	fi
+
+	if command -v apt-fast >/dev/null 2>&1; then
+		alias apt='apt-fast'
+	fi
 elif [ "$OS" = 'Mac' ]; then
 	alias defaults_before='defaults read > before.txt && defaults -currentHost read > beforeCurrent.txt'
 	alias defaults_after='defaults read > after.txt && defaults -currentHost read > afterCurrent.txt && diff --color before.txt after.txt && diff --color beforeCurrent.txt afterCurrent.txt'
