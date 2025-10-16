@@ -31,8 +31,8 @@ defaults write -g WebAutomaticSpellingCorrectionEnabled -bool false
 ## Dock automatically on/off
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>122</integer><integer>9961472</integer></array><key>type</key><string>standard</string></dict></dict>"
 
-## Mission Control: CTRL+Enter
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>36</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
+## Mission Control: CTRL+Enter: Disabled
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>36</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 34 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>36</integer><integer>393216</integer></array><key>type</key><string>standard</string></dict></dict>"
 
 ## Disable Application Window
