@@ -1,3 +1,5 @@
+" ~/.vimrc
+
 " General Settings
 set number
 set cursorline
@@ -17,7 +19,7 @@ set shiftwidth=4                                " number of spaces for smart ind
 set whichwrap=b,s,h,l,<,>,[,],~
 set backspace=indent,eol,start
 set mouse=
-set clipboard=unnamedplus
+set clipboard=unnamed
 set laststatus=2
 set showmatch
 set history=10000
