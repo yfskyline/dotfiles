@@ -49,7 +49,7 @@ augroup FileTypeSettings
 	autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType dockerfile setlocal tabstop=4 shiftwidth=4 expandtab
-	autocmd FileType yaml setlocal tabstop=4 shiftwidth=4 expandtab
+	autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType markdown setlocal tabstop=4 shiftwidth=4 expandtab wrap
 	autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
