@@ -70,7 +70,7 @@ cask "visual-studio-code"
 cask "vlc"
 cask "webex"
 cask "webex-meetings"
-cask "wireshark"
+cask "wireshark-app"
 cask "zoom"
 mas "LINE", id: 539883307
 mas "Prime Video", id: 545519333
