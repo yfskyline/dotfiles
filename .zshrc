@@ -60,6 +60,11 @@ export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/local/opt/gnu-getopt/bin"
 
 # pyenv
+if [ -e ~/.pyenv ]; then
+else
+	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+fi
+
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
 eval "$(pyenv init -)"
