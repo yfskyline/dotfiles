@@ -18,7 +18,7 @@ elif [ "$(uname -s | cut -c1-10)" = 'MINGW32_NT' ]; then
 	OS='Cygwin'
 else
 	echo -e "${LOG}Your platform ($(uname -a)) is not supported."
-	exit 1
+	return
 fi
 
 # install zplug if it has not been installed
