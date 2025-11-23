@@ -30,7 +30,7 @@ if [ $OS = 'Mac' ]; then
 
 	# Karabiner-Elements config
 	mkdir -p ~/.config/karabiner
-	ln -sf ~/dotfiles/mac/karabiner/assets ~/.config/karabiner/assets
+	ln -sf ~/dotfiles/mac/karabiner/assets ~/.config/karabiner/
 	ln -sf ~/dotfiles/mac/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
 
 	# Visual Studio Code
