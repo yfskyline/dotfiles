@@ -78,7 +78,7 @@ fi
 
 # setup zsh
 echo -e "$LOG chsh to zsh..."
-if getent passwd "$TARGET_USER" | grep -q '^'"$TARGET_USER"':' ; then
+if grep -q "^$TARGET_USER:" /etc/passwd; then
 	echo -e "$LOG Local passwd entry found. ($TARGET_USER) Changing shell to $(which zsh)..."
 	if chsh "$TARGET_USER" -s "$(which zsh)"; then
 		echo -e "$SUCCESS chsh to zsh completed"
@@ -87,9 +87,10 @@ if getent passwd "$TARGET_USER" | grep -q '^'"$TARGET_USER"':' ; then
 		exit 1
 	fi
 else
-	echo -e "$WARNING Local passwd entry not found (LDAP account?). Skipping chsh..."
-	echo -e "$LOG Current shell: $SHELL"
+	echo -e "$WARNING User '$TARGET_USER' not found in /etc/passwd (Likely LDAP account)."
+	echo -e "$WARNING Skipping chsh..."
 fi
+echo -e "$LOG Current shell: $SHELL"
 
 # modify motd
 echo -e "$LOG Setup motd..."
