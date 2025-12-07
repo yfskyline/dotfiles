@@ -26,5 +26,5 @@ elif [ -e /Users/$TARGET_USER/.cache/dein ]; then
 	echo -e "$WARNING dein.vim is already installed"
 	exit 0
 else
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/Shougo/dein-installer.vim/master/installer.sh)" /home/"$TARGET_USER"/.cache/dein --use-vim-config
+	curl -fsSL https://raw.githubusercontent.com/Shougo/dein-installer.vim/master/installer.sh | sh -s /home/"$TARGET_USER"/.cache/dein --use-vim-config
 fi
