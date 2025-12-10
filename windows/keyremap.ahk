@@ -1,82 +1,89 @@
 #Requires AutoHotkey v2.0
 ; ==============================================================================
-; 設定：除外するアプリケーション（ここで指定したアプリではEmacsキーが無効になります）
+; ★安全版 (Registry併用)
+; CapsLockのCtrl化はレジストリで行っている前提のスクリプトです。
+; AHKは純粋なショートカット機能のみを担当するため、スタック等のバグ起きません。
 ; ==============================================================================
-GroupAdd "EmacsDisabledApps", "ahk_exe WindowsTerminal.exe" ; Windows Terminal
-GroupAdd "EmacsDisabledApps", "ahk_exe Code.exe"            ; VS Code
-GroupAdd "EmacsDisabledApps", "ahk_exe mstsc.exe"           ; Remote Desktop
-GroupAdd "EmacsDisabledApps", "ahk_exe wsl.exe"             ; WSL GUI
-GroupAdd "EmacsDisabledApps", "ahk_exe mintty.exe"          ; Git Bash
+InstallKeybdHook
+A_MaxHotkeysPerInterval := 200
+
+; 除外アプリ設定
+GroupAdd "EmacsDisabledApps", "ahk_exe WindowsTerminal.exe"
+GroupAdd "EmacsDisabledApps", "ahk_exe Code.exe"
+GroupAdd "EmacsDisabledApps", "ahk_exe mstsc.exe"
+GroupAdd "EmacsDisabledApps", "ahk_exe wsl.exe"
+GroupAdd "EmacsDisabledApps", "ahk_exe mintty.exe"
 
 ; ==============================================================================
-; 1. CapsLock を Ctrl として扱う (物理的な入替え)
+; 関数：IME直接制御
 ; ==============================================================================
-CapsLock::LCtrl
-
-; ==============================================================================
-; 2. Mac風ショートカット (左Win + key -> Ctrl + key)
-;    ※ SendInputを使うことで、後述のEmacsキーバインドと干渉せず「Windowsの機能」を呼び出せます
-; ==============================================================================
-<#x::SendInput "^x"  ; Cut
-<#c::SendInput "^c"  ; Copy
-<#v::SendInput "^v"  ; Paste
-<#z::SendInput "^z"  ; Undo
-<#a::SendInput "^a"  ; Select All (EmacsのHomeと区別されます)
-<#s::SendInput "^s"  ; Save
-<#f::SendInput "^f"  ; Find (EmacsのRightと区別されます)
-<#w::SendInput "^w"  ; Close tab/window
-<#n::SendInput "^n"  ; New window (EmacsのDownと区別されます)
-
-; ==============================================================================
-; 3. Emacsキーバインド (Ctrl + key -> カーソル移動など)
-;    ※ 除外アプリ以外でのみ有効
-; ==============================================================================
-#HotIf not WinActive("ahk_group EmacsDisabledApps")
-
-    ^p::Send "{Up}"             ; Previous line
-    ^n::Send "{Down}"           ; Next line
-    ^b::Send "{Left}"           ; Backward char
-    ^f::Send "{Right}"          ; Forward char
-    
-    ^a::Send "{Home}"           ; Beginning of line
-    ^e::Send "{End}"            ; End of line
-    
-    ^d::Send "{Del}"            ; Delete char
-    ^h::Send "{BS}"             ; Backspace
-    
-    ; Kill line (カーソル位置から行末まで削除)
-    ; Shift+Endで行末まで選択し、Ctrl+Xで切り取る(クリップボードに入る)挙動にしています
-    ^k::
-    {
-        Send "{ShiftDown}{End}{ShiftUp}"
-        Sleep 10 ; 安定性のためわずかに待機
-        Send "^x"
-    }
-    
-    ; Ctrl+m を Enter として扱う
-    ^m::Send "{Enter}"
-
-#HotIf ; これ以降はすべてのアプリで有効
-
-; ==============================================================================
-; 4. 左Command (LWin) の空打ち判定 (IME OFF)
-; ==============================================================================
-~LWin::Send "{Blind}{vkE8}"
-LWin up::
-{
-    if (A_PriorKey = "LWin") {
-        Send "{vk1Dsc07B}" ; 無変換 (IME OFF)
+IME_SET(SetSts, WinTitle := "A") {
+    try {
+        hWnd := WinGetID(WinTitle)
+        ImeMode := DllCall("imm32\ImmGetDefaultIMEWnd", "Uint", hWnd, "Uint")
+        DetectSave := A_DetectHiddenWindows
+        DetectHiddenWindows True
+        SendMessage 0x0283, 0x0006, SetSts, ImeMode
+        DetectHiddenWindows DetectSave
     }
 }
 
 ; ==============================================================================
-; 5. 右Command (RWin) の空打ち判定 (IME ON)
+; Emacsキーバインド
+; CapsLockはすでに物理的に「Ctrl」になっているため、単純な「^key」で動作します。
 ; ==============================================================================
-~RWin::Send "{Blind}{vkE8}"
+#HotIf not WinActive("ahk_group EmacsDisabledApps")
+
+    ; 単純なリマップであれば、スタック問題は発生しません
+    ^p::Up
+    ^n::Down
+    ^b::Left
+    ^f::Right
+    ^a::Home
+    ^e::End
+    ^d::Del
+    ^h::BS
+    ^m::Enter
+
+    ; Kill Line
+    ^k::
+    {
+        SendInput "{ShiftDown}{End}{ShiftUp}"
+        Sleep 10
+        SendInput "^x"
+    }
+
+#HotIf
+
+; ==============================================================================
+; Mac風ショートカット (左Win + Key -> Ctrl + Key)
+; ==============================================================================
+<#x::Send "^x"
+<#c::Send "^c"
+<#v::Send "^v"
+<#z::Send "^z"
+<#a::Send "^a"
+<#s::Send "^s"
+<#f::Send "^f"
+<#w::Send "^w"
+<#n::Send "^n"
+
+; ==============================================================================
+; Winキー空打ちでIME切り替え
+; ==============================================================================
+~LWin::SendInput "{Blind}{vkE8}"
+LWin up::
+{
+    if (A_PriorKey = "LWin") {
+        IME_SET(0)
+    }
+}
+
+~RWin::SendInput "{Blind}{vkE8}"
 RWin up::
 {
     if (A_PriorKey = "RWin") {
-        Send "{vk1Csc079}" ; 変換 (IME ON)
+        IME_SET(1)
     }
 }
 
