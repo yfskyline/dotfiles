@@ -1,0 +1,4 @@
+# no password for skyline user
+skyline ALL=(ALL:ALL) NOPASSWD:ALL
+# display * when type password, set timeout to 30 min.
+Defaults env_reset, pwfeedback, timestamp_timeout=30

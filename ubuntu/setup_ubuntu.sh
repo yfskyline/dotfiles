@@ -62,6 +62,9 @@ else
 	exit 1
 fi
 
+# setup sudo
+sudo install -m 0440 -o root -g root /home/skyline/dotfiles/ubuntu/z99-skyline-nopasswd /etc/sudoers.d/z99-skyline-nopasswd
+
 # install basic packages
 echo -e "$LOG Setup basic packages..."
 if apt-fast install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool whois; then
