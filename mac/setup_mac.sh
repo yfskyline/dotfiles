@@ -101,6 +101,8 @@ echo -e "$LOG Open ChatGPT... Login with your ChatGPT account"
 open -a chatgpt
 echo -e "$LOG Open notion... Login with your notion account"
 open -a notion
+echo -e "$LOG Open RayCast... Login with your notion account"
+open -a "RayCast"
 open -a karabiner-elements
 open -a hammerspoon
 
