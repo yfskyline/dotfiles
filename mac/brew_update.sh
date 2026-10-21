@@ -1,1 +1,1 @@
-brew update && brew upgrade && brew cleanup && brew autoremove && mas upgrade
+brew update && brew upgrade --greedy && brew cleanup && brew autoremove && mas upgrade
