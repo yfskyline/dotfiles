@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         HackMD: Fix Esc in multi-cursor mode
 // @namespace    https://hackmd.io/
-// @version      1.0.1
+// @version      1.0.2
 // @description  Restore CodeMirror's Esc behavior
 // @match        https://hackmd.io/*
 // @run-at       document-idle
 // @grant        none
 // @sandbox      raw
 // @noframes
-// @updateURL    https://raw.githubusercontent.com/yfskyline/dotfiles/main/chrome/tampermonkey/hackmd-multicursor-fix.user.js
-// @downloadURL  https://raw.githubusercontent.com/yfskyline/dotfiles/main/chrome/tampermonkey/hackmd-multicursor-fix.user.js
+// @updateURL    https://raw.githubusercontent.com/yfskyline/dotfiles/master/chrome/tampermonkey/hackmd-multicursor-fix.user.js
+// @downloadURL  https://raw.githubusercontent.com/yfskyline/dotfiles/master/chrome/tampermonkey/hackmd-multicursor-fix.user.js
 // ==/UserScript==
 
 (() => {
