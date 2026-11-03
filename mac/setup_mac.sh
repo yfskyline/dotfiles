@@ -118,6 +118,11 @@ else
 	exit 1
 fi
 
+# Setup zsh plugins
+if ! zsh "$HOME/dotfiles/zsh/setup_zsh.zsh"; then
+	echo -e "$FAILED zsh plugin setup failed"
+	exit 1
+fi
 # Setup Karabiner-Elements
 echo -e "$LOG setup Karabiner-Elements..."
 

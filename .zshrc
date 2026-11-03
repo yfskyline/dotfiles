@@ -21,53 +21,26 @@ else
 	return
 fi
 
-# install zplug if it has not been installed
-test -d $HOME/.zplug || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-# zplug
-if [ $OS = 'Linux' ]; then
-	test $(stat $HOME/.zplug -c '%u') -eq $(id -u) || sudo chown -R $(whoami) $HOME/.zplug
-elif [ $OS = 'Mac' ]; then
-	test "$(stat -f '%u' $HOME/.zplug)" -eq "$(id -u)" || sudo chown -R "$(whoami)" "$HOME"/.zplug
-	if [ $(uname -m) = 'x86_64' ]; then
-		test $(stat -f '%u' /usr/local/share/zsh) -eq $(id -u) || sudo chown -LR $(whoami) /usr/local/share/
-	fi
+# Load installed zplug plugins. Installation is handled by zsh/setup_zsh.zsh.
+if [[ -r "$HOME/.zplug/init.zsh" ]]; then
+	source "$HOME/.zplug/init.zsh"
+	source "$HOME/dotfiles/zsh/plugins.zsh"
+	zplug load
 fi
-. "$HOME"/.zplug/init.zsh
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug "mafredri/zsh-async"                     # asynchronous processing
-zplug "zsh-users/zsh-syntax-highlighting"      # Syntax Highlight
-zplug "zsh-users/zsh-autosuggestions"          # command-suggestion referring history
-zplug "zsh-users/zsh-completions"              # zplug completions
-zplug "chrissicool/zsh-256color"               # zplug 256-color
-zplug "zsh-users/zsh-history-substring-search" # zplug history-substring search
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-	printf "Install zplug plugins? [y/N]: "
-	if read -q; then
-		echo; zplug install
-	fi
-fi
-
-# install dein.vim if it has not been installed
-test -e "$HOME"/.cache/dein || sh "$HOME"/dotfiles/vim/install_dein.sh
 
 # PATH
-zplug load # source zplug plugins and add commands to $PATH
-
 export PATH="$PATH:/usr/local/opt/libpcap/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/local/opt/gnu-getopt/bin"
 
-# pyenv
-if [ -e ~/.pyenv ]; then
-else
-	git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-fi
-
+# pyenv (installed by python/setup_python.sh)
 export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin:$PATH"
-eval "$(pyenv init -)"
+if [[ -d "${PYENV_ROOT}/bin" ]]; then
+	export PATH="${PYENV_ROOT}/bin:$PATH"
+fi
+if (( $+commands[pyenv] )); then
+	eval "$(pyenv init -)"
+fi
 
 # nvm
 if [ $OS = 'Linux' ]; then
@@ -76,30 +49,24 @@ if [ $OS = 'Linux' ]; then
 	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 elif [ $OS = 'Mac' ]; then
 	export NVM_DIR="$HOME/.nvm"
-	[ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
-	[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+	if [[ -s /opt/homebrew/opt/nvm/nvm.sh ]]; then
+		source /opt/homebrew/opt/nvm/nvm.sh --no-use
+	elif [[ -s /usr/local/opt/nvm/nvm.sh ]]; then
+		source /usr/local/opt/nvm/nvm.sh --no-use
+	fi
 fi
 
 # for user scripts
 export PATH="$PATH:$HOME/bin"
-test -d $HOME/bin || mkdir $HOME/bin
 
 autoload -Uz colors && colors     # Use colors
 
-local now=$(date +"%s")
-local threshold=$((60 * 60 * 24 * 7))
-
-if [ -f ~/.zcompdump ]; then
-	local updated=$(date -r ~/.zcompdump +"%s")
-	if [ $((${now} - ${updated})) -gt ${threshold} ]; then
-		autoload -Uz compinit && compinit		# enable zsh completion
-	else
-		autoload -Uz compinit && compinit -C	# enable zsh completion
-	fi
-else
-	autoload -Uz compinit && compinit
+# zplug normally initializes completion; only initialize it if still needed.
+if (( ! ${+_comps} )); then
+	autoload -Uz compinit
+	compinit
 fi
-
 
 # Environmental Variable
 export LANG=en_US.UTF-8
@@ -125,20 +92,26 @@ if [[ -n "$SSH_CONNECTION" ]];then
 fi
 
 set_prompt() {
+	local exit_status=$1
 	local venv=""
+	local color="green"
+
+	# Python virtual environment
 	if [[ -n "$VIRTUAL_ENV" ]]; then
-		venv="(%{$fg[cyan]%}$(basename $VIRTUAL_ENV)%{$reset_color%})"
+		venv="(%F{cyan}${VIRTUAL_ENV:t}%f)"
 	fi
 
-	if [ $? = 0 ]; then
-		PROMPT="${venv}%{$ISSSH$fg[green]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
-	else
-		PROMPT="${venv}%{$ISSSH$fg[red]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
+	# Previous command exit status
+	if (( exit_status != 0 )); then
+		color="red"
 	fi
+
+	PROMPT="${venv}${ISSSH}%F{${color}}[%n@%m]%f %~"$'\n'"%(!.#.$) "
 }
 
 precmd() {
-	set_prompt
+	local exit_status=$?
+	set_prompt "$exit_status"
 }
 
 PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"

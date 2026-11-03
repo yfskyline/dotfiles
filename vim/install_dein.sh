@@ -1,30 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-# define color / log headers
-RED="\033[31;1m"
-GREEN="\033[32;1m"
-YELLOW="\033[33;1m"
-BLUE="\033[34;1m"
-CYAN="\033[36;1m"
-RESET="\033[0m"
-SUCCESS="${GREEN}[SUCCESS]${RESET}"
-FAILED="${RED}[FAILED ]${RESET}"
-WARNING="${YELLOW}[WARNING]${RESET}"
-LOG="${CYAN}[LOG    ]${RESET}"
-
-if [ -n "$1" ]; then
-	echo -e "$LOG TARGET_USER=$1"
-	TARGET_USER=$1
-else
-	echo -e "$FAILED usage: ./install_dein.sh <username>"
+if [[ $# -ne 1 || "${1}" != "$(id -un)" ]]; then
+	printf 'ERROR: Run as the target user: bash install_dein.sh <current-username>\n' >&2
+	exit 1
 fi
 
-if [ -e /home/"$TARGET_USER"/.cache/dein  ]; then
-	echo -e "$WARNING dein.vim is already installed"
+if [[ -d "$HOME/.cache/dein" ]]; then
+	printf 'dein.vim is already installed\n'
 	exit 0
-elif [ -e /Users/$TARGET_USER/.cache/dein ]; then
-	echo -e "$WARNING dein.vim is already installed"
-	exit 0
-else
-	curl -fsSL https://raw.githubusercontent.com/Shougo/dein-installer.vim/master/installer.sh | sh -s /home/"$TARGET_USER"/.cache/dein --use-vim-config
 fi
+
+mkdir -p "$HOME/.cache"
+curl -fsSL https://raw.githubusercontent.com/Shougo/dein-installer.vim/master/installer.sh | sh -s "$HOME/.cache/dein" --use-vim-config

@@ -95,6 +95,11 @@ else
 	echo -e "$FAILED package update failed"
 fi
 
+# Setup zsh plugins as the target user
+if ! sudo -H -u "$TARGET_USER" zsh "$TARGET_HOME/dotfiles/zsh/setup_zsh.zsh"; then
+	echo -e "$FAILED zsh plugin setup failed"
+	exit 1
+fi
 # setup zsh
 echo -e "$LOG chsh to zsh..."
 if grep -q "^$TARGET_USER:" /etc/passwd; then
