@@ -37,23 +37,26 @@ if timedatectl set-timezone Asia/Tokyo; then
 	echo -e "$SUCCESS Timezone set to Asia/Tokyo"
 else
 	echo -e "$FAILED Timezone set failed"
+	exit 1
 fi
 
-echo -e "$LOG Setup apt-fast command..."
-if add-apt-repository -y ppa:apt-fast/stable > /dev/null; then
-	echo -e "$SUCCESS apt-fast repository added"
+# Non-interactive, distribution-provided APT (Ubuntu 22.04/24.04/26.04).
+# apt-fast's debconf wizard blocks unattended bootstrap; no third-party PPA.
+export DEBIAN_FRONTEND=noninteractive
+export APT_LISTCHANGES_FRONTEND=none
+export NEEDRESTART_MODE=a
+
+# Keep existing locally modified package configuration files by default.
+apt_get() {
+    apt-get -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold "$@"
+}
+
+echo -e "$LOG Updating Ubuntu APT package index..."
+if apt_get update -qq; then
+    echo -e "$SUCCESS APT package index updated"
 else
-	echo -e "$FAILED apt-fast repository add failed"
-fi
-if apt update -qq; then
-	echo -e "$SUCCESS apt-fast repository updated"
-else
-	echo -e "$FAILED apt-fast repository update failed"
-fi
-if apt install -qq apt-fast -y; then
-	echo -e "$SUCCESS apt-fast installed"
-else
-	echo -e "$FAILED apt-fast install failed"
+    echo -e "$FAILED APT package index update failed"
+    exit 1
 fi
 
 # dotfiles link
@@ -83,16 +86,21 @@ rm -f "$sudoers_tmp"
 
 # install basic packages
 echo -e "$LOG Setup basic packages..."
-if apt-fast install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool whois; then
+if apt_get install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool whois pipx python3-setuptools gawk; then
 	echo -e "$SUCCESS Basic packages installed"
 else
 	echo -e "$FAILED Basic packages install failed"
+	exit 1
 fi
-echo -e "$LOG package update..."
-if apt-fast update -qq && sudo apt-fast upgrade -qq -y && apt-fast autoremove -qq -y; then
-	echo -e "$SUCCESS package update completed"
+# OS-wide upgrades must be explicitly requested.
+if [ "${UPDATE_UBUNTU:-0}" = "1" ]; then
+	echo -e "$LOG Ubuntu package upgrade (opt-in)..."
+	if ! apt_get update -qq || ! apt_get upgrade -qq -y || ! apt_get autoremove -qq -y; then
+		echo -e "$FAILED Ubuntu package upgrade failed"
+		exit 1
+	fi
 else
-	echo -e "$FAILED package update failed"
+	echo -e "$LOG Skipping Ubuntu package upgrades"
 fi
 
 # Setup zsh plugins as the target user
@@ -103,8 +111,11 @@ fi
 # setup zsh
 echo -e "$LOG chsh to zsh..."
 if grep -q "^$TARGET_USER:" /etc/passwd; then
-	echo -e "$LOG Local passwd entry found. ($TARGET_USER) Changing shell to $(which zsh)..."
-	if chsh "$TARGET_USER" -s "$(which zsh)"; then
+	zsh_path="$(command -v zsh)"
+	current_shell="$(getent passwd "$TARGET_USER" | cut -d: -f7)"
+	if [ "$current_shell" = "$zsh_path" ]; then
+		echo -e "$SUCCESS Login shell already set to zsh"
+	elif chsh "$TARGET_USER" -s "$zsh_path"; then
 		echo -e "$SUCCESS chsh to zsh completed"
 	else
 		echo -e "$FAILED chsh to zsh failed"
@@ -116,41 +127,51 @@ else
 fi
 echo -e "$LOG Current shell: $SHELL"
 
-# modify motd
+# Disable unwanted MOTD entries without overwriting existing backups.
 echo -e "$LOG Setup motd..."
-[ -f /etc/update-motd.d/10-help-text ] && mv /etc/update-motd.d/10-help-text /etc/update-motd.d/10-help-text.orig
-[ -f /etc/update-motd.d/50-motd-news ] && mv /etc/update-motd.d/50-motd-news /etc/update-motd.d/50-motd-news.orig
-[ -f /etc/update-motd.d/91-contract-ua-esm-status ] && mv /etc/update-motd.d/91-contract-ua-esm-status /etc/update-motd.d/91-contract-ua-esm-status.orig
-[ -f /etc/update-motd.d/90-updates-available ] && mv /etc/update-motd.d/90-updates-available /etc/update-motd.d/90-updates-available.orig
-systemctl disable update-notifier-motd.timer
-rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available
-systemctl disable motd-news.timer
-rm -f /var/cache/motd-news
+for motd_name in 10-help-text 50-motd-news 91-contract-ua-esm-status 90-updates-available; do
+	motd_path="/etc/update-motd.d/$motd_name"
+	if [ -f "$motd_path" ] && [ ! -e "${motd_path}.orig" ]; then
+		if ! mv "$motd_path" "${motd_path}.orig"; then
+			echo -e "$FAILED Failed to disable $motd_name"
+			exit 1
+		fi
+	fi
+done
+systemctl disable update-notifier-motd.timer 2>/dev/null || true
+systemctl disable motd-news.timer 2>/dev/null || true
+rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available /var/cache/motd-news
 
-# ubuntu pro
+# Ubuntu Pro: do not modify apt hooks manually.
 echo -e "$LOG Setup ubuntu pro..."
-mkdir -p /etc/apt/apt.conf.d/old
-mv /etc/apt/apt.conf.d/{,old/}20apt-esm-hook.conf
-touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
-pro config set apt_news=false
+if command -v pro > /dev/null 2>&1; then
+	if ! pro config set apt_news=false; then
+		echo -e "$WARNING Unable to disable Ubuntu Pro apt news"
+	fi
+fi
 
 # setup cron
 echo -e "$LOG Setup cron..."
-if printf '*/10 * * * * %s cd "%s/dotfiles" && /usr/bin/git pull --ff-only\n' "$TARGET_USER" "$TARGET_HOME" > /etc/cron.d/git_pull; then
-	chown root:root /etc/cron.d/git_pull
-	chmod 644 /etc/cron.d/git_pull
+cron_tmp="$(mktemp /etc/cron.d/.dotfiles-git-pull.XXXXXX)" || exit 1
+if printf '*/10 * * * * %s cd "%s/dotfiles" && /usr/bin/git pull --ff-only\n' "$TARGET_USER" "$TARGET_HOME" > "$cron_tmp" \
+	&& chmod 0644 "$cron_tmp" \
+	&& chown root:root "$cron_tmp" \
+	&& mv -f "$cron_tmp" /etc/cron.d/git_pull; then
 	echo -e "$SUCCESS Cron setup completed"
 else
 	echo -e "$FAILED Cron setup failed"
+	rm -f "$cron_tmp"
+	exit 1
 fi
 
 
 # setup git
 echo -e "$LOG Setup git..."
-if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/git/setup_git.sh "$TARGET_USER"; then
+if sudo -H -u "$TARGET_USER" bash "$TARGET_HOME/dotfiles/git/setup_git.sh" "$TARGET_USER"; then
 	echo -e "$SUCCESS Git setup completed"
 else
 	echo -e "$FAILED Git setup failed"
+	exit 1
 fi
 
 # setup python
@@ -159,28 +180,31 @@ if HOME="$TARGET_HOME" bash "$TARGET_HOME"/dotfiles/python/setup_python.sh "$TAR
 	echo -e "$SUCCESS Python setup completed"
 else
 	echo -e "$FAILED Python setup failed"
+	exit 1
 fi
 
 # setup vim
 echo -e "$LOG Setup vim..."
-update-alternatives --set editor /usr/bin/vim.basic
+if ! update-alternatives --set editor /usr/bin/vim.basic; then
+	echo -e "$FAILED Setting vim as editor failed"
+	exit 1
+fi
 echo -e "$LOG Setup vim(install dein.vim)..."
 if sudo -H -u "$TARGET_USER" bash "$TARGET_HOME/dotfiles/vim/install_dein.sh" "$TARGET_USER"; then
 	echo -e "$SUCCESS Dein.vim setup completed"
 else
 	echo -e "$FAILED Dein.vim setup failed"
+	exit 1
 fi
-echo -e "$LOG Setup vim(install setuptools)..."
-if sudo -u "$TARGET_USER" pip install --upgrade setuptools; then
-	echo -e "$SUCCESS Setuptools setup completed"
+# Use pipx instead of modifying Ubuntu's system Python environment.
+echo -e "$LOG Setup vim-vint via pipx..."
+if [ -x "$TARGET_HOME/.local/bin/vint" ]; then
+	echo -e "$SUCCESS vim-vint already installed"
+elif sudo -H -u "$TARGET_USER" pipx install vim-vint; then
+	echo -e "$SUCCESS vim-vint installed"
 else
-	echo -e "$FAILED Setuptools setup failed"
-fi
-echo -e "$LOG Setup vim(install vim-vint)..."
-if sudo -u "$TARGET_USER" pip install vim-vint; then
-	echo -e "$SUCCESS Vim setup completed"
-else
-	echo -e "$FAILED Vim setup failed"
+	echo -e "$FAILED vim-vint install failed"
+	exit 1
 fi
 
 # setup nodejs
@@ -189,17 +213,15 @@ if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/nodejs/setup_nvm.sh "$TARGET_U
 	echo -e "$SUCCESS Nvm setup completed"
 else
 	echo -e "$FAILED Nvm setup failed"
+	exit 1
 fi
 if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/nodejs/setup_yarn.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Yarn setup completed"
 else
 	echo -e "$FAILED Yarn setup failed"
+	exit 1
 fi
-if [ $? -eq 0 ]; then
-	echo -e "$SUCCESS Nodejs setup completed"
-else
-	echo -e "$FAILED Nodejs setup failed"
-fi
+echo -e "$SUCCESS Nodejs setup completed"
 
 # setup ssh
 echo -e "$LOG Setup ssh..."
@@ -207,6 +229,7 @@ if bash "$TARGET_HOME"/dotfiles/ssh/setup_authorized_keys.sh "$TARGET_USER"; the
 	echo -e "$SUCCESS SSH setup completed"
 else
 	echo -e "$FAILED SSH setup failed"
+	exit 1
 fi
 
 # setup docker
@@ -215,9 +238,13 @@ if bash "$TARGET_HOME"/dotfiles/docker/setup_docker.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Docker setup completed"
 else
 	echo -e "$FAILED Docker setup failed"
+	exit 1
 fi
 
 # sudo -u "$TARGET_USER" zsh
 # shellcheck source=/home/skyline/dotfiles/.zshrc
 # zsh -i source "$TARGET_HOME"/dotfiles/.zshrc && exit 0
-sudo -u "$TARGET_USER" zsh -i -c exit 0
+if ! sudo -H -u "$TARGET_USER" zsh -i -c 'exit 0'; then
+	echo -e "$FAILED Zsh startup test failed"
+	exit 1
+fi

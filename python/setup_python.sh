@@ -87,4 +87,6 @@ sudo -u "$TARGET_USER" bash -c 'export PYENV_ROOT="$HOME/.pyenv"; export PATH="$
 sudo -u "$TARGET_USER" bash -c 'export PYENV_ROOT="$HOME/.pyenv"; export PATH="$PYENV_ROOT/bin:$PATH"; pyenv global '"$PYTHON_VERSION"
 
 # Install Linter
-sudo -u "$TARGET_USER" pip install flake8
+# Use the exact pyenv interpreter as the target user. sudo's secure_path may
+# hide pyenv shims and pip; the explicit interpreter works in noninteractive CI.
+sudo -H -u "$TARGET_USER" bash -c 'exec "$HOME/.pyenv/versions/$1/bin/python" -m pip install flake8' _ "$PYTHON_VERSION"
