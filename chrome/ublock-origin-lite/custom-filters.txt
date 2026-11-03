@@ -1,0 +1,10 @@
+
+! Notion: Reduce page margins to 8px
+app.notion.com##.layout.layout-wide:style(grid-template-columns: [full-start] 8px [content-start] minmax(0, 1fr) [content-end] 8px [full-end] !important)
+
+! Notion: Remove the maximum width restriction on content blocks
+app.notion.com##.layout.layout-wide .notion-page-content .notion-selectable:style(max-width: none !important; width: 100% !important)
+
+! Notion: Hide the floating AI button
+app.notion.com##.notion-ai-button
+
