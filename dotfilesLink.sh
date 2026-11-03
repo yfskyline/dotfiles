@@ -28,11 +28,6 @@ if [ $OS = 'Mac' ]; then
 	mkdir -p ~/.hammerspoon
 	ln -sf ~/dotfiles/mac/hammerspoon/init.lua ~/.hammerspoon/init.lua
 
-	# Karabiner-Elements config
-	mkdir -p ~/.config/karabiner
-	ln -sf ~/dotfiles/mac/karabiner/assets ~/.config/karabiner/
-	ln -sf ~/dotfiles/mac/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
-
 	# Visual Studio Code
 	mkdir -p ~/Library/Application\ Support/Code/User/
 	ln -sf ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json

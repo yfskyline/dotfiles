@@ -53,6 +53,17 @@ else
 	echo -e "$FAILED Homebrew bundle packages install failed"
 fi
 
+# Setup Karabiner-Elements
+echo -e "$LOG setup Karabiner-Elements..."
+
+if bash "$HOME/dotfiles/mac/karabiner/setup_karabiner.sh"; then
+    echo -e "$SUCCESS Karabiner config linked"
+else
+    echo -e "$FAILED Karabiner setup failed"
+    exit 1
+fi
+
+# create a directory for work
 mkdir -p ~/dev
 
 # setup nodejs

@@ -3,25 +3,10 @@
 
 # KeyBoard (設定の反映はログアウトが必要)
 ## 1 * 15ms = 15ms
-defaults write -g KeyRepeat -int 1
-# defaults write -g KeyRepeat -int 2 # システム上限
+defaults write -g KeyRepeat -int 1 # 2がシステム上限
 
 ## 10 * 15ms = 150ms
-defaults write -g InitialKeyRepeat -int 10
-# defaults write -g InitialKeyRepeat -int 15 # システム上限
-
-# Change 'CapsLock' key to 'Ctrl'
-# get string like : 1452-630-0 for keyboard_id
-# 1452: Vendor-ID of Apple
-keyboard_id="$(ioreg -c AppleEmbeddedKeyboard -r | grep -Eiw "VendorID|ProductID" | awk '{ print $4 }' | paste -s -d'-\n' - | grep 1452)-0"
-defaults -currentHost write -g com.apple.keyboard.modifiermapping.${keyboard_id} -array-add "
-<dict>
-  <key>HIDKeyboardModifierMappingDst</key>\
-  <integer>30064771300</integer>\
-  <key>HIDKeyboardModifierMappingSrc</key>\
-  <integer>30064771129</integer>\
-</dict>
-"
+defaults write -g InitialKeyRepeat -int 10 # 15がシステム上限
 
 # User Dictionary
 defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
