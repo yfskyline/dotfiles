@@ -16,14 +16,17 @@ if [ "$(id -u)" -ne 0 ]; then
 	echo -e "$FAILED Please run as root"
 	exit 1
 fi
-if [ -z "$SUDO_USER" ]; then
-	echo -e "$WARNING SUDO_USER is not set. Falling back to root user"
-	export TARGET_USER="root"
-	export TARGET_HOME="/root"
+if [ -z "${SUDO_USER:-}" ] || [ "$SUDO_USER" = "root" ]; then
+	echo -e "$FAILED Run this script using sudo from a normal user."
 	exit 1
-else
-	TARGET_USER="$SUDO_USER"
-	TARGET_HOME="/home/$SUDO_USER"
+fi
+
+TARGET_USER="$SUDO_USER"
+TARGET_HOME="$(getent passwd "$TARGET_USER" | cut -d: -f6)"
+
+if [ -z "$TARGET_HOME" ] || [ ! -d "$TARGET_HOME" ]; then
+	echo -e "$FAILED Cannot determine home directory for $TARGET_USER"
+	exit 1
 fi
 echo -e "$LOG TARGET_USER: $TARGET_USER"
 echo -e "$LOG TARGET_HOME: $TARGET_HOME"
@@ -55,7 +58,7 @@ fi
 
 # dotfiles link
 echo -e "$LOG basic dotfiles link..."
-if sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/dotfilesLink.sh; then
+if sudo -H -u "$TARGET_USER" bash "$TARGET_HOME/dotfiles/dotfilesLink.sh"; then
 	echo -e "$SUCCESS dotfiles setup completed"
 else
 	echo -e "$FAILED dotfiles setup failed"
@@ -144,7 +147,7 @@ fi
 echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
 echo -e "$LOG Setup vim(install dein.vim)..."
-if sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/vim/install_dein.sh "$TARGET_USER"; then
+if sudo -H -u "$TARGET_USER" bash "$TARGET_HOME/dotfiles/vim/install_dein.sh" "$TARGET_USER"; then
 	echo -e "$SUCCESS Dein.vim setup completed"
 else
 	echo -e "$FAILED Dein.vim setup failed"
