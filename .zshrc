@@ -261,7 +261,7 @@ if [ "$OS" = 'Mac' ]; then
 			dir="$(mktemp -d "${TMPDIR:-/tmp/}clipfile.XXXXXXXX")" || return 1
 			file="$dir/session.txt"
 			echo "Recording terminal session. Type exit to finish." >&2
-			script -q "$file" || return 1
+			script -q "$file" || printf 'WARNING: script exited with status %d; copying captured log anyway\n' "$?" >&2
 		elif (( $# == 1 )); then
 			file="${1:A}"
 		elif [[ -t 0 ]]; then
