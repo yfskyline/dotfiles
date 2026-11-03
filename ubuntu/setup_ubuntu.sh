@@ -118,7 +118,7 @@ pro config set apt_news=false
 
 # setup cron
 echo -e "$LOG Setup cron..."
-if echo "*/10 * * * * skyline cd /home/skyline/dotfiles/ && git pull" > /etc/cron.d/git_pull; then
+if printf '*/10 * * * * %s cd "%s/dotfiles" && /usr/bin/git pull --ff-only\n' "$TARGET_USER" "$TARGET_HOME" > /etc/cron.d/git_pull; then
 	chown root:root /etc/cron.d/git_pull
 	chmod 644 /etc/cron.d/git_pull
 	echo -e "$SUCCESS Cron setup completed"
