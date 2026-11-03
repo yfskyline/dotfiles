@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # define message
 RED="\033[31;1m"
 GREEN="\033[32;1m"

@@ -2,9 +2,11 @@
 # repo = 'junegunn/fzf'
 # on_ft = ['fzf']
 
-# [[plugins]]
-# repo = 'ctrlpvim/ctrlp.vim'
-# desc = "多機能セレクタ"
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+# on_cmd = ['CtrlP', 'CtrlPMRUFiles']
+on_map = ['<C-p>']
+desc = "多機能セレクタ"
 
 # [[plugins]]
 # repo = 'tacahiroy/ctrlp-funky'

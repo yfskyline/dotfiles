@@ -123,23 +123,24 @@ endif
 
 let g:markdown_enable_spell_checking = 0 "disable spell-checking of vim-markdown"
 
-"----------------------------------------------------------
-" CtrlP
-"----------------------------------------------------------
-let g:ctrlp_match_window = 'order:ttb,min:20,max:20,results:100' " マッチウインドウの設定. 「下部に表示, 大きさ20行で固定, 検索結果100件」
-let g:ctrlp_show_hidden = 1 " .(ドット)から始まるファイルも検索対象にする
-let g:ctrlp_types = ['fil'] "ファイル検索のみ使用
-let g:ctrlp_extensions = ['funky', 'commandline'] " CtrlPの拡張として「funky」と「commandline」を使用
+" Plugin: CtrlP
+let g:ctrlp_match_window = 'order:ttb,min:20,max:20,results:100'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_types = ['fil']
+let g:ctrlp_extensions = ['funky', 'commandline']
 
-" CtrlPCommandLineの有効化
 command! CtrlPCommandLine call ctrlp#init(ctrlp#commandline#id())
 
-" CtrlPFunkyの絞り込み検索設定
 let g:ctrlp_funky_matchtype = 'path'
 
 if executable('ag')
-	let g:ctrlp_use_caching=0 " CtrlPのキャッシュを使わない
-	let g:ctrlp_user_command='ag %s -i --hidden -g ""' " agの検索設定
+	let g:ctrlp_use_caching=0
+	let g:ctrlp_user_command='ag %s -i --hidden -g ""'
+endif
+
+if executable('rg')
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command = 'rg --files --hidden --glob "" %s'
 endif
 
 if dein#load_state(s:dein_dir)
