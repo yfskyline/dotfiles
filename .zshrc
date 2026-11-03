@@ -76,8 +76,12 @@ if [ $OS = 'Linux' ]; then
 	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 elif [ $OS = 'Mac' ]; then
 	export NVM_DIR="$HOME/.nvm"
-	[ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
-	[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+	if [[ -s /opt/homebrew/opt/nvm/nvm.sh ]]; then
+		source /opt/homebrew/opt/nvm/nvm.sh --no-use
+	elif [[ -s /usr/local/opt/nvm/nvm.sh ]]; then
+		source /usr/local/opt/nvm/nvm.sh --no-use
+	fi
 fi
 
 # for user scripts
@@ -125,20 +129,26 @@ if [[ -n "$SSH_CONNECTION" ]];then
 fi
 
 set_prompt() {
+	local exit_status=$1
 	local venv=""
+	local color="green"
+
+	# Python virtual environment
 	if [[ -n "$VIRTUAL_ENV" ]]; then
-		venv="(%{$fg[cyan]%}$(basename $VIRTUAL_ENV)%{$reset_color%})"
+		venv="(%F{cyan}${VIRTUAL_ENV:t}%f)"
 	fi
 
-	if [ $? = 0 ]; then
-		PROMPT="${venv}%{$ISSSH$fg[green]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
-	else
-		PROMPT="${venv}%{$ISSSH$fg[red]%}[%n@%m]%{${reset_color}%} %~"$'\n'"%(!.#.$) "
+	# Previous command exit status
+	if (( exit_status != 0 )); then
+		color="red"
 	fi
+
+	PROMPT="${venv}${ISSSH}%F{${color}}[%n@%m]%f %~"$'\n'"%(!.#.$) "
 }
 
 precmd() {
-	set_prompt
+	local exit_status=$?
+	set_prompt "$exit_status"
 }
 
 PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
