@@ -14,13 +14,32 @@ else
 fi
 
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
-ln -sf ~/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/.bashrc ~/.bashrc
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.gdbinit ~/.gdbinit
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.digrc ~/.digrc
 ln -sf ~/dotfiles/git/.gitignore_global ~/.gitignore_global
+
+# Shell configuration: machine-local wrapper
+for shell in zsh bash; do
+	rc="$HOME/.${shell}rc"
+	shared="$HOME/dotfiles/.${shell}rc"
+
+	if [ -e "$rc" ] || [ -L "$rc" ]; then
+		if [ ! -L "$rc" ] || [ "$(readlink "$rc")" != "$shared" ]; then
+			echo "Preserving existing $rc"
+			continue
+		fi
+	fi
+
+	tmp="$(mktemp "${rc}.XXXXXXXX")" || exit 1
+	printf 'source "$HOME/dotfiles/.%src"\n' "$shell" > "$tmp"
+	if [ "$shell" = "bash" ]; then
+		echo '[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"' >> "$tmp"
+	fi
+	mv -f "$tmp" "$rc"
+	echo "Configured $rc"
+done
 
 # macos
 if [ $OS = 'Mac' ]; then
