@@ -248,6 +248,44 @@ if [ "$OS" = 'Mac' ]; then
 	#eval "$(gh completion -s zsh)"
 fi
 
+if [ "$OS" = 'Mac' ]; then
+	clipfile() {
+		local dir file
+
+		if ! command -v clippy >/dev/null 2>&1; then
+			echo "ERROR: clippy is not installed (brew install clippy)" >&2
+			return 1
+		fi
+
+		if [[ "${1:-}" == "--session" ]]; then
+			dir="$(mktemp -d "${TMPDIR:-/tmp/}clipfile.XXXXXXXX")" || return 1
+			file="$dir/session.txt"
+			echo "Recording terminal session. Type exit to finish." >&2
+			script -q "$file" || return 1
+		elif (( $# == 1 )); then
+			file="${1:A}"
+		elif [[ -t 0 ]]; then
+			dir="$(mktemp -d "${TMPDIR:-/tmp/}clipfile.XXXXXXXX")" || return 1
+			file="$dir/output.txt"
+			pbpaste -Prefer txt > "$file" || return 1
+		else
+			dir="$(mktemp -d "${TMPDIR:-/tmp/}clipfile.XXXXXXXX")" || return 1
+			file="$dir/output.txt"
+			tee "$file" || return 1
+		fi
+
+		if [[ ! -s "$file" ]]; then
+			echo "ERROR: No text or file to copy" >&2
+			return 1
+		fi
+
+		clippy "$file" || return 1
+
+		echo "Copied file: $file" >&2
+	}
+fi
+
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 cat "$HOME"/dotfiles/asciiart_skyline.txt
