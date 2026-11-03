@@ -66,7 +66,20 @@ else
 fi
 
 # setup sudo
-sudo install -m 0440 -o root -g root /home/skyline/dotfiles/ubuntu/z99-skyline-nopasswd /etc/sudoers.d/z99-skyline-nopasswd
+sudoers_tmp="$(mktemp)" || exit 1
+
+if sed "s/^skyline ALL=/$TARGET_USER ALL=/" \
+	"$TARGET_HOME/dotfiles/ubuntu/z99-skyline-nopasswd" > "$sudoers_tmp" \
+	&& visudo -cf "$sudoers_tmp" > /dev/null \
+	&& install -m 0440 -o root -g root "$sudoers_tmp" /etc/sudoers.d/z99-skyline-nopasswd; then
+	echo -e "$SUCCESS sudoers setup completed"
+else
+	echo -e "$FAILED sudoers setup failed"
+	rm -f "$sudoers_tmp"
+	exit 1
+fi
+
+rm -f "$sudoers_tmp"
 
 # install basic packages
 echo -e "$LOG Setup basic packages..."
