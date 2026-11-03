@@ -53,6 +53,14 @@ else
 	echo -e "$FAILED Homebrew bundle packages install failed"
 fi
 
+# Set up zsh plugins as the login user (not root).
+zsh_setup_user="${SUDO_USER:-$USER}"
+zsh_setup_home="$(dscl . -read "/Users/$zsh_setup_user" NFSHomeDirectory | awk '{print $2}')"
+if ! sudo -H -u "$zsh_setup_user" zsh "$zsh_setup_home/dotfiles/zsh/setup_zsh.zsh"; then
+	echo -e "$FAILED zsh plugin setup failed"
+	exit 1
+fi
+
 # Setup Karabiner-Elements
 echo -e "$LOG setup Karabiner-Elements..."
 
@@ -112,7 +120,7 @@ fi
 
 # setup vim
 echo -e "$LOG setup vim..."
-if "$HOME"/dotfiles/vim/install_dein.sh "$USER"; then
+if sudo -H -u "$zsh_setup_user" bash "$zsh_setup_home/dotfiles/vim/install_dein.sh" "$zsh_setup_user"; then
 	echo -e "$SUCCESS dein.vim installed"
 else
 	echo -e "$FAILED dein.vim install failed"

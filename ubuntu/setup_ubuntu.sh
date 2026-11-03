@@ -79,6 +79,12 @@ else
 	echo -e "$FAILED package update failed"
 fi
 
+# Install zplug and plugins as the target user.
+if ! sudo -H -u "$TARGET_USER" zsh "$TARGET_HOME/dotfiles/zsh/setup_zsh.zsh"; then
+	echo -e "$FAILED zsh plugin setup failed"
+	exit 1
+fi
+
 # setup zsh
 echo -e "$LOG chsh to zsh..."
 if grep -q "^$TARGET_USER:" /etc/passwd; then
@@ -144,7 +150,7 @@ fi
 echo -e "$LOG Setup vim..."
 update-alternatives --set editor /usr/bin/vim.basic
 echo -e "$LOG Setup vim(install dein.vim)..."
-if sudo -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/vim/install_dein.sh "$TARGET_USER"; then
+if sudo -H -u "$TARGET_USER" /home/"$TARGET_USER"/dotfiles/vim/install_dein.sh "$TARGET_USER"; then
 	echo -e "$SUCCESS Dein.vim setup completed"
 else
 	echo -e "$FAILED Dein.vim setup failed"
