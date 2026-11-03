@@ -1,67 +1,80 @@
 #!/bin/bash
+set -euo pipefail
 
-# define message
+# Log messages
 RED="\033[31;1m"
 GREEN="\033[32;1m"
 YELLOW="\033[33;1m"
-BLUE="\033[34;1m"
 CYAN="\033[36;1m"
 RESET="\033[0m"
+
 SUCCESS="${GREEN}[SUCCESS]${RESET}"
 FAILED="${RED}[FAILED ]${RESET}"
 WARNING="${YELLOW}[WARNING]${RESET}"
 LOG="${CYAN}[LOG    ]${RESET}"
 
-# set $OS
-if [ "$(uname)" = 'Darwin' ]; then
-	OS='Mac'
-elif [ "$(uname -s | cut -c1-5)" = 'Linux' ]; then
-	OS='Linux'
-elif [ "$(uname -s | cut -c1-10)" = 'MINGW32_NT' ]; then
-	OS='Cygwin'
-else
-	echo -e "${FAILED}Your platform ($(uname -a)) is not supported."
+# Options
+DRY_RUN=0
+if [ "${1:-}" = "--dry-run" ]; then
+	DRY_RUN=1
+	shift
+fi
+
+if [ "$#" -ne 0 ]; then
+	printf '%b\n' "${FAILED} Usage: bash setup.sh [--dry-run]" >&2
+	exit 2
+fi
+
+# Do not run the entire setup as root
+if [ "$(id -u)" -eq 0 ]; then
+	printf '%b\n' "${FAILED} Run as a normal user, not root." >&2
 	exit 1
 fi
 
-if [ "$OS" = 'Mac' ]; then
-	echo -e "${LOG} Setting up for Mac"
-	# check if the user is root.
-	if [ "$(id -u)" -ne 0 ]; then
-		echo -e "${FAILED} This script must be run as root."
-		echo -e "${LOG} Usage: sudo zsh ./setup.sh"
-		exit 1
-	fi
-	if mac/setup_mac.sh; then
-		echo -e "$SUCCESS"
-	else
-		echo -e "$FAILED"
-	fi
-elif [ "$OS" = 'Linux' ]; then
-	echo -e "${LOG} Setting up for Linux"
-	# check if the user is root.
-	if [ "$(id -u)" -ne 0 ]; then
-		echo -e "${FAILED} This script must be run as root."
-		echo -e "${LOG} Usage: sudo bash ./setup.sh <username>"
-		exit 1
-	fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-	if [ -n "$1" ]; then
-		echo -e "$LOG TARGET_USER=$1"
-		TARGET_USER=$1
-		echo -e "$LOG Setting up for $TARGET_USER"
-	elif [ -n "$TARGET_USER" ]; then
-		echo -e "$LOG TARGET_USER=$TARGET_USER"
-		echo -e "$LOG Setting up for $TARGET_USER"
-	else
-		echo -e "${FAILED} TARGET_USER is not set."
-		echo -e "${FAILED} Usage: sudo bash ./setup.sh <username>"
-		exit 1
-	fi
+# Detect OS and select setup script
+case "$(uname -s)" in
+	Darwin)
+		OS="macOS"
+		CMD=(bash "$SCRIPT_DIR/mac/setup_mac.sh")
+		;;
+	Linux)
+		if [ ! -r /etc/os-release ]; then
+			printf '%b\n' "${FAILED} Cannot identify Linux distribution." >&2
+			exit 1
+		fi
+		. /etc/os-release
+		if [ "${ID:-}" != "ubuntu" ]; then
+			printf '%b\n' "${FAILED} Unsupported Linux distribution: ${ID:-unknown}" >&2
+			exit 1
+		fi
 
-	if sudo -u "$TARGET_USER" bash /home/$TARGET_USER/dotfiles/ubuntu/setup_ubuntu.sh; then
-		echo -e "$SUCCESS"
-	else
-		echo -e "$FAILED"
-	fi
+		OS="Ubuntu"
+		CMD=(sudo bash "$SCRIPT_DIR/ubuntu/setup_ubuntu.sh")
+		;;
+	*)
+		printf '%b\n' "${FAILED} Unsupported OS: $(uname -s)" >&2
+		exit 1
+		;;
+esac
+
+printf '%b\n' "${LOG} Setting up for $OS"
+
+# Preview execution without making changes
+if [ "$DRY_RUN" -eq 1 ]; then
+	printf '%b\n' "${LOG} Dry-run: no changes will be made."
+	printf 'Command:'
+	printf ' %q' "${CMD[@]}"
+	printf '\n'
+	exit 0
+fi
+
+# Execute platform-specific setup
+if "${CMD[@]}"; then
+	printf '%b\n' "${SUCCESS} $OS setup completed."
+else
+	STATUS=$?
+	printf '%b\n' "${FAILED} $OS setup failed (exit status: $STATUS)." >&2
+	exit "$STATUS"
 fi

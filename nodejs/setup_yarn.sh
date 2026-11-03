@@ -39,6 +39,21 @@ fi
 if [ $OS = 'Mac' ]; then
 	sudo -u "$TARGET_USER" bash --login -c 'brew install yarn'
 elif [ $OS = 'Linux' ]; then
-	sudo -u "$TARGET_USER" bash --login -c 'npm -g install yarn'
-	sudo -u "$TARGET_USER" bash --login -c 'yarn -v'
+	# NVM bootstrap for noninteractive shells: login shells do not guarantee npm on PATH.
+	TARGET_HOME="$(getent passwd "$TARGET_USER" | cut -d: -f6)"
+	if [ -z "$TARGET_HOME" ] || [ ! -f "$TARGET_HOME/.nvm/nvm.sh" ]; then
+	    echo -e "${FAILED} NVM is missing for $TARGET_USER"
+	    exit 1
+	fi
+	if ! sudo -H -u "$TARGET_USER" env NVM_DIR="$TARGET_HOME/.nvm" bash -c '
+	    set -e
+	    source "$NVM_DIR/nvm.sh"
+	    nvm use --silent default >/dev/null
+	    command -v npm >/dev/null
+	    npm install --global yarn
+	    yarn --version
+	'; then
+	    echo -e "${FAILED} Yarn setup failed"
+	    exit 1
+	fi
 fi
