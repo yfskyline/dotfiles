@@ -47,10 +47,35 @@ if [ "$OS" = 'Linux' ]; then
 		exit 1
 	fi
 elif [ "$OS" = 'Darwin' ]; then
-	# Add ssh keys to the user
-	mkdir -p /Users/"$SUDO_USER"/.ssh
-	curl https://github.com/yfskyline.keys >> /Users/"$SUDO_USER"/.ssh/authorized_keys
-	chown "$SUDO_USER":"$SUDO_USER" /Users/"$SUDO_USER"/.ssh/authorized_keys
-	chmod 600 /Users/"$SUDO_USER"/.ssh/authorized_keys
-	uniq -u authorized_keys > tmp && mv -f tmp authorized_keys
+	if [ -z "${SUDO_USER:-}" ] || [ "$SUDO_USER" = "root" ]; then
+		echo "Run this script using sudo from a normal user."
+		exit 1
+	fi
+	# Add SSH keys to the user
+	ssh_dir="/Users/$SUDO_USER/.ssh"
+	auth_keys="$ssh_dir/authorized_keys"
+	mkdir -p "$ssh_dir" || exit 1
+	chown "$SUDO_USER" "$ssh_dir" || exit 1
+	chmod 700 "$ssh_dir" || exit 1
+
+	downloaded="$(mktemp)" || exit 1
+	tmp="$(mktemp "${auth_keys}.XXXXXXXX")" || {
+		rm -f "$downloaded"
+		exit 1
+	}
+
+	previous="/dev/null"
+	[ -f "$auth_keys" ] && previous="$auth_keys"
+
+	if ! curl -fsSL https://github.com/yfskyline.keys -o "$downloaded" ||
+		[ ! -s "$downloaded" ] ||
+		! awk 'NF && !seen[$0]++' "$previous" "$downloaded" > "$tmp" ||
+		! chown "$SUDO_USER" "$tmp" ||
+		! chmod 600 "$tmp" ||
+		! mv -f "$tmp" "$auth_keys"; then
+		rm -f "$downloaded" "$tmp"
+		exit 1
+	fi
+
+	rm -f "$downloaded"
 fi
