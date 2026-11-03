@@ -57,10 +57,10 @@ fi
 echo -e "$LOG setup Karabiner-Elements..."
 
 if bash "$HOME/dotfiles/mac/karabiner/setup_karabiner.sh"; then
-    echo -e "$SUCCESS Karabiner config linked"
+	echo -e "$SUCCESS Karabiner config linked"
 else
-    echo -e "$FAILED Karabiner setup failed"
-    exit 1
+	echo -e "$FAILED Karabiner setup failed"
+	exit 1
 fi
 
 # create a directory for work
@@ -92,47 +92,9 @@ fi
 killall cfprefsd
 killall SystemUIServer
 
-# open apps which are required to GUI setup
-echo -e "$LOG Open apps..."
-echo -e "$LOG Open Google Chrome... Login your Google account"
-open -a "Google Chrome"
-echo -e "$LOG Open 1Password... Login your 1Password account"
-open -a "1Password 7"
-echo -e "$LOG Open slack... Login your slack workspaces"
-open -a slack
-echo -e "$LOG Open LINE... Login your LINE account"
-open -a line
-echo -e "$LOG Open snippety... Login with your Apple account"
-open -a snippety
-echo -e "$LOG Open snippety... Login with your Apple account"
-open -a discord
-echo -e "$LOG Open Zoom... Login with your Zoom account"
-open -a zoom.us
-echo -e "$LOG Open ChatGPT... Login with your ChatGPT account"
-open -a chatgpt
-echo -e "$LOG Open notion... Login with your notion account"
-open -a notion
-echo -e "$LOG Open RayCast... Login with your notion account"
-open -a "RayCast"
-open -a karabiner-elements
-open -a hammerspoon
-
 # update App Store apps
 echo -e "$LOG Update App Store apps..."
 softwareupdate --all --install --force
-
-# setup ssh
-echo -e "$LOG setup ssh..."
-if sudo bash "$HOME"/dotfiles/ssh/setup_authorized_keys.sh; then
-	echo -e "$SUCCESS ssh setup completed"
-else
-	echo -e "$FAILED ssh setup failed"
-fi
-if cd "$HOME" && git clone git@github.com:yfskyline/ssh-config.git && bash "$HOME"/ssh-config/configLink.sh; then
-	echo -e "$SUCCESS ssh-config cloned"
-else
-	echo -e "$FAILED ssh-config clone failed"
-fi
 
 # setup python
 if sudo bash "$HOME"/dotfiles/python/setup_python.sh "$USER"; then
@@ -169,3 +131,41 @@ fi
 # display macOS version
 echo -e "$LOG macOS version..."
 sw_vers
+
+# Interactive application setup
+echo -e "$LOG Interactive application setup..."
+if bash "$HOME/dotfiles/mac/setup_apps.sh"; then
+	echo -e "$SUCCESS Interactive application setup completed"
+else
+	echo -e "$FAILED Interactive application setup failed"
+	exit 1
+fi
+
+# Setup SSH after 1Password onboarding
+echo -e "$LOG setup ssh..."
+if sudo bash "$HOME/dotfiles/ssh/setup_authorized_keys.sh"; then
+	echo -e "$SUCCESS ssh setup completed"
+else
+	echo -e "$FAILED ssh setup failed"
+	exit 1
+fi
+
+echo -e "$LOG setup ssh-config..."
+if [[ -d "$HOME/ssh-config/.git" ]]; then
+	echo -e "$SUCCESS ssh-config already cloned"
+elif git clone git@github.com:yfskyline/ssh-config.git "$HOME/ssh-config"; then
+	echo -e "$SUCCESS ssh-config cloned"
+else
+	echo -e "$FAILED ssh-config clone failed"
+	exit 1
+fi
+
+if [[ ! -f "$HOME/ssh-config/configLink.sh" ]]; then
+	echo -e "$FAILED ssh-config/configLink.sh not found"
+	exit 1
+elif bash "$HOME/ssh-config/configLink.sh"; then
+	echo -e "$SUCCESS ssh-config setup completed"
+else
+	echo -e "$FAILED ssh-config setup failed"
+	exit 1
+fi
