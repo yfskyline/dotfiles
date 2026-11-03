@@ -63,6 +63,13 @@ else
 	exit 1
 fi
 
+# Disable automatic window tiling (macOS 15+)
+if [[ $(sw_vers -productVersion | cut -d. -f1) -ge 15 ]]; then
+	defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool false
+	defaults write com.apple.WindowManager EnableTopTilingByEdgeDrag -bool false
+	defaults write com.apple.WindowManager EnableTilingOptionAccelerator -bool false
+fi
+
 # create a directory for work
 mkdir -p ~/dev
 
