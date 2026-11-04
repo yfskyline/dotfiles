@@ -106,7 +106,9 @@ precmd() {
 # Aliases
 [ -f ~/dotfiles/.aliases.sh ] && source ~/dotfiles/.aliases.sh
 
-stty stop undef              # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
+if [[ -t 0 ]]; then
+    stty stop undef              # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
+fi
 
 function gcc2(){
 	FILENAME=$(basename $1);
