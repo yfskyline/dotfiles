@@ -178,7 +178,9 @@ setopt pushd_ignore_dups     # don't push duplicated directory history to the di
 setopt interactive_comments  # treat '#' and after as comments on the CLI as well
 setopt print_eight_bit       # enable display of Japanese file names
 setopt no_flow_control       # disable flow-control with CTRL+S / CTRL+Q
-stty stop undef              # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
+if [[ -t 0 ]]; then
+    stty stop undef              # fwd-i-searchが使えるようにsttyのCTRL+Sを無効化
+fi
 setopt ignore_eof            # disable exit zsh with CTRL+D
 setopt share_history         # share zsh history files between concurrently opened zsh sessions
 setopt hist_ignore_all_dups  # don't save duplicate commands in the history
