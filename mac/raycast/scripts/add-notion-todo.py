@@ -7,7 +7,6 @@
 
 import sys
 import json
-import getpass
 import subprocess
 import urllib.request
 import urllib.error
@@ -18,6 +17,7 @@ BLOCK_ID = "40f0718aaca9808b920df2da622ebcbd"
 # "end" = 末尾、"start" = 先頭
 POSITION = "start"
 
+
 def main():
     title = sys.argv[1].strip()
 
@@ -27,14 +27,12 @@ def main():
     if len(title) > 2000:
         sys.exit("TODOは2000文字以内にしてください")
 
-    # macOS Keychainからトークンを取得
+    # Get PAT from 1Password
     token = subprocess.check_output(
         [
-            "/usr/bin/security",
-            "find-generic-password",
-            "-a", getpass.getuser(),
-            "-s", "raycast-notion",
-            "-w"
+            "/opt/homebrew/bin/op",
+            "read",
+            "op://Personal/Notion-PAT/credential"
         ],
         text=True
     ).strip()
