@@ -33,19 +33,26 @@ for shell in zsh bash; do
 	fi
 
 	tmp="$(mktemp "${rc}.XXXXXXXX")" || exit 1
+	# shellcheck disable=SC2016
 	printf 'source "$HOME/dotfiles/.%src"\n' "$shell" > "$tmp"
 	if [ "$shell" = "bash" ]; then
+		# shellcheck disable=SC2016
 		echo '[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"' >> "$tmp"
 	fi
 	mv -f "$tmp" "$rc"
 	echo "Configured $rc"
 done
 
-# macos
+# macOS
 if [ $OS = 'Mac' ]; then
 	# HammerSpoon config
 	mkdir -p ~/.hammerspoon
 	ln -sf ~/dotfiles/mac/hammerspoon/init.lua ~/.hammerspoon/init.lua
+
+	# Raycast
+	mkdir -p "$HOME/.config/raycast/scripts"
+	ln -sf "$HOME/dotfiles/mac/raycast/scripts/add-notion-todo.py" \
+		"$HOME/.config/raycast/scripts/add-notion-todo.py"
 
 	# Visual Studio Code
 	mkdir -p ~/Library/Application\ Support/Code/User/
