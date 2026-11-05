@@ -86,49 +86,56 @@ zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
 
 
+
 # PROMPT
-if [[ -n "$SSH_CONNECTION" ]];then
+if [[ -n "$SSH_CONNECTION" ]]; then
 	ISSSH="%F{cyan}[SSH]%f"
 fi
 
-set_prompt() {
-	local exit_status=$1
-	local venv=""
-	local color="green"
-
-	# Python virtual environment
-	if [[ -n "$VIRTUAL_ENV" ]]; then
-		venv="(%F{cyan}${VIRTUAL_ENV:t}%f)"
-	fi
-
-	# Previous command exit status
-	if (( exit_status != 0 )); then
-		color="red"
-	fi
-
-	PROMPT="${venv}${ISSSH}%F{${color}}[%n@%m]%f %~"$'\n'"%(!.#.$) "
-}
-
-precmd() {
-	local exit_status=$?
-	set_prompt "$exit_status"
-}
-
-PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
-SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
-
-# insert vcs_info in the right side PROMPT (RPROMPT)
 autoload -Uz vcs_info
-autoload -Uz add-zsh-hook
 
 zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
-function _update_vcs_info_msg() {
-	LANG=en_US.UTF-8 vcs_info
-	RPROMPT="${vcs_info_msg_0_}"
+
+set_prompt() {
+	local color="green"
+	(( $1 != 0 )) && color="red"
+
+	# Left prompt
+	local left="${ISSSH}%F{${color}}[%n@%m]%f %~"
+	local plain="${SSH_CONNECTION:+[SSH]}[${(%):-%n@%m}] ${(%):-%~}"
+
+	# Python virtual environment
+	if [[ -n "$VIRTUAL_ENV" ]]; then
+		left="(%F{cyan}${VIRTUAL_ENV:t}%f)${left}"
+		plain="(${VIRTUAL_ENV:t})${plain}"
+	fi
+
+	# Right-align Git information on the first line
+	local git="${vcs_info_msg_0_}"
+	if [[ -n "$git" ]]; then
+		local git_plain="${git#*\}}"	# Remove leading %F{color}
+		git_plain="${git_plain%\%f}"	# Remove trailing %f
+
+		local padding=$(( COLUMNS - ${#plain} - ${#git_plain} - 1 ))
+		(( padding > 0 )) && left+="${(l:$padding:)}${git}"
+	fi
+
+	PROMPT="${left}"$'\n'"%(!.#.$) "
 }
-add-zsh-hook precmd _update_vcs_info_msg
+
+
+precmd() {
+	local exit_status=$?
+	LANG=en_US.UTF-8 vcs_info
+	set_prompt "$exit_status"
+}
+
+RPROMPT=""
+
+PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
+SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 
 
 # key-bind
