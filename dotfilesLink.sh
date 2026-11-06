@@ -20,6 +20,15 @@ ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.digrc ~/.digrc
 ln -sf ~/dotfiles/git/.gitignore_global ~/.gitignore_global
 
+# Git global ignore
+mkdir -p "$HOME/.config/git"
+
+if [ ! -e "$HOME/.config/git/ignore" ] &&
+	[ ! -L "$HOME/.config/git/ignore" ]; then
+	ln -s "$HOME/dotfiles/git/.gitignore_global" \
+		"$HOME/.config/git/ignore"
+fi
+
 # Shell configuration: machine-local wrapper
 for shell in zsh bash; do
 	rc="$HOME/.${shell}rc"
