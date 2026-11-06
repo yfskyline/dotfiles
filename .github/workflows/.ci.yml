@@ -1,0 +1,56 @@
+
+name: Dotfiles CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh shellcheck
+
+      - name: Bash syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          while IFS= read -r -d '' file; do
+            echo "Checking $file"
+            bash -n "$file"
+          done < <(find . -type f -name '*.sh' -print0)
+
+          bash -n .bashrc
+
+      - name: Zsh syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          zsh -n .zshrc
+          while IFS= read -r -d '' file; do
+            zsh -n "$file"
+          done < <(find zsh -type f -name '*.zsh' -print0)
+
+      - name: ShellCheck
+        continue-on-error: true
+        shell: bash
+        run: |
+          find . -type f -name '*.sh' -print0 |
+            xargs -0 -r shellcheck -S warning
+
