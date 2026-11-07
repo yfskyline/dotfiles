@@ -1,20 +1,28 @@
-#!/bin/bash
-sh $HOME/dotfiles/mac/defaults/setup_dock.sh
-sh $HOME/dotfiles/mac/defaults/setup_finder.sh
-sh $HOME/dotfiles/mac/defaults/setup_trackpad.sh
-sh $HOME/dotfiles/mac/defaults/setup_keyboard.sh
-sh $HOME/dotfiles/mac/defaults/setup_spotlight.sh
-sh $HOME/dotfiles/mac/defaults/setup_ical.sh
-sh $HOME/dotfiles/mac/defaults/setup_mouse.sh
-sh $HOME/dotfiles/mac/defaults/setup_safari.sh
-sh $HOME/dotfiles/mac/defaults/setup_maps.sh
-sh $HOME/dotfiles/mac/defaults/setup_printer.sh
-sh $HOME/dotfiles/mac/defaults/setup_terminal.sh
-sh $HOME/dotfiles/mac/defaults/setup_currentHost.sh
-sh $HOME/dotfiles/mac/defaults/setup_general.sh
-# sh $HOME/dotfiles/mac/defaults/setup_shiftit.sh
-sh $HOME/dotfiles/mac/defaults/setup_hammerspoon.sh
-sh $HOME/dotfiles/mac/defaults/setup_music.sh
-sh $HOME/dotfiles/mac/defaults/setup_display.sh
-sh $HOME/dotfiles/mac/defaults/setup_windowmanager.sh
-sh $HOME/dotfiles/mac/defaults/setup_others.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+for script in \
+    setup_dock.sh \
+    setup_finder.sh \
+    setup_trackpad.sh \
+    setup_keyboard.sh \
+    setup_spotlight.sh \
+    setup_ical.sh \
+    setup_mouse.sh \
+    setup_safari.sh \
+    setup_maps.sh \
+    setup_printer.sh \
+    setup_terminal.sh \
+    setup_currentHost.sh \
+    setup_general.sh \
+    setup_hammerspoon.sh \
+    setup_music.sh \
+    setup_display.sh \
+    setup_windowmanager.sh \
+    setup_others.sh
+do
+    echo "[RUN] $script"
+    bash "$SCRIPT_DIR/$script"
+done
