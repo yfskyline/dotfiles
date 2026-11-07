@@ -104,20 +104,17 @@ function! s:home()
 	return ''
 endfunction
 
-
+" dein.vim paths
 let s:dein_dir = expand('~/.cache/dein')
-let s:dein_repo_dir = expand(s:dein_dir . '/repos/github.com/Shougo/dein.vim')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 if has('vim_starting')
-	" set runtimepath+=~/src/vim-polyglot
 	if isdirectory(s:dein_repo_dir)
-		execute 'set runtimepath+=' . s:dein_repo_dir
-	endif
-	set runtimepath+=expand("~/.cache/dein")
-
-	if !isdirectory(expand('~/.cache/dein'))
-		echo 'Please install dein.vim by running the following command:'
-		echo "sh -c '$(curl -fsSL https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh)'"
+		execute 'set runtimepath^=' . fnameescape(s:dein_repo_dir)
+	else
+		echohl WarningMsg
+		echomsg 'dein.vim is not installed. Run: bash ~/dotfiles/vim/install_dein.sh ' . $USER
+		echohl None
 	endif
 endif
 
@@ -142,22 +139,24 @@ if executable('ag')
 	let g:ctrlp_user_command='ag %s -i --hidden -g ""' " agの検索設定
 endif
 
-if dein#load_state(s:dein_dir)
-	call dein#begin(s:dein_dir)
+if isdirectory(s:dein_repo_dir)
+	if dein#load_state(s:dein_dir)
+		call dein#begin(s:dein_dir)
 
-	let g:rc_dir = expand('~/dotfiles/vim')
-	let s:toml	 = g:rc_dir . '/dein.toml'
-	let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+		let g:rc_dir = expand('~/dotfiles/vim')
+		let s:toml = g:rc_dir . '/dein.toml'
+		let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
-	call dein#load_toml(s:toml,			{'lazy': 0})
-	call dein#load_toml(s:lazy_toml,	{'lazy': 1})
+		call dein#load_toml(s:toml, {'lazy': 0})
+		call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-	call dein#end()
-	call dein#save_state()
-endif
+		call dein#end()
+		call dein#save_state()
+	endif
 
-if dein#check_install()
-	call dein#install()
+	if dein#check_install()
+		call dein#install()
+	endif
 endif
 
 let g:airline_theme = 'powerlineish'
