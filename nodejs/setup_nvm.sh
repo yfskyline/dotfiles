@@ -1,56 +1,85 @@
-#!/bin/bash
-# Install nvm
+#!/usr/bin/env bash
+set -o pipefail
 
-NODEJS_VERSION=v22.13.1
+NODEJS_VERSION="${NODEJS_VERSION:-lts/*}"
+TARGET_USER="${1:-${TARGET_USER:-}}"
 
-# define color / log headers
+# Colorized log headers
 RED="\033[31;1m"
 GREEN="\033[32;1m"
 YELLOW="\033[33;1m"
 BLUE="\033[34;1m"
 CYAN="\033[36;1m"
 RESET="\033[0m"
+
 SUCCESS="${GREEN}[SUCCESS]${RESET}"
 FAILED="${RED}[FAILED ]${RESET}"
+WARNING="${YELLOW}[WARNING]${RESET}"
 LOG="${CYAN}[LOG    ]${RESET}"
 
-if [ -n "$1" ]; then
-	TARGET_USER=$1
-	echo -e "$LOG TARGET_USER=$1"
-	echo -e "$LOG Setting up nvm for $TARGET_USER"
-elif [ -n "$TARGET_USER" ]; then
-	echo -e "$LOG Setting up nvm for $TARGET_USER"
-else
-	echo -e "$FAILED TARGET_USER is not set"
-	echo -e "$FAILED Usage: ./setup_nvm.sh <username>"
+if [[ -z "$TARGET_USER" ]]; then
+	echo -e "$FAILED Usage: $0 <username>"
 	exit 1
 fi
 
-# set $OS
-OS_NAME=$(uname -s)
-if [ "$OS_NAME" = 'Darwin' ]; then
-	OS='Mac'
-elif [ "${OS_NAME:0:5}" = 'Linux' ]; then
-	OS='Linux'
-elif [ "${OS_NAME:0:10}" = 'MINGW32_NT' ]; then
-	OS='Cygwin'
-else
-	echo -e "${FAILED}Your platform ($(uname -a)) is not supported."
+if [[ "$(id -un)" != "$TARGET_USER" ]]; then
+	echo -e "$FAILED Run as $TARGET_USER"
 	exit 1
 fi
 
-if [ $OS = 'Mac' ]; then
-	sudo -u "$TARGET_USER" brew install nvm
-	sudo -u "TARGET_USER" mkdir -p /home/"$TARGET_USER"/.nvm
-elif [ $OS = 'Linux' ]; then
-	if sudo -u "$TARGET_USER" curl -fsSL -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash > /dev/null; then
-		echo -e "$SUCCESS Setup nvm"
-	else
-		echo -e "$FAILED Failed to setup nvm"
+echo -e "$LOG Setting up nvm for $TARGET_USER"
+echo -e "$LOG Node.js version: $NODEJS_VERSION"
+
+export NVM_DIR="$HOME/.nvm"
+mkdir -p "$NVM_DIR" || exit 1
+
+case "$(uname -s)" in
+	Darwin)
+		if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+			source "$NVM_DIR/nvm.sh"
+		else
+			NVM_SCRIPT="$(brew --prefix nvm)/nvm.sh"
+			[[ -s "$NVM_SCRIPT" ]] || exit 1
+			source "$NVM_SCRIPT"
+		fi
+		;;
+	Linux)
+		if [[ ! -s "$NVM_DIR/nvm.sh" ]]; then
+			installer="$(mktemp)" || exit 1
+			if ! curl -fsSL \
+				https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh \
+				-o "$installer"; then
+				rm -f "$installer"
+				exit 1
+			fi
+			if ! PROFILE=/dev/null bash "$installer"; then
+				rm -f "$installer"
+				exit 1
+			fi
+			rm -f "$installer"
+		fi
+		source "$NVM_DIR/nvm.sh"
+		;;
+	*)
+		echo "Unsupported OS" >&2
 		exit 1
-	fi
+		;;
+esac
+
+if ! nvm install "$NODEJS_VERSION"; then
+	echo -e "$FAILED Node.js installation failed"
+	exit 1
 fi
 
-# install nodejs
-sudo -u "$TARGET_USER" bash -c 'export NVM_DIR="$HOME"/.nvm; source $NVM_DIR/nvm.sh; nvm install '"$NODEJS_VERSION"
-sudo -u "$TARGET_USER" bash -c 'export NVM_DIR="$HOME"/.nvm; source $NVM_DIR/nvm.sh; nvm use '"$NODEJS_VERSION"
+if ! nvm alias default "$NODEJS_VERSION"; then
+	echo -e "$FAILED Failed to set default Node.js"
+	exit 1
+fi
+
+if ! nvm use default; then
+	echo -e "$FAILED Failed to activate Node.js"
+	exit 1
+fi
+
+echo -e "$SUCCESS Node.js $(node --version) available"
+echo -e "$LOG npm $(npm --version)"

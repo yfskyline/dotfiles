@@ -86,7 +86,7 @@ rm -f "$sudoers_tmp"
 
 # install basic packages
 echo -e "$LOG Setup basic packages..."
-if apt_get install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool whois pipx python3-setuptools gawk; then
+if apt_get install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool whois python3-setuptools gawk; then
 	echo -e "$SUCCESS Basic packages installed"
 else
 	echo -e "$FAILED Basic packages install failed"
@@ -174,12 +174,39 @@ else
 	exit 1
 fi
 
-# setup python
-echo -e "$LOG Setup python..."
-if HOME="$TARGET_HOME" bash "$TARGET_HOME"/dotfiles/python/setup_python.sh "$TARGET_USER"; then
-	echo -e "$SUCCESS Python setup completed"
+# Setup pyenv only when required for legacy projects
+if [ "${INSTALL_PYENV:-0}" = "1" ]; then
+	echo -e "$LOG Setup pyenv (legacy compatibility)..."
+	if HOME="$TARGET_HOME" bash \
+		"$TARGET_HOME/dotfiles/python/setup_python.sh" "$TARGET_USER"; then
+		echo -e "$SUCCESS pyenv setup completed"
+	else
+		echo -e "$FAILED pyenv setup failed"
+		exit 1
+	fi
 else
-	echo -e "$FAILED Python setup failed"
+	echo -e "$LOG Skipping pyenv (uv is the default)"
+fi
+
+# Setup uv for the target user
+echo -e "$LOG Setup uv..."
+
+if [ -x "$TARGET_HOME/.local/bin/uv" ]; then
+	echo -e "$LOG uv is already installed"
+else
+	if ! sudo -H -u "$TARGET_USER" \
+		env UV_NO_MODIFY_PATH=1 bash -o pipefail -c \
+		'curl -LsSf https://astral.sh/uv/install.sh | sh'; then
+		echo -e "$FAILED uv installation failed"
+		exit 1
+	fi
+fi
+
+if sudo -H -u "$TARGET_USER" \
+	"$TARGET_HOME/.local/bin/uv" --version; then
+	echo -e "$SUCCESS uv setup completed"
+else
+	echo -e "$FAILED uv verification failed"
 	exit 1
 fi
 
@@ -196,32 +223,15 @@ else
 	echo -e "$FAILED Dein.vim setup failed"
 	exit 1
 fi
-# Use pipx instead of modifying Ubuntu's system Python environment.
-echo -e "$LOG Setup vim-vint via pipx..."
-if [ -x "$TARGET_HOME/.local/bin/vint" ]; then
-	echo -e "$SUCCESS vim-vint already installed"
-elif sudo -H -u "$TARGET_USER" pipx install vim-vint; then
-	echo -e "$SUCCESS vim-vint installed"
-else
-	echo -e "$FAILED vim-vint install failed"
-	exit 1
-fi
 
 # setup nodejs
-echo -e "$LOG Setup nodejs..."
-if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/nodejs/setup_nvm.sh "$TARGET_USER"; then
-	echo -e "$SUCCESS Nvm setup completed"
+if sudo -H -u "$TARGET_USER" bash \
+    "$TARGET_HOME/dotfiles/nodejs/setup_nvm.sh" "$TARGET_USER"; then
+    echo -e "$SUCCESS Nvm setup completed"
 else
-	echo -e "$FAILED Nvm setup failed"
-	exit 1
+    echo -e "$FAILED Nvm setup failed"
+    exit 1
 fi
-if sudo -u "$TARGET_USER" "$TARGET_HOME"/dotfiles/nodejs/setup_yarn.sh "$TARGET_USER"; then
-	echo -e "$SUCCESS Yarn setup completed"
-else
-	echo -e "$FAILED Yarn setup failed"
-	exit 1
-fi
-echo -e "$SUCCESS Nodejs setup completed"
 
 # setup ssh
 echo -e "$LOG Setup ssh..."

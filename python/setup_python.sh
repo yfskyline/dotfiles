@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PYTHON_VERSION="${PYTHON_VERSION:-3.13.0}"
-
 # define message
 RED="\033[31;1m"
 GREEN="\033[32;1m"
@@ -81,12 +79,3 @@ else
 	echo -e "${FAILED} failed to install pyenv"
 	exit 1
 fi
-
-# install python
-sudo -u "$TARGET_USER" bash -c 'export PYENV_ROOT="$HOME/.pyenv"; export PATH="$PYENV_ROOT/bin:$PATH"; pyenv install --skip-existing '"$PYTHON_VERSION"
-sudo -u "$TARGET_USER" bash -c 'export PYENV_ROOT="$HOME/.pyenv"; export PATH="$PYENV_ROOT/bin:$PATH"; pyenv global '"$PYTHON_VERSION"
-
-# Install Linter
-# Use the exact pyenv interpreter as the target user. sudo's secure_path may
-# hide pyenv shims and pip; the explicit interpreter works in noninteractive CI.
-sudo -H -u "$TARGET_USER" bash -c 'exec "$HOME/.pyenv/versions/$1/bin/python" -m pip install flake8' _ "$PYTHON_VERSION"

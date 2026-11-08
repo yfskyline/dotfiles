@@ -158,13 +158,6 @@ else
 	echo -e "$FAILED nvm setup failed"
 	exit 1
 fi
-echo -e "$LOG setup yarn..."
-if "$HOME"/dotfiles/nodejs/setup_yarn.sh "$USER"; then
-	echo -e "$SUCCESS yarn setup completed"
-else
-	echo -e "$FAILED yarn setup failed"
-	exit 1
-fi
 
 # setup scripts
 echo -e "$LOG macOS system configuration setup scripts..."
@@ -190,13 +183,17 @@ else
 	echo -e "$LOG Skipping macOS software updates"
 fi
 
-# setup python
-if sudo bash "$HOME/dotfiles/python/setup_python.sh" "$USER"; then
-	echo -e "$SUCCESS python setup completed"
-else
-	echo -e "$FAILED python setup failed"
+# Verify Python development tools installed by Homebrew.
+echo -e "$LOG Checking Python tools..."
+
+if ! command -v pyenv >/dev/null 2>&1 || ! command -v uv >/dev/null 2>&1; then
+	echo -e "$FAILED pyenv or uv is missing"
 	exit 1
 fi
+
+pyenv --version
+uv --version
+echo -e "$SUCCESS Python development tools available"
 
 # setup vim
 echo -e "$LOG setup vim..."

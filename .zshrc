@@ -42,19 +42,21 @@ if (( $+commands[pyenv] )); then
 	eval "$(pyenv init -)"
 fi
 
-# nvm
-if [ $OS = 'Linux' ]; then
-	export NVM_DIR="$HOME/.nvm"
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-elif [ $OS = 'Mac' ]; then
-	export NVM_DIR="$HOME/.nvm"
+# uv-managed executables and Python CLI tools
+export PATH="$HOME/.local/bin:$PATH"
 
-	if [[ -s /opt/homebrew/opt/nvm/nvm.sh ]]; then
-		source /opt/homebrew/opt/nvm/nvm.sh --no-use
-	elif [[ -s /usr/local/opt/nvm/nvm.sh ]]; then
-		source /usr/local/opt/nvm/nvm.sh --no-use
-	fi
+# Prefer uv-managed Python for uv commands.
+export UV_PYTHON_PREFERENCE="only-managed"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+    source "$NVM_DIR/nvm.sh"
+elif [[ -s /opt/homebrew/opt/nvm/nvm.sh ]]; then
+    source /opt/homebrew/opt/nvm/nvm.sh
+elif [[ -s /usr/local/opt/nvm/nvm.sh ]]; then
+    source /usr/local/opt/nvm/nvm.sh
 fi
 
 # for user scripts

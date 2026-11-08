@@ -1,0 +1,21 @@
+root = true
+
+[*.sh]
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+[*.zsh]
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+[.bashrc]
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+[.zshrc]
+indent_style = tab
+indent_size = tab
+tab_width = 4
