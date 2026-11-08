@@ -86,7 +86,7 @@ rm -f "$sudoers_tmp"
 
 # install basic packages
 echo -e "$LOG Setup basic packages..."
-if apt_get install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool whois python3-setuptools gawk; then
+if apt_get install -qq -y zsh curl ssh git vim tmux tig ipcalc shellcheck fd-find ripgrep jq ipmitool whois python3-setuptools gawk shfmt; then
 	echo -e "$SUCCESS Basic packages installed"
 else
 	echo -e "$FAILED Basic packages install failed"
