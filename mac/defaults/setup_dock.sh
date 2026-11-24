@@ -106,6 +106,13 @@ defaults write com.apple.dock expose-group-apps -bool true
 # Bottom right
 # defaults write com.apple.dock wvous-br-corner -int 13 # 画面をロック
 # defaults write com.apple.dock wvous-br-modifier -int 0
+# Disable all hot corners
+for corner in tl tr bl br; do
+    defaults write com.apple.dock "wvous-${corner}-corner" -int 0
+    defaults write com.apple.dock "wvous-${corner}-modifier" -int 0
+done
+
+killall Dock
 
 
 # Wipe all app icons from the Dock exclude Finder and Trash
