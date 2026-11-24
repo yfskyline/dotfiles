@@ -20,6 +20,7 @@ for script in \
 	setup_hammerspoon.sh \
 	setup_music.sh \
 	setup_outlook.sh \
+	setup_mail.sh \
 	setup_display.sh \
 	setup_windowmanager.sh \
 	setup_others.sh
