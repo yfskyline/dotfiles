@@ -50,10 +50,22 @@ export PATH="$PATH:/usr/local/opt/libpcap/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/local/opt/gnu-getopt/bin"
 
-# pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin:$PATH"
-eval "$(pyenv init -)"
+# User-local executables (uv, uv tool, etc.)
+export PATH="$HOME/.local/bin:$PATH"
+
+# Legacy Python projects
+export PYENV_ROOT="$HOME/.pyenv"
+
+if [ -d "$PYENV_ROOT/bin" ]; then
+	export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
+if command -v pyenv >/dev/null 2>&1; then
+	eval "$(pyenv init - bash)"
+fi
+
+# uv-managed Python for new projects
+export UV_PYTHON_PREFERENCE="only-managed"
 
 # nvm
 if [ $OS = 'Linux' ]; then
