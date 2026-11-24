@@ -7,6 +7,9 @@
 // @run-at       document-idle
 // @grant        GM_addStyle
 // @noframes
+// @homepageURL  https://github.com/yfskyline/dotfiles
+// @updateURL    https://raw.githubusercontent.com/yfskyline/dotfiles/master/chrome/tampermonkey/hackmd-title-fix.user.js
+// @downloadURL  https://raw.githubusercontent.com/yfskyline/dotfiles/master/chrome/tampermonkey/hackmd-title-fix.user.js
 // ==/UserScript==
 
 (() => {
