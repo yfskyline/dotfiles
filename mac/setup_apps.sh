@@ -111,6 +111,9 @@ setup_app chatgpt "ChatGPT" \
 setup_app notion "Notion" \
 	"Sign in to your workspace."
 
+setup_app outlook "Microsoft Outlook" \
+	"Sign in to your email accounts and verify keyboard shortcuts."
+
 if [[ "$found" -eq 0 ]]; then
 	printf '%s\n' "$FAILED Unknown app: $target" >&2
 	exit 2
