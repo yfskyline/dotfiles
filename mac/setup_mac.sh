@@ -246,22 +246,22 @@ else
 	exit 1
 fi
 
-echo -e "$LOG setup ssh-config..."
-if [[ -d "$HOME/ssh-config/.git" ]]; then
-	echo -e "$SUCCESS ssh-config already cloned"
-elif git clone git@github.com:yfskyline/ssh-config.git "$HOME/ssh-config"; then
-	echo -e "$SUCCESS ssh-config cloned"
+PRIVATE_DOTFILES="$HOME/dotfiles/private-dotfiles"
+
+echo -e "$LOG setup private-dotfiles..."
+
+if [[ -d "$PRIVATE_DOTFILES/.git" ]]; then
+	echo -e "$SUCCESS private-dotfiles already cloned"
+elif git clone git@github.com:yfskyline/private-dotfiles.git "$PRIVATE_DOTFILES"; then
+	echo -e "$SUCCESS private-dotfiles cloned"
 else
-	echo -e "$FAILED ssh-config clone failed"
-	exit 1
+	echo -e "$FAILED private-dotfiles clone failed"
 fi
 
-if [[ ! -f "$HOME/ssh-config/configLink.sh" ]]; then
-	echo -e "$FAILED ssh-config/configLink.sh not found"
-	exit 1
-elif bash "$HOME/ssh-config/configLink.sh"; then
-	echo -e "$SUCCESS ssh-config setup completed"
+if [[ ! -f "$PRIVATE_DOTFILES/setup.sh" ]]; then
+	echo -e "$FAILED private-dotfiles/setup.sh not found"
+elif bash "$PRIVATE_DOTFILES/setup.sh"; then
+	echo -e "$SUCCESS private-dotfiles setup completed"
 else
-	echo -e "$FAILED ssh-config setup failed"
-	exit 1
+	echo -e "$FAILED private-dotfiles setup failed"
 fi
