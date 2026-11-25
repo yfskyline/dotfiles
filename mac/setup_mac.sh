@@ -256,12 +256,15 @@ elif git clone git@github.com:yfskyline/private-dotfiles.git "$PRIVATE_DOTFILES"
 	echo -e "$SUCCESS private-dotfiles cloned"
 else
 	echo -e "$FAILED private-dotfiles clone failed"
+	exit 1
 fi
 
 if [[ ! -f "$PRIVATE_DOTFILES/setup.sh" ]]; then
 	echo -e "$FAILED private-dotfiles/setup.sh not found"
+	exit 1
 elif bash "$PRIVATE_DOTFILES/setup.sh"; then
 	echo -e "$SUCCESS private-dotfiles setup completed"
 else
 	echo -e "$FAILED private-dotfiles setup failed"
+	exit 1
 fi
