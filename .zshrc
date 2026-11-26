@@ -230,6 +230,8 @@ if [ "$OS" = 'Mac' ]; then
 	export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 	test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 	#eval "$(gh completion -s zsh)"
+	# Skip casks with built-in automatic updates.
+	export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
 fi
 
 if [ "$OS" = 'Mac' ]; then
