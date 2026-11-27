@@ -13,12 +13,19 @@ else
 	exit 1
 fi
 
-ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.gdbinit ~/.gdbinit
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.digrc ~/.digrc
 ln -sf ~/dotfiles/git/.gitignore_global ~/.gitignore_global
+
+# Vim
+ln -sf ~/dotfiles/.vimrc ~/.vimrc
+mkdir -p "$HOME/.vim"
+
+if [ ! -e "$HOME/.vim/after" ] && [ ! -L "$HOME/.vim/after" ]; then
+	ln -s "$HOME/dotfiles/vim/after" "$HOME/.vim/after"
+fi
 
 # Git global ignore
 mkdir -p "$HOME/.config/git"

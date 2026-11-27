@@ -41,6 +41,14 @@ set softtabstop=4
 
 scriptencoding utf-8
 
+" Workaround for Vim 9.1.1703-1756:
+" colorresp.vim may reset custom highlight settings at startup.
+" Fixed in Vim 9.1.1757 (2025-09-14).
+" https://github.com/vim/vim/commit/c077f5e9
+if has('patch-9.1.1703') && !has('patch-9.1.1757')
+	let g:loaded_colorresp = 1
+endif
+
 " Enable 'expandtab
 filetype plugin indent on
 augroup FileTypeSettings
@@ -161,6 +169,7 @@ endif
 
 let g:airline_theme = 'powerlineish'
 let g:airline_section_x = airline#section#create_right(['%{&modified?"⚡":"✔"}'])
+call airline#parts#define_minwidth('mode', 0)
 let g:ale_linters = {
 	\ 'c': ['clangd', 'cppcheck', 'cpplint'],
 	\ 'cpp': ['clangd', 'cppcheck', 'cpplint'],
@@ -221,7 +230,7 @@ nmap <silent> <C-k> :ALEPrevious<CR>
 
 " Highlight Full-width Space
 function! FullSpace()
-	highlight FullSpace cterm=underline ctermbg=red ctermfg=magenta
+	highlight FullSpace cterm=underline ctermbg=red ctermfg=magenta gui=underline guibg=#e60000 guifg=#e600e6
 endfunction
 
 if has('syntax')
@@ -235,17 +244,17 @@ endif
 syntax enable
 
 " Color settings
-set notermguicolors
 set background=dark
 
-" GitGutter ColorSetting
-augroup ColorSchemeSettings
-	autocmd!
-	autocmd ColorScheme * highlight SignColumn		ctermbg=NONE
-	autocmd ColorScheme * highlight GitGutterAdd	ctermfg=Green ctermbg=NONE
-	autocmd ColorScheme * highlight GitGutterChange	ctermfg=Yellow ctermbg=NONE
-	autocmd ColorScheme * highlight GitGutterDelete	ctermfg=Red ctermbg=NONE
-augroup END
-set updatetime=250
+" Enable True Color
+if has('termguicolors')
+	set termguicolors
+endif
 
+" Color scheme
 colorscheme default
+source ~/dotfiles/vim/color.vim
+call FullSpace()
+
+" Update interval
+set updatetime=250
